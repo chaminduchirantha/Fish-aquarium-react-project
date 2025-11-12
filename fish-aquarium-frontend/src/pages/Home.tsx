@@ -50,7 +50,7 @@ export default function AnjalFarmHero() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="rounded-md p-2.5 text-sky-900 hover:text-sky-700"
+              className="rounded-md p-2.5 text-sky-200 hover:text-sky-700"
             >
               <Bars3Icon className="w-7 h-7" />
             </button>
@@ -88,7 +88,7 @@ export default function AnjalFarmHero() {
 
         {/* Mobile menu */}
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-sky-900/95 backdrop-blur-md text-white p-6">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-sky-700/95 backdrop-blur-md text-white p-6">
             <div className="flex items-center justify-between mb-6">
               <a href="#" className="flex items-center gap-3">
                 <img
@@ -160,13 +160,13 @@ export default function AnjalFarmHero() {
         </div>
 
         <div className="px-6 lg:px-8 animate-fadeIn">
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-sky-100 drop-shadow-lg">
+          <h1 className="text-3xl lg:text-5xl md:text-3xl font-bold tracking-tight text-sky-100 drop-shadow-lg">
             Dive Into Your Own Underwater World
           </h1>
-          <h2 className="text-3xl sm:text-4xl font-medium text-sky-200 mt-3 drop-shadow-md">
+          <h2 className="text-2xl md:text-3xl sm:text-4xl font-medium text-sky-200 mt-3 drop-shadow-md">
             Aqua World Fish Aquarium Shop
           </h2>
-          <p className="mt-6 text-lg sm:text-xl text-sky-100/90 max-w-2xl mx-auto">
+          <p className="mt-6 text-xl lg:text-xl text-sky-100/90 max-w-2xl mx-auto">
             Experience the tranquility of the ocean in your own home. Explore our exotic fish, aquatic plants, and smart aquarium systems.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
