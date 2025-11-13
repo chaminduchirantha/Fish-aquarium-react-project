@@ -15,7 +15,7 @@ function Login() {
             alt="AquaWorld Logo"
             className="w-26 h-26 mx-auto mb-2 rounded-full"
           />
-          <h2 className="text-3xl font-bold ">Anjal Farm</h2>
+          <h2 className="text-3xl font-bold ">Aqua World</h2>
           <p className=" text-sm mt-1">
             Welcome back to your aquarium world.
           </p>
