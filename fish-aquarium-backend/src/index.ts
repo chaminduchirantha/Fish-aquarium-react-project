@@ -2,6 +2,8 @@ import express from "express"
 import authRouter from "./routes/authRoutes"
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"
+import cors from "cors"
+
 dotenv.config()
 
 
@@ -11,6 +13,13 @@ const MONGO_URI = process.env.MONGO_URI as string
 const app = express()
 
 app.use(express.json())
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  })
+)
 
 app.use("/api/v1/auth" , authRouter)
 
