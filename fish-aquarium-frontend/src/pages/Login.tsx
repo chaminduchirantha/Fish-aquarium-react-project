@@ -1,7 +1,42 @@
+import React from "react"
+import { useNavigate } from "react-router-dom"
+
+
+
 import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-tank-bubbles-__26356.png";
 import bgImage from "../assets/top-view-colorful-koi-fishes.jpg";
+import { login } from "../services/auth";
 
 function Login() {
+
+ const [email, setEmail] = React.useState('')
+  const [password , setPassword] = React.useState('')
+  const [error, setError] = React.useState<string | null>(null)
+
+  const navigate = useNavigate()
+  const handelLogin = async (e:React.FormEvent)=>{
+      e.preventDefault()
+      setError(null)
+
+      if(!email || !password){
+        setError('Please fill all fields')
+        return
+      }
+
+      try{
+        const res:any = await login(email,password)
+        if (res && (res.data || res.user || res.token)) {
+          alert(`Login Succesfull Welcome to Aqua World ${res.email}`)
+          navigate('/')
+        } else {
+          setError(res?.message || 'Login failed')
+        }
+    }catch(err:any){
+      console.error("There was an error", err)
+      const apiMessage = err?.response?.data?.message || err?.response?.data || err?.message
+      setError(apiMessage || 'Login failed')
+    }
+  }
   return (
     <div
       className="flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat absolute inset-0 -z-10 "
@@ -34,6 +69,8 @@ function Login() {
               type="email"
               id="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
               required
             />
@@ -50,6 +87,8 @@ function Login() {
               type="password"
               id="password"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
               required
             />
@@ -62,13 +101,17 @@ function Login() {
             </label>
           </div>
 
-          <button
+          <button onClick={handelLogin}
             type="submit"
             className="w-full bg-sky-700 hover:bg-sky-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
             Login
           </button>
         </form>
+
+        {error && (
+          <div className="mt-4 text-center font-bold text-sm text-red-400">{error}</div>
+        )}
 
         {/* Divider */}
         <div className="my-6 border-t border-gray-300 text-center">

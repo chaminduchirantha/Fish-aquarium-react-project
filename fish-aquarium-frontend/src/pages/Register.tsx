@@ -1,5 +1,5 @@
-import React, { useState, type FormEvent } from "react"
-import { data, useNavigate } from "react-router-dom"
+import { useState, type FormEvent } from "react"
+import { useNavigate } from "react-router-dom"
 // import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-tank-bubbles-__26356.png";
 import bgImage from "../assets/top-view-colorful-koi-fishes.jpg";
 import { register } from "../services/auth";
@@ -13,7 +13,7 @@ function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [conPassword, setConPassword] = useState("")
-  const [role, setRole] = useState("USER")
+  const [role] = useState("USER")
 
   const handleRgister = async (e: FormEvent) => {
     e.preventDefault() // ignore page refresh
