@@ -58,11 +58,8 @@ function Login() {
           <div className="flex items-center justify-between mb-4">
             <label className="flex items-center text-sm ">
               <input type="checkbox" className="mr-2 accent-sky-600" />
-              Remember me
+              Show Password
             </label>
-            <a href="#" className="text-sm  hover:underline">
-              Forgot Password?
-            </a>
           </div>
 
           <button
