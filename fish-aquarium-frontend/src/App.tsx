@@ -1,7 +1,7 @@
 import Header from './components/Header'
 import { lazy, Suspense, type ReactNode } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { useAuth } from './context/authContext'
+import { AuthProvider, useAuth } from './context/authContext'
 
 
 
@@ -14,34 +14,34 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
 
-type RequireAuthTypes = { children: ReactNode; roles?: string[] }
+type RequireAuthTypes = { children: ReactNode; roles?: string[] };
 
 const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
-  const { user, loading } = useAuth()
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-100">
-        <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
-    )
+    );
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />;
   }
 
-  if (roles && !roles.some((role) => user.roles?.includes(role))) {
+  if (roles && !roles.some((r) => user.roles?.includes(r))) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-xl font-bold mb-2">Access denied</h2>
-        <p>You do not have permission to view this page.</p>
+        <h1 className="text-xl font-bold">Access Denied</h1>
+        <p>You don't have permission to view this page.</p>
       </div>
-    )
+    );
   }
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
 function AppContent() {
   const location = useLocation()
@@ -63,7 +63,7 @@ function AppContent() {
       >
         <Routes>
           <Route
-              path="/home"
+              path="/"
               element={
                 <RequireAuth roles={["USER"]}>
                   <Home />
@@ -84,10 +84,7 @@ function AppContent() {
                 </RequireAuth>
               }
             />
-
         </Routes>
-
-        
       </Suspense>
 
     </>
@@ -97,9 +94,12 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
+
 export default App

@@ -18,6 +18,7 @@ const navigation = [
 
 export default function AnjalFarmHero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  
 
   return (
       <header className="fixed top-0 inset-x-0 z-50 bg-sky-700 border-b border-white/20 shadow-md">

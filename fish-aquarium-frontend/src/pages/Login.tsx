@@ -32,29 +32,35 @@ export default function Login() {
         return
       }
 
-      
-
       await localStorage.setItem("accessToken", res.data.accessToken)
-      // import { getMyDetails, login } from "../services/auth"
       const detail = await getMyDetails()
 
-      // save userdata redux
-      // auth contex
-      setUser(detail.data)
+      const userData = ({
+        ...detail.data,
+        roles: detail.data.role    
+      })
+
+      setUser(userData);
+
       localStorage.setItem("user", JSON.stringify(detail.data))
 
-      // Redirect based on role
-      if (detail.data?.roles == 'ADMIN') {
+      if (userData.roles?.includes("ADMIN")) {
+        alert(`Welcom to Admin : ${ email}`)
         navigate('/admin')
       } else {
-        navigate('/home')
+       alert(`Welcome to User : ${ email}`)
+        navigate('/')
       }
 
-    } catch (err) {
+    } catch (err :any) {
       console.error(err)
+
+      if (err.response?.status === 401 || err.response?.status === 400) {
+        alert("Invalid email or password!");
+      } else {
+        alert("Something went wrong. Try again.");
+      }
     }
-    // api call
-    // redirect to /home
   }
 
 
