@@ -4,14 +4,14 @@ import { IUser } from "../model/user"
 
 dotenv.config()
 
-const SECRET_KEY = process.env.SECRET_KEY as string
+const JWT_SECRET = process.env.JWT_SECRET as string
 export const signAccessToken = (user:IUser):string => {
     return jwt.sign(
         {
             sub:user._id.toString(),
             role : user.role 
         },
-        SECRET_KEY,
+        JWT_SECRET,
         {
             expiresIn: "30m"
         }

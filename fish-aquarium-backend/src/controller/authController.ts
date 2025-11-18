@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import bcrypt from "bcryptjs"
-import {User } from "../model/user"
+import {IUser, User } from "../model/user"
 import { signAccessToken } from "../util/token"
+import { AuthRequest } from "../middleware/auth"
 
 
 export const register = async (req:Request , res:Response)=>{
@@ -64,6 +65,24 @@ export const login = async(req:Request , res:Response)=>{
     })
 }
 
-export const get = (req:Request , res:Response)=>{
-    res.send("Get Details")
+export const getMyDetails = async(req:AuthRequest , res:Response)=>{
+if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" })
+  }
+  const userId = req.user.sub
+  const user =
+    ((await User.findById(userId).select("-password")) as IUser) || null
+
+  if (!user) {
+    return res.status(404).json({
+      message: "User not found"
+    })
+  }
+
+  const { firstname, lastname, email, role} = user
+
+  res.status(200).json({
+    message: "Ok",
+    data: { firstname, lastname, email, role }
+  })
 }

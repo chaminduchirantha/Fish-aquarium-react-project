@@ -1,45 +1,66 @@
-import React from "react"
+import React, { useState, type FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
-
-
 
 import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-tank-bubbles-__26356.png";
 import bgImage from "../assets/top-view-colorful-koi-fishes.jpg";
-import { login } from "../services/auth";
+import { getMyDetails, login } from "../services/auth";
+import { useAuth } from "../context/authContext";
 
-function Login() {
+export default function Login() {
+  const navigate = useNavigate();
 
- const [email, setEmail] = React.useState('')
-  const [password , setPassword] = React.useState('')
-  const [error, setError] = React.useState<string | null>(null)
+  const { setUser } = useAuth()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate()
-  const handelLogin = async (e:React.FormEvent)=>{
-      e.preventDefault()
-      setError(null)
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault()
 
-      if(!email || !password){
-        setError('Please fill all fields')
+    if (!email || !password) {
+      alert("ALl fields are re...")
+      return
+    }
+
+    try {
+      const res = await login(email, password)
+      console.log(res.data.accessToken)
+
+      if (!res.data.accessToken) {
+        alert("Login fail")
         return
       }
 
-      try{
-        const res:any = await login(email,password)
-        if (res && (res.data || res.user || res.token)) {
-          alert(`Login Succesfull Welcome to Aqua World ${res.email}`)
-          navigate('/')
-        } else {
-          setError(res?.message || 'Login failed')
-        }
-    }catch(err:any){
-      console.error("There was an error", err)
-      const apiMessage = err?.response?.data?.message || err?.response?.data || err?.message
-      setError(apiMessage || 'Login failed')
+      
+
+      await localStorage.setItem("accessToken", res.data.accessToken)
+      // import { getMyDetails, login } from "../services/auth"
+      const detail = await getMyDetails()
+
+      // save userdata redux
+      // auth contex
+      setUser(detail.data)
+      localStorage.setItem("user", JSON.stringify(detail.data))
+
+      // Redirect based on role
+      if (detail.data?.roles == 'ADMIN') {
+        navigate('/admin')
+      } else {
+        navigate('/home')
+      }
+
+    } catch (err) {
+      console.error(err)
     }
+    // api call
+    // redirect to /home
   }
+
+
   return (
     <div
-      className="flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat absolute inset-0 -z-10 "
+      className="flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat absolute inset-0 -z-10"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="bg-black/50 text-white shadow-lg backdrop-blur-sm rounded-2xl p-8 w-full max-w-md border border-sky-200 opacity-100">
@@ -50,18 +71,18 @@ function Login() {
             alt="AquaWorld Logo"
             className="w-26 h-26 mx-auto mb-2 rounded-full"
           />
-          <h2 className="text-3xl font-bold ">Aqua World</h2>
-          <p className=" text-sm mt-1">
+          <h2 className="text-3xl font-bold">Aqua World</h2>
+          <p className="text-sm mt-1">
             Welcome back to your aquarium world.
           </p>
         </div>
 
         {/* Login Form */}
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block  font-medium mb-2"
+              className="block font-medium mb-2"
             >
               Email Address
             </label>
@@ -71,8 +92,9 @@ function Login() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-black"
               required
+              disabled={loading}
             />
           </div>
 
@@ -84,43 +106,46 @@ function Login() {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-black"
               required
+              disabled={loading}
             />
           </div>
 
           <div className="flex items-center justify-between mb-4">
-            <label className="flex items-center text-sm ">
-              <input type="checkbox" className="mr-2 accent-sky-600" />
+            <label className="flex items-center text-sm">
+              <input 
+                type="checkbox" 
+                className="mr-2 accent-sky-600" 
+                checked={showPassword}
+                onChange={(e) => setShowPassword(e.target.checked)}
+              />
               Show Password
             </label>
           </div>
 
-          <button onClick={handelLogin}
+          <button
             type="submit"
-            className="w-full bg-sky-700 hover:bg-sky-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            disabled={loading}
+            className="w-full bg-sky-700 hover:bg-sky-800 disabled:bg-sky-400 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        {error && (
-          <div className="mt-4 text-center font-bold text-sm text-red-400">{error}</div>
-        )}
-
         {/* Divider */}
         <div className="my-6 border-t border-gray-300 text-center">
-          <span className=" px-2 text-sm">or</span>
+          <span className="px-2 text-sm">or</span>
         </div>
 
         {/* Signup Link */}
-        <p className="text-center  text-sm">
-          Don’t have an account?{" "}
+        <p className="text-center text-sm">
+          Don't have an account?{" "}
           <a
             href="/register"
             className="text-sky-700 font-medium hover:underline"
@@ -132,5 +157,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

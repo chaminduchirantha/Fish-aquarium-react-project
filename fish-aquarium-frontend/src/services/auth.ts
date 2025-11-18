@@ -17,4 +17,9 @@ export const login = async (email: string, password: string) => {
   return res.data
 }
 
+export const getMyDetails = async () => {
+  const res = await api.get('/auth/get')
+  return res.data
+}
+
 
