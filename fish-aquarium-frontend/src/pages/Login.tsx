@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from "react"
+import{ useState, type FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 
 import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-tank-bubbles-__26356.png";
@@ -12,7 +12,7 @@ export default function Login() {
   const { setUser } = useAuth()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: FormEvent) => {
@@ -98,7 +98,7 @@ export default function Login() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-black"
+              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-white"
               required
               disabled={loading}
             />
@@ -117,7 +117,7 @@ export default function Login() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-black"
+              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-white"
               required
               disabled={loading}
             />
