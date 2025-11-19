@@ -10,6 +10,8 @@ const About = lazy(() => import('./pages/About'))
 const Services = lazy(() => import('./pages/Service'))
 const Access = lazy(() => import('./pages/Accessories'))
 const Collection = lazy(() => import('./pages/Collection'))
+const CustomizedAqua = lazy(() => import('./pages/CustomizeAquarium'))
+const Fishes = lazy(() => import('./pages/Fishes'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
@@ -72,8 +74,17 @@ function AppContent() {
             />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+           <Route
+              path="/fish"
+              element={
+                <RequireAuth roles={["USER"]}>
+                  <Fishes />
+                </RequireAuth>
+              }
+            />
           <Route path="/access" element={<Access />} />
           <Route path="/collection" element={<Collection />} />
+          <Route path="/customized" element={<CustomizedAqua />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

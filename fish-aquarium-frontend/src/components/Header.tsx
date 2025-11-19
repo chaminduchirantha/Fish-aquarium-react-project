@@ -10,10 +10,10 @@ const navigation = [
   { name: 'About Us', href: '/about' },
   { name: 'Services', href: '/services' },
   { name: 'Collections', href: '/collection' },
-  { name: 'Fishes', href: '/fishes' },
+  { name: 'Fishes', href: '/fishe' },
   { name: 'Accessories', href: '/access' },
   { name: 'Aquarium Plants', href: '/plants' },
-  { name: 'Smart Aquarium', href: '/smart-aquarium' },
+  { name: 'Smart Aquarium', href: '/customized' },
 ]
 
 export default function AnjalFarmHero() {
