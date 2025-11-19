@@ -10,7 +10,9 @@ export const requireRole = (roles: Role[]) => {
       })
     }
 
-    const hasRole = roles.some(role => req.user!.roles?.includes(role))
+    const userRoles = req.user.role; // <-- FIXED
+
+    const hasRole = userRoles?.some((r: Role) => roles.includes(r));
     if (!hasRole) {
       return res.status(403).json({
         message: `Require ${roles} role`
