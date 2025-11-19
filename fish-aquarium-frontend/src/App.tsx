@@ -84,7 +84,14 @@ function AppContent() {
             />
           <Route path="/access" element={<Access />} />
           <Route path="/collection" element={<Collection />} />
-          <Route path="/customized" element={<CustomizedAqua />} />
+           <Route
+              path="/customized"
+              element={
+                <RequireAuth roles={["USER"]}>
+                  <CustomizedAqua />
+                </RequireAuth>
+              }
+            />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

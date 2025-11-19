@@ -111,7 +111,7 @@ const CardSection: React.FC = () => {
                 Smart Auarium Maintenance
               </h2>
               <a
-                href="#"
+                href="/customized"
                 className="px-4 py-2 bg-sky-600  rounded-md hover:bg-sky-700 transition text-white"
               >
                 View More

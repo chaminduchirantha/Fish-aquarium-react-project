@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from "react";
-import image1 from "../assets/21438.jpg";
+import image1 from "../assets/beautiful-group-fish-underwater.jpg";
 import { ImagePlus, Loader2 } from "lucide-react";
 import { createCustomizedAquarium } from "../services/customizedAquarium";
 
@@ -75,7 +75,7 @@ export default function CustomTankForm() {
     <div className="min-h-screen p-6 flex justify-center items-center mt-15">
       <div className="w-full max-w-7xl bg-white/80 backdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-white/40">
         {/* LEFT IMAGE SECTION */}
-        <div className="relative h-80 md:h-auto">
+        <div className="relative h-60 md:h-auto">
           <img src={image1} alt="Aquarium" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-sky-900/30"></div>
         </div>
