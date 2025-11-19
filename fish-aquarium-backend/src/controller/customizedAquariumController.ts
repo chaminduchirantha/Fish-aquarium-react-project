@@ -54,6 +54,34 @@ export const create = async(req:AuthRequest , res:Response)=>{
     }
 }
 
-export const getDetails = (req:Request , res:Response) => {
+export const getDetails = async (req:AuthRequest , res:Response) => {
+     try {
 
+    if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized" })
+    }
+
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const posts = await CustomizedAquarium.find()
+      .populate('auther', 'customername email phonenumber address image')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await CustomizedAquarium.countDocuments();
+    return res.status(200).json({
+      message: 'Posts data',
+      data: posts,
+      totalPages: Math.ceil(total / limit),
+      totalCount: total,
+      page,
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to get post.!' });
+  }
 }
