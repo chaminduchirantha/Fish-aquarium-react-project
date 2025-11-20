@@ -34,7 +34,7 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
   }
 
   if (!user) {
-    
+
   if (!showPopup) setShowPopup(true);
     return (
       <>
@@ -75,15 +75,16 @@ function AppContent() {
         }
       >
         <Routes>
-          <Route
+          {/* <Route
               path="/home"
               element={
                 <RequireAuth roles={["USER"]}>
                   <Home />
                 </RequireAuth>
               }
-            />
+            /> */}
           <Route path="/" element={<Welcome />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
            <Route

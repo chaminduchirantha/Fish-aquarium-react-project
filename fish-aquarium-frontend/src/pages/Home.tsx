@@ -44,15 +44,15 @@ export default function AnjalFarmHero() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
               href="/fish"
-              className="bg-gradient-to-r from-sky-400 to-blue-500 hover:from-blue-500 hover:to-sky-400 px-6 py-3 text-md font-semibold text-white rounded-full shadow-lg transition-all"
+              className="bg-gradient-to-r from-sky-400 to-blue-500 hover:from-blue-500 hover:to-sky-400 px-6 py-3 lg:text-md md:text-md sm:text-sm font-semibold text-white rounded-full shadow-lg transition-all"
             >
-              Explore Our Fishes
+               Our Fishes
             </a>
             <a
               href="/access"
-              className="bg-gradient-to-r from-orange-400 to-pink-500 hover:from-pink-500 hover:to-orange-400 px-6 py-3 text-md font-semibold text-white rounded-full shadow-lg transition-all"
+              className="bg-gradient-to-r from-orange-400 to-pink-500 hover:from-pink-500 hover:to-orange-400 px-6 py-3 lg:text-md md:text-md sm:text-sm font-semibold text-white rounded-full shadow-lg transition-all"
             >
-              View Accessories
+               Accessories
             </a>
           </div>
         </div>
