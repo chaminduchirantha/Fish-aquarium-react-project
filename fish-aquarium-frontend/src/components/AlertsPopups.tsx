@@ -41,9 +41,9 @@ export default function AlertPopups({ onClose }: AuthPopupProps) {
       </div>
       <style>{`
         @keyframes pop {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-            }
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+        }
 
         .animate-pop {
         animation: pop 0.25s ease-out forwards;

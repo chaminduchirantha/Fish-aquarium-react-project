@@ -5,6 +5,7 @@ import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-
 import bgImage from "../assets/top-view-colorful-koi-fishes.jpg";
 import { getMyDetails, login } from "../services/auth";
 import { useAuth } from "../context/authContext";
+import AlertModal from "../components/AlertModelPropsLogin";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -15,11 +16,22 @@ export default function Login() {
   const [loading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
+  const openAlert = (title: string, msg: string) => {
+    setAlertTitle(title);
+    setAlertMsg(msg);
+    setShowAlert(true);
+  };
+
+
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     if (!email || !password) {
-      alert("ALl fields are re...")
+      openAlert("Missing Fields", "Please fill all required fields.");
       return
     }
 
@@ -28,7 +40,7 @@ export default function Login() {
       console.log(res.data.accessToken)
 
       if (!res.data.accessToken) {
-        alert("Login fail")
+        openAlert("Login Failed", "Invalid email or password.");
         return
       }
 
@@ -44,21 +56,24 @@ export default function Login() {
 
       localStorage.setItem("user", JSON.stringify(detail.data))
 
+    openAlert("Login Successful", `Welcome back, ${email}!`);
+
+    setTimeout(() => {
       if (userData.roles?.includes("ADMIN")) {
-        alert(`Welcom to Admin : ${ email}`)
-        navigate('/admin')
+        navigate("/admin");
       } else {
-       alert(`Welcome to User : ${ email}`)
-        navigate('/')
+        navigate("/");
       }
+    }, 2000);
+
 
     } catch (err :any) {
       console.error(err)
 
       if (err.response?.status === 401 || err.response?.status === 400) {
-        alert("Invalid email or password!");
+       openAlert("Login Failed", "Invalid email or password.");
       } else {
-        alert("Something went wrong. Try again.");
+       openAlert("Error", "Something went wrong. Try again.");
       }
     }
   }
@@ -160,6 +175,12 @@ export default function Login() {
           </a>
         </p>
       </div>
+       <AlertModal
+        title={alertTitle}
+        message={alertMsg}
+        show={showAlert}
+        onClose={() => setShowAlert(false)}
+      />
     </div>
   );
 }
