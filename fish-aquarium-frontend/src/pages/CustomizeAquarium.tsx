@@ -1,5 +1,10 @@
 import { useState, type ChangeEvent } from "react";
-import image1 from "../assets/beautiful-group-fish-underwater.jpg";
+import image1 from "../assets/beautiful-color-mandarin-fish-colorfull-mandarin-fish-mandarin-fish-closeup.jpg"
+import image2 from "../assets/beautiful-group-fish-underwater.jpg"
+import image3 from "../assets/top-view-colorful-koi-fishes.jpg"
+import image4 from "../assets/closeup-shot-yellow-cichlidae-cichlid-home-aquarium.jpg"
+
+
 import { ImagePlus, Loader2 } from "lucide-react";
 import { createCustomizedAquarium } from "../services/customizedAquarium";
 
@@ -72,19 +77,45 @@ export default function CustomTankForm() {
   };
 
   return (
-    <div className="min-h-screen p-6 flex justify-center items-center mt-15">
-      <div className="w-full max-w-7xl bg-white/80 backdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-white/40">
-        {/* LEFT IMAGE SECTION */}
-        <div className="relative h-60 md:h-auto">
-          <img src={image1} alt="Aquarium" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-sky-900/30"></div>
+    <div className="min-h-screen p-6 flex justify-center items-center">
+    <div className="w-full max-w-7xlbackdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-white/40">
+
+      {/* LEFT SIDE IMAGES + PARAGRAPH */}
+      <div className="p-16 flex flex-col mt-20" >
+        {/* IMAGE GRID */}
+        <div className="grid grid-cols-2 gap-4">
+          <img
+            src={image1}
+            className= "w-full h-70 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-700"
+          />
+          <img
+            src={image4}
+            className="w-full h-70 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-700"
+          />
+          <img
+            src={image3}
+            className="w-full h-70 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-700"
+          />
+          <img
+            src={image2}
+            className="w-full h-70 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-700"
+          />
         </div>
 
-        {/* RIGHT FORM SECTION */}
-        <div className="p-8">
-          <h1 className="text-3xl font-bold text-sky-700 mb-12 text-center drop-shadow-sm">
-            Custom Tank Request
-          </h1>
+        {/* PARAGRAPH */}
+        <p className="mt-5 text-sky-800 text-lgleading-relaxed lg:text-left md:text-center sm:text-center">
+            Choose your ideal custom fish tank design from our stunning collection of colorful and vibrant aquatic themes, each crafted to 
+            inspire creativity, relaxation, and a deeper connection with aquatic life. Whether you prefer a natural, planted environment, a sleek modern aesthetic, or a fully personalized concept based on your own imagination, our system allows you to upload your design and customize every detail. You can adjust the shape, size, and materials to suit your available space or visual preferences, ensuring your tank blends perfectly with your home or office environment. Additionally, you can select lighting styles, filtration systems, decorative elements, and advanced smart features such as automatic feeders, temperature monitoring, and water-quality sensors. 
+            Every component is designed to help you build a tank that is not only visually stunning but also safe, 
+            efficient, and comfortable for your fish. Create a tank that truly reflects your personality and aquatic passion.        
+            </p>
+      </div>
+
+    {/* RIGHT SIDE FORM */}
+      <div className="p-8">
+        <h1 className="text-3xl font-bold text-sky-700 mb-12 text-center drop-shadow-sm">
+          Custom Tank Request
+        </h1>
 
           {/* Form Start */}
           <form onSubmit={handleSubmit}>

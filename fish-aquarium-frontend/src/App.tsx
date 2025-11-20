@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import { AuthProvider, useAuth } from './context/authContext'
 
 
-
+const Welcome =  lazy(() => import('./pages/WelcomPage'))
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Services = lazy(() => import('./pages/Service'))
@@ -30,6 +30,7 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
   }
 
   if (!user) {
+    alert("Please Your are Login or register....")
     return <Navigate to="/login" replace />;
   }
 
@@ -65,13 +66,14 @@ function AppContent() {
       >
         <Routes>
           <Route
-              path="/"
+              path="/home"
               element={
                 <RequireAuth roles={["USER"]}>
                   <Home />
                 </RequireAuth>
               }
             />
+          <Route path="/" element={<Welcome />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
            <Route
