@@ -2,6 +2,7 @@ import Header from './components/Header'
 import { lazy, Suspense, type ReactNode } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/authContext'
+import Footer from './components/Footer'
 
 
 const Welcome =  lazy(() => import('./pages/WelcomPage'))
@@ -106,6 +107,8 @@ function AppContent() {
             />
         </Routes>
       </Suspense>
+
+      <Footer/>
 
     </>
     
