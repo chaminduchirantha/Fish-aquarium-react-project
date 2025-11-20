@@ -1,8 +1,9 @@
 import Header from './components/Header'
-import { lazy, Suspense, type ReactNode } from 'react'
+import { lazy, Suspense, useState, type ReactNode } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/authContext'
 import Footer from './components/Footer'
+import AlertPopups from './components/AlertsPopups'
 
 
 const Welcome =  lazy(() => import('./pages/WelcomPage'))
@@ -21,6 +22,8 @@ type RequireAuthTypes = { children: ReactNode; roles?: string[] };
 
 const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
   const { user, loading } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+
 
   if (loading) {
     return (
@@ -31,9 +34,15 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
   }
 
   if (!user) {
-    alert("Please Your are Login or register....")
-    return <Navigate to="/login" replace />;
+    
+  if (!showPopup) setShowPopup(true);
+    return (
+      <>
+        {showPopup && <AlertPopups onClose={() => setShowPopup(false)} />}
+      </>
+    );
   }
+
 
   if (roles && !roles.some((r) => user.roles?.includes(r))) {
     return (
