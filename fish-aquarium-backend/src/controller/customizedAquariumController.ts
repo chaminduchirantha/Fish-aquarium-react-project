@@ -9,6 +9,12 @@ export const create = async(req:AuthRequest , res:Response)=>{
     try{
     const {customername, phonenumber, email, address, width, height, length, material, extrafeatures, notes} = req.body
 
+    const existing = await CustomizedAquarium.findOne({ email });
+    if (existing) {
+        return res.status(400).json({ message: "This email already exists. Please use another email." });
+    }
+
+
         let imageUrl = ""
 
         if (req.file) {

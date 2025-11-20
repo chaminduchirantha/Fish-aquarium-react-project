@@ -23,6 +23,17 @@ export default function CustomTankForm() {
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [alert, setAlert] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const showAlert = (type: "success" | "error", message: string) => {
+    setAlert({ type, message });
+    setTimeout(() => setAlert(null), 3000);
+  };
+
+
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -67,10 +78,15 @@ export default function CustomTankForm() {
       setNotes("");
       setImage(null);
       setPreview("");
-      alert("Custom Tank Request Submitted Successfully!");
-    } catch (error) {
-      console.error("Submit Failed", error);
-      alert("Failed to submit. Try again!");
+      showAlert("success", "Custom Tank Request Submitted Successfully!");
+    } catch (error : any) {
+
+      if (error.response?.status === 400) {
+        showAlert("error", error.response.data.message);
+      } else {
+        showAlert("error", "Failed to submit. Try again!");
+      }
+    
     } finally {
       setLoading(false);
     }
@@ -108,7 +124,7 @@ export default function CustomTankForm() {
             inspire creativity, relaxation, and a deeper connection with aquatic life. Whether you prefer a natural, planted environment, a sleek modern aesthetic, or a fully personalized concept based on your own imagination, our system allows you to upload your design and customize every detail. You can adjust the shape, size, and materials to suit your available space or visual preferences, ensuring your tank blends perfectly with your home or office environment. Additionally, you can select lighting styles, filtration systems, decorative elements, and advanced smart features such as automatic feeders, temperature monitoring, and water-quality sensors. 
             Every component is designed to help you build a tank that is not only visually stunning but also safe, 
             efficient, and comfortable for your fish. Create a tank that truly reflects your personality and aquatic passion.        
-            </p>
+        </p>
       </div>
 
     {/* RIGHT SIDE FORM */}
@@ -117,6 +133,7 @@ export default function CustomTankForm() {
           Custom Tank Request
         </h1>
 
+         
           {/* Form Start */}
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -274,9 +291,30 @@ export default function CustomTankForm() {
               {loading && <Loader2 className="animate-spin" size={20} />}
               {loading ? "Saving..." : "Save Post"}
             </button>
+            {alert && (
+            <div
+              className={`
+                mt-4 p-4 rounded-lg border-l-4 shadow  
+                ${
+                  alert.type === "success"
+                    ? "bg-green-100 border-green-500 text-green-800"
+                    : "bg-red-100 border-red-500 text-red-800"
+                }
+              `}
+            >
+              <div className="flex justify-between items-center">
+                <span>{alert.message}</span>
+                <button
+                  onClick={() => setAlert(null)}
+                  className="font-bold text-xl leading-none"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
           </form>
-          {/* Form End */}
-        </div>
+        </div>          
       </div>
     </div>
   );
