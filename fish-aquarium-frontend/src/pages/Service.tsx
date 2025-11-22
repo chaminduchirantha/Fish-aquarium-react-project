@@ -8,11 +8,17 @@ import card7 from '../assets/Aquarium Setup & Ins.png'
 
 function Service() {
   return (
-    <section id="accessories" className="py-16 bg-white">
+    <section id="accessories" className="py-16 bg-white mt-5">
         <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl  text-center text-black; mb-10">
+          <h1 className="text-5xl font-bold text-sky-800 text-center mb-5">
            Our Services
           </h1>
+
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+            Discover our smart aquarium solutions from intelligent fish care
+            systems to automated tank management tools that make your aquarium
+            experience easier and more enjoyable.
+          </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
             {/* Accessory Card 1 */}

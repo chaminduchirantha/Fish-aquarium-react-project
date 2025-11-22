@@ -90,10 +90,12 @@ function AppContent() {
            <Route
               path="/fish"
               element={
-                <RequireAuth roles={["USER"]}>
-                  <Fishes />
-                </RequireAuth>
+                // <RequireAuth roles={["USER"]}>
+                //   <Fishes />
+                // </RequireAuth>
+                <Fishes/>
               }
+              
             />
           <Route path="/access" element={<Access />} />
           <Route path="/collection" element={<Collection />} />

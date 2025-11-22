@@ -11,7 +11,7 @@ const CardSection: React.FC = () => {
     <section className="bg-gray-100 w-full min-h-screen flex flex-col items-center py-10 px-6 " id="collections">
       {/* Header Section */}
       <header className="text-center ">
-        <h1 className="text-5xl font-bold text-black mt-9">
+        <h1 className="text-5xl font-bold  text-sky-800  mt-9">
           Explore Our Collections
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto mt-9">
