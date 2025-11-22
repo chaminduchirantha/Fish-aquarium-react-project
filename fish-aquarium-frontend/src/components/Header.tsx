@@ -12,7 +12,6 @@ const navigation = [
   { name: 'Collections', href: '/collection' },
   { name: 'Fishes', href: '/fishe' },
   { name: 'Accessories', href: '/access' },
-  { name: 'Aquarium Plants', href: '/plants' },
   { name: 'Smart Aquarium', href: '/customized' },
 ]
 

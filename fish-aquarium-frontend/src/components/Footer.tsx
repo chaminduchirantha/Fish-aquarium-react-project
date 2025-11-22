@@ -57,11 +57,7 @@ export default function Footer() {
                   Accessories
                 </Link>
               </li>
-              <li>
-                <a href="#plants" className="text-gray-300 hover:text-sky-400 transition">
-                  Aquarium Plants
-                </a>
-              </li>
+              
               <li>
                 <a href="#smart" className="text-gray-300 hover:text-sky-400 transition">
                   Smart Aquariums

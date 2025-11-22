@@ -79,25 +79,7 @@ const CardSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-all hover:-translate-y-2 duration-300 flex flex-col items-center text-center">
-            <img
-              className="h-40 w-full object-cover rounded-t-xl"
-              src={image2}
-              alt="LED Lighting Control"
-            />
-            <div className="p-4">
-              <h2 className="font-bold text-lg mb-4 text-black">
-                Explore Our Aquarium Plants
-              </h2>
-              <a
-                href="#"
-                className="text-white px-4 py-2 bg-sky-600  rounded-md hover:bg-sky-700  transition"
-              >
-              View More
-              </a>
-            </div>
-          </div>
+          
 
           {/* Card 4 */}
           <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-all hover:-translate-y-2 duration-300 flex flex-col items-center text-center">

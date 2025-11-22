@@ -46,13 +46,13 @@ export default function AnjalFarmHero() {
               href="/fish"
               className="bg-gradient-to-r from-sky-400 to-blue-500 hover:from-blue-500 hover:to-sky-400 px-6 py-3 lg:text-md md:text-md sm:text-sm font-semibold text-white rounded-full shadow-lg transition-all"
             >
-               Our Fishes
+              Explore Our Fishes
             </a>
             <a
               href="/access"
               className="bg-gradient-to-r from-orange-400 to-pink-500 hover:from-pink-500 hover:to-orange-400 px-6 py-3 lg:text-md md:text-md sm:text-sm font-semibold text-white rounded-full shadow-lg transition-all"
             >
-               Accessories
+               View  Accessories
             </a>
           </div>
         </div>
