@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/authContext'
 import Footer from './components/Footer'
 import AlertPopups from './components/AlertsPopups'
+import DiliveryAdmin from './adminPages/DiliveryAdmin'
 
 
 const Welcome =  lazy(() => import('./pages/WelcomPage'))
@@ -17,6 +18,14 @@ const Fishes = lazy(() => import('./pages/Fishes'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
+const CustomerAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
+const FishesAdmin = lazy(() => import('./adminPages/FishesAdmin'))
+const OrdersAdmin = lazy(() => import('./adminPages/OrdersAdmin'))
+const AccessoriesAdmin = lazy(() => import('./adminPages/AccessoriesAdmin'))
+const FeedbackAdmin = lazy(() => import('./adminPages/FeedbackAdmin'))
+const PaymentAdmin = lazy(() => import('./adminPages/PaymentAdmin'))
+const DeliveryAdmin = lazy(() => import('./adminPages/DiliveryAdmin'))
+const CustomizedAquariumAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] };
 
@@ -59,8 +68,8 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
 function AppContent() {
   const location = useLocation()
 
-  const hideHeaderRoutes = ['/login', '/register','/admin']
-  const shouldHideHeader = hideHeaderRoutes.includes(location.pathname)
+  const hideHeaderRoutes = ['/login', '/register', '/admin']
+  const shouldHideHeader = hideHeaderRoutes.some(route => location.pathname.startsWith(route))
 
   return (
     <>
@@ -75,14 +84,6 @@ function AppContent() {
         }
       >
         <Routes>
-          {/* <Route
-              path="/home"
-              element={
-                <RequireAuth roles={["USER"]}>
-                  <Home />
-                </RequireAuth>
-              }
-            /> */}
           <Route path="/" element={<Welcome />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -116,11 +117,20 @@ function AppContent() {
                   <AdminDashBoard />
                 </RequireAuth>
               }
-            />
+            >
+              <Route path="customers" element={<CustomerAdmin />} />
+              <Route path="fishes" element={<FishesAdmin />} />
+              <Route path="orders" element={<OrdersAdmin />} />
+              <Route path="accessories" element={<AccessoriesAdmin />} />
+              <Route path="feedback" element={<FeedbackAdmin/>} />
+              <Route path="delivery" element={<DeliveryAdmin/>} />
+              <Route path="payments" element={<PaymentAdmin/>} />
+              <Route path="customized" element={<CustomizedAquariumAdmin/>} />
+            </Route>
         </Routes>
       </Suspense>
 
-      <Footer/>
+      {/* <Footer/> */}
 
     </>
     

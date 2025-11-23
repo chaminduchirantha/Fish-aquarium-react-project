@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link, Outlet } from "react-router-dom";
 import fish from "../assets/icons8-fish-50.png"
 import delivery from "../assets/icons8-delivery-50.png"
 
@@ -104,7 +105,7 @@ const DashboardLayout: React.FC = () => {
       </header>
 
       {/* BODY */}
-      <div className="flex">
+      <div className="flex flex-1">
 
         {/* SIDEBAR */}
         {asideOpen && (
@@ -112,52 +113,57 @@ const DashboardLayout: React.FC = () => {
             className="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2"
             style={{ height: "90.5vh" }}
           >
-            <a className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-home"></i></span>
               <span className="ml-3">Dashboard</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/customers" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-user"></i></span>
               <span className="ml-3">Customers</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/fishes" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><img className="w-7.5" src={fish} alt="" /></span>
               <span className="ml-3">Fishes</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/feedback" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"> <i className="bx bx-message-dots text-2xl"></i> </span>
               <span className="ml-3">FeedBack</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/accessories" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-heart text-2xl"></i></span>
               <span className="ml-3">Accessories</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/orders" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-package text-2xl"></i></span>
-              <span className="ml-3">orders</span>
-            </a>
+              <span className="ml-3">Orders</span>
+            </Link>
 
-            <a className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/delivery" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><img className="w-7.5" src={delivery} alt="" /></span>              
               <span className="ml-3">Delivery</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/payments" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-credit-card text-2xl"></i></span>
               <span className="ml-3">Payments</span>
-            </a>
+            </Link>
 
-            <a className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600" href="#">
+            <Link to="/admin/customized" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <i className="bx bx-cog text-2xl"></i>              
-              <span className="ml-3">customized aquarium</span>
-            </a>
+              <span className="ml-3">Customized Aquarium</span>
+            </Link>
           </aside>
         )}    
+
+        {/* MAIN CONTENT AREA */}
+        <main className="flex-1 overflow-auto p-6">
+          <Outlet />
+        </main>
 
       </div>
     </main>
