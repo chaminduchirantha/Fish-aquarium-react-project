@@ -8,3 +8,8 @@ export const createFish = async(data: any)=>{
   })
   return res.data
 }
+
+export const getAllFish = async (page: number, limit: number) => {
+  const res = await api.get(`/fish/all?page=${page}&limit=${limit}`);
+  return res.data;
+};

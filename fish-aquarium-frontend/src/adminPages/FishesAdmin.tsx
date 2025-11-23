@@ -1,6 +1,8 @@
 import { ImagePlus, Loader2 } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 import { createFish } from "../services/Fish";
+import FishCardGrid from "./FishCardGrid";
+
 
 function FishesAdmin() {
     const [showModal, setShowModal] = useState(false);
@@ -87,6 +89,10 @@ function FishesAdmin() {
         >
           + Add Fish Details
         </button>
+      </div>
+
+      <div>
+        <FishCardGrid />
       </div>
 
       {/* Modal */}
@@ -218,10 +224,17 @@ function FishesAdmin() {
             </button>
             </form>
           </div>
+
+          
         </div>
+        
       )}
     </div>
-  );
+
+    
+    
+    
+  )
 }
 
 export default FishesAdmin;
