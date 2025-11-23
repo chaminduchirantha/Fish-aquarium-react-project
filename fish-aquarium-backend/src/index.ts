@@ -1,6 +1,7 @@
 import express from "express"
 import authRouter from "./routes/authRoutes"
 import customAquariumRouter from "./routes/customizedAquariumRoutes"
+import fishRouter from "./routes/fishRoutes"
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"
 import cors from "cors"
@@ -24,6 +25,7 @@ app.use(
 
 app.use("/api/v1/auth" , authRouter)
 app.use("/api/v1/aquarium" , customAquariumRouter)
+app.use("/api/v1/fish" , fishRouter)
 
 
 
