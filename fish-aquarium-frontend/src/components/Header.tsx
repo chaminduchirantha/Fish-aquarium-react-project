@@ -56,7 +56,7 @@ export default function AnjalFarmHero() {
           {/* Dropdown Menu */}
           <Menu as="div" className="relative">
             <MenuButton className="text-white font-semibold hover:text-yellow-300 cursor-pointer flex items-center gap-1">
-              Menu <ChevronDownIcon className="h-4 w-4" />
+              Items <ChevronDownIcon className="h-4 w-4" />
             </MenuButton>
 
             <MenuItems className="absolute mt-2 w-40 bg-white shadow-lg rounded-md p-2 text-gray-800 z-50">

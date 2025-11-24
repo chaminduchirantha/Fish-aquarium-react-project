@@ -1,4 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllFish } from "../services/Fish";
+import { ShoppingCart } from "lucide-react";
+
+interface Fish {
+  _id: string;
+  fishName: string;
+  price: string;
+  description: string;
+  fishCategory: string;
+  imageUrl: string;
+}
 
 export default function FishCategorySection() {
   const categories = [
@@ -11,6 +22,21 @@ export default function FishCategorySection() {
   ];
 
   const [selected, setSelected] = useState("all");
+  const [fishList, setFishList] = useState<Fish[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 6;
+
+  const loadData = async () => {
+      const res = await getAllFish(page, limit);
+      setFishList(res.data);
+      setTotalPages(res.totalPages);
+  };
+
+  useEffect(() => {
+     loadData();
+  }, [page]);
+  
 
   return (
     <section className="py-12 px-6 bg-gray-50 mt-8">
@@ -27,7 +53,7 @@ export default function FishCategorySection() {
         </p>
 
         {/* Category Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-23">
+        <div className="flex flex-wrap justify-center gap-3 mb-20">
           {categories.map((cat) => (
             <button
               key={cat.value}
@@ -43,6 +69,75 @@ export default function FishCategorySection() {
           ))}
         </div>
       </div>
-    </section>
+
+
+      <div className="mt-10">
+      {/* Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {fishList.map((fish) => (
+          <div
+            key={fish._id}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative"
+          >
+            <div className="h-70 w-full overflow-hidden">
+              <img
+                src={fish.imageUrl}
+                alt={fish.fishName}
+                className="w-full h-full object-cover transform hover:scale-105 transition duration-500"
+              />
+            </div>
+
+            <div className="p-5 space-y-3">
+              <div className="flex items-center justify-between w-full">
+                <h3 className="text-xl font-semibold text-sky-800">
+                  {fish.fishName}
+                </h3>
+                <span className="bg-blue-100 text-blue-700 px-3 font-bold py-2 rounded-2xl text-sm whitespace-nowrap">
+                  {fish.fishCategory}
+                </span>
+              </div>
+
+              <h4 className="text-md text- font-semibold mb-3 text-sky-800">
+                  Pair of Fish : {fish.price}
+              </h4>
+              <p className="text-gray-600 font-semibold text-sm leading-relaxed">
+                {fish.description}
+              </p>
+
+              
+
+              <button className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
+                <ShoppingCart size={18} />
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center gap-4 mt-8">
+        <button
+          disabled={page === 1}
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          onClick={() => setPage((p) => p - 1)}
+        >
+          Previous
+        </button>
+
+        <span className="font-medium text-lg">{page} / {totalPages}</span>
+
+        <button
+          disabled={page === totalPages}
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          onClick={() => setPage((p) => p + 1)}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+
+
+  </section>
   );
 }
