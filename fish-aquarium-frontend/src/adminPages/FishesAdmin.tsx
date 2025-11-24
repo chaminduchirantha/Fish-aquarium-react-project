@@ -1,12 +1,25 @@
 import { ImagePlus, Loader2 } from "lucide-react";
-import { useState, type ChangeEvent } from "react";
-import { createFish } from "../services/Fish";
-import FishCardGrid from "./FishCardGrid";
+import { useState, useRef, type ChangeEvent } from "react";
+import { createFish, updateFish } from "../services/Fish";
+import FishCardGrid, { type FishCardGridHandle } from "./FishCardGrid";
 
+interface Fish {
+  _id: string;
+  fishName: string;
+  price: string;
+  description: string;
+  fishCategory: string;
+  imageUrl: string;
+}
 
 function FishesAdmin() {
+    const fishCardGridRef = useRef<FishCardGridHandle>(null);
+    
     const [showModal, setShowModal] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    
     const [fishName , setFishName] = useState("")
+    const [editFishId, setEditFishId] = useState<string | null>(null);
     const [price , setPrice] = useState("")
     const [description , setDescription] = useState("")
     const [fishCategory , setFishCategoury] = useState("")
@@ -24,12 +37,48 @@ function FishesAdmin() {
         setTimeout(() => setAlert(null), 3000);
     };
 
+    const handleEditClick = (fish: Fish) => {
+        setIsEditMode(true);
+        setEditFishId(fish._id);  
+        setFishName(fish.fishName);
+        setPrice(fish.price);
+        setDescription(fish.description);
+        setFishCategoury(fish.fishCategory);
+        setPreview(fish.imageUrl);
+        setImage(null);
+        setShowModal(true);
+    };
+
+    const handleAddNewClick = () => {
+        setIsEditMode(false);
+        resetForm();
+        setShowModal(true);
+    };
+
+    const resetForm = () => {
+        setFishName("");
+        setPrice("");
+        setDescription("");
+        setFishCategoury("");
+        setImage(null);
+        setPreview("");
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        resetForm();
+        setIsEditMode(false);
+    };
 
    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
         setImage(file);
-        // setPreview(URL.createObjectURL(file));
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
       }
     };
 
@@ -45,19 +94,26 @@ function FishesAdmin() {
           formData.append("fishCategory", fishCategory);
         
           if (image) {
-            formData.append("image", image);
+            formData.append("image", image); 
+          } else if (isEditMode) {
+            formData.append("imageUrl", preview); 
           }
-    
-          await createFish(formData);
-    
-          // Reset all fields
-          setFishName("");
-          setPrice("");
-          setDescription("");
-          setFishCategoury("");
-          setImage(null);
-          setImage(null);
-          setPreview("");
+
+          if (isEditMode && editFishId) {
+            await updateFish(editFishId, formData);
+            showAlert("success", "Fish updated successfully!");
+          } else {
+            await createFish(formData);
+            showAlert("success", "Fish added successfully!");
+          }
+        
+          showAlert("success", isEditMode ? "Fish updated successfully!" : "Fish added successfully!");
+          resetForm();
+          setShowModal(false);
+          setIsEditMode(false);
+          
+          // Refresh the fish card grid
+          fishCardGridRef.current?.refreshData();
         } catch (error : any) {
     
           if (error.response?.status === 400) {
@@ -84,7 +140,7 @@ function FishesAdmin() {
 
         {/* Add Fish Button */}
         <button
-          onClick={() => setShowModal(true)}
+          onClick={handleAddNewClick}
           className="bg-blue-600 text-white px-5 py-2 cursor-pointer rounded-lg hover:bg-blue-700"
         >
           + Add Fish Details
@@ -92,12 +148,12 @@ function FishesAdmin() {
       </div>
 
       <div>
-        <FishCardGrid />
+        <FishCardGrid ref={fishCardGridRef} onEditClick={handleEditClick} />
       </div>
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-white bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-white bg-opacity-50 flex justify-center items-center z-50">
             {alert && (
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[90%]">
               <div
@@ -122,17 +178,17 @@ function FishesAdmin() {
               </div>
             </div>
           )}
-          <div className="bg-white  border-black w-140 rounded-lg shadow-lg p-6 relative">
+          <div className="bg-white  border-black w-140 rounded-lg shadow-lg p-6 relative max-h-[90vh] overflow-y-auto">
 
             {/* Close Button */}
             <button
-              onClick={() => setShowModal(false)}
+              onClick={handleCloseModal}
               className="absolute top-2 right-3 cursor-pointer text-gray-600 hover:text-black text-4xl "
             >
               ×
             </button>
 
-            <h2 className="text-xl font-bold mb-4 text-gray-700">Add New Fish</h2>
+            <h2 className="text-xl font-bold mb-4 text-gray-700">{isEditMode ? "Edit Fish Details" : "Add New Fish"}</h2>
 
             <form  onSubmit={handleSubmit} className="space-y-4">
 
@@ -200,7 +256,7 @@ function FishesAdmin() {
               <div className="flex flex-col items-center mt-6">
               <label className="flex flex-col items-center justify-center w-full border-2 border-dashed border-sky-300 rounded-xl cursor-pointer hover:bg-sky-50 transition p-6">
                 <ImagePlus className="text-sky-500 mb-2" size={30} />
-                <span className="text-sky-600 font-medium">{image ? image.name : "Upload Image"}</span>
+                <span className="text-sky-600 font-medium">{image ? image.name : (isEditMode ? "Change Image (Optional)" : "Upload Image")}</span>
                 <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
               </label>
 
@@ -220,7 +276,7 @@ function FishesAdmin() {
               disabled={loading}
             >
               {loading && <Loader2 className="animate-spin" size={20} />}
-              {loading ? "Saving..." : "Save Fish Details"}
+              {loading ? "Saving..." : (isEditMode ? "Update Fish Details" : "Save Fish Details")}
             </button>
             </form>
           </div>

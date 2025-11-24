@@ -62,7 +62,56 @@ export const getAll = async (req:Request, res:Response) => {
 }
 
 export const updateFish = async(req:Request, res:Response) =>{
+     try {
+    const { id } = req.params;
+    const { fishName, price, description, fishCategory } = req.body;
 
+    const existingFish = await Fish.findById(id);
+    if (!existingFish) {
+      return res.status(404).json({ message: "Fish not found" });
+    }
+
+    let imageUrl = existingFish.imageUrl;
+
+    if (req.file) {
+      const fileBuffer = req.file.buffer;
+      const result: any = await new Promise((resolve, reject) => {
+        const upload_stream = cloudinary.uploader.upload_stream(
+          { folder: "post" },
+          (err, result) => {
+            if (err) return reject(err);
+            resolve(result);
+          }
+        );
+        upload_stream.end(fileBuffer);
+      });
+
+      imageUrl = result.secure_url;
+    }
+
+    const updatedFish = await Fish.findByIdAndUpdate(
+      id,
+      {
+        fishName,
+        price,
+        description,
+        fishCategory,
+        imageUrl,
+      },
+      { new: true } 
+    );
+
+    res.status(200).json({
+      message: "Fish details updated successfully",
+      data: updatedFish,
+    });
+
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Update failed",
+      error: error.message,
+    });
+  }
 }
 
 export const deleteFish = async(req:Request, res:Response) =>{

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { getAllFish } from "../services/Fish";
+import { Edit2, Trash2 } from "lucide-react";
 
 interface Fish {
   _id: string;
@@ -10,7 +11,15 @@ interface Fish {
   imageUrl: string;
 }
 
-function FishCardGrid() {
+interface FishCardGridProps {
+  onEditClick?: (fish: Fish) => void;
+}
+
+export interface FishCardGridHandle {
+  refreshData: () => void;
+}
+
+const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEditClick }, ref) => {
   const [fishList, setFishList] = useState<Fish[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -21,6 +30,12 @@ function FishCardGrid() {
     setFishList(res.data);
     setTotalPages(res.totalPages);
   };
+
+  useImperativeHandle(ref, () => ({
+    refreshData: () => {
+      loadData();
+    }
+  }));
 
   useEffect(() => {
     loadData();
@@ -33,8 +48,25 @@ function FishCardGrid() {
         {fishList.map((fish) => (
           <div
             key={fish._id}
-            className="bg-white rounded-xl shadow-md p-4 border"
+            className="bg-white rounded-xl shadow-md p-4 border relative hover:shadow-lg transition"
           >
+            {/* Edit and Delete Icons */}
+            <div className="absolute top-2 right-2 flex gap-2">
+              <button
+                onClick={() => onEditClick?.(fish)}
+                className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition shadow-md"
+                title="Edit"
+              >
+                <Edit2 size={18} />
+              </button>
+              <button
+                className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition shadow-md"
+                title="Delete"
+              >
+                <Trash2 size={18} />
+              </button>
+            </div>
+
             <img
               src={fish.imageUrl}
               className="w-full h-48 object-cover rounded-md"
@@ -48,7 +80,7 @@ function FishCardGrid() {
               <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
                 {fish.fishCategory}
               </span>
-              <span className="font-semibold text-green-700">{fish.price}</span>
+              <span className="font-semibold text-green-700">${fish.price}</span>
             </div>
           </div>
         ))}
@@ -76,6 +108,8 @@ function FishCardGrid() {
       </div>
     </div>
   );
-}
+});
+
+FishCardGrid.displayName = "FishCardGrid";
 
 export default FishCardGrid;
