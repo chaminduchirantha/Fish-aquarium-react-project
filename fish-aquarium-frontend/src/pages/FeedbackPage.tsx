@@ -1,10 +1,50 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { feedabckSave } from "../services/feedback";
 
 const FeedbackForm: React.FC = () => {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
   const [feedback, setFeedback] = useState<string>("");
+  const [customername , setCustomerName] = useState("")
+  const [email , setEmail] = useState("")
+  const [loading, setLoading] = useState<boolean>(false);
+
+
+  const handleSubmit = async()=>{
+    if (!customername || !email || !rating || !feedback) {
+      alert("Please fill all fields and select a rating.");
+      return;
+    }
+
+    setLoading(true);
+
+    const feedbackData = {
+      customername,
+      email,
+      ratings: rating,
+      feedback,
+    };
+
+     try {
+      const res = await feedabckSave(feedbackData);
+      alert("Feedback Submitted Successfully!");
+
+      // Clear Form
+      setCustomerName("");
+      setEmail("");
+      setRating(0);
+      setFeedback("");
+
+    } catch (error) {
+      console.error(error);
+      alert("Error submitting feedback.");
+    } finally {
+      setLoading(false);
+    }
+
+  }
+
 
   return (
     <section className="py-16 bg-gray-50">
@@ -26,6 +66,8 @@ const FeedbackForm: React.FC = () => {
               <input
                 type="text"
                 placeholder="Enter your Name"
+                value={customername}
+                onChange={(e) => setCustomerName(e.target.value)}
                 className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-sky-400 transition"
               />
             </div>
@@ -34,7 +76,9 @@ const FeedbackForm: React.FC = () => {
               <label className="font-semibold block mb-2">Email Address</label>
               <input
                 type="email"
+                value={email}
                 placeholder="Enter your Email Address"
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-sky-400 transition"
               />
             </div>
@@ -78,8 +122,8 @@ const FeedbackForm: React.FC = () => {
           
           {/* Submit Button */}
           <div className="mt-8">
-            <button className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
-              Submit Feedback
+            <button onClick={handleSubmit} disabled={loading} className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
+               {loading ? "Submitting..." : "Submit Feedback"}
             </button>
           </div>
         </div>
