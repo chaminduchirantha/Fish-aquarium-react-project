@@ -3,6 +3,7 @@ import authRouter from "./routes/authRoutes"
 import customAquariumRouter from "./routes/customizedAquariumRoutes"
 import fishRouter from "./routes/fishRoutes"
 import userRouter from "./routes/userRoutes"
+import feedbackRouter from "./routes/feedbackRoutes"
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"
 import cors from "cors"
@@ -28,6 +29,7 @@ app.use("/api/v1/auth" , authRouter)
 app.use("/api/v1/aquarium" , customAquariumRouter)
 app.use("/api/v1/fish" , fishRouter)
 app.use("/api/v1/user" , userRouter)
+app.use("/api/v1/feedback", feedbackRouter)
 
 
 mongoose

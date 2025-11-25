@@ -10,6 +10,7 @@ const navigation = [
   { name: 'About Us', href: '/about' },
   { name: 'Services', href: '/services' },
   { name: 'Smart Aquarium', href: '/customized' },
+  { name: 'Feedback', href: '/feedbacak' },
   { name: 'Collections', href: '/collection' },
 ]
 
