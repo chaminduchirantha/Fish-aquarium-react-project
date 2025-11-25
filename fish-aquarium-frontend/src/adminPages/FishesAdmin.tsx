@@ -148,7 +148,10 @@ function FishesAdmin() {
       </div>
 
       <div>
-        <FishCardGrid ref={fishCardGridRef} onEditClick={handleEditClick} />
+        <FishCardGrid ref={fishCardGridRef} 
+        onEditClick={handleEditClick} 
+        onDeleteSuccess={() => showAlert("success", "Fish deleted successfully!")}
+      />
       </div>
 
       {/* Modal */}

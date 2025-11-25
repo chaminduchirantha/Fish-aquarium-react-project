@@ -1,5 +1,5 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
-import { getAllFish } from "../services/Fish";
+import { getAllFish , deleteFish } from "../services/Fish";
 import { Edit2, Trash2 } from "lucide-react";
 
 interface Fish {
@@ -13,13 +13,14 @@ interface Fish {
 
 interface FishCardGridProps {
   onEditClick?: (fish: Fish) => void;
+  onDeleteSuccess?: () => void;
 }
 
 export interface FishCardGridHandle {
   refreshData: () => void;
 }
 
-const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEditClick }, ref) => {
+const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEditClick,onDeleteSuccess}, ref) => {
   const [fishList, setFishList] = useState<Fish[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -30,6 +31,22 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
     setFishList(res.data);
     setTotalPages(res.totalPages);
   };
+
+   const handleDelete = async (id: string) => {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this fish?"
+      );
+      if (!confirmDelete) return;
+
+      try {
+        await deleteFish(id);
+        alert("Fish deleted successfully!");
+        loadData();
+        onDeleteSuccess?.();
+      } catch (err) {
+        alert("Failed to delete fish.");
+      }
+    };
 
   useImperativeHandle(ref, () => ({
     refreshData: () => {
@@ -44,7 +61,7 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
   return (
     <div className="mt-10">
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {fishList.map((fish) => (
           <div
             key={fish._id}
@@ -60,6 +77,7 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
                 <Edit2 size={18} />
               </button>
               <button
+                onClick={() => handleDelete(fish._id)}
                 className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition shadow-md"
                 title="Delete"
               >
@@ -80,7 +98,7 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
               <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
                 {fish.fishCategory}
               </span>
-              <span className="font-semibold text-green-700">${fish.price}</span>
+              <span className="font-semibold text-green-700">{fish.price}</span>
             </div>
           </div>
         ))}

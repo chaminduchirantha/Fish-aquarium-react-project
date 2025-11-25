@@ -115,6 +115,24 @@ export const updateFish = async(req:Request, res:Response) =>{
 }
 
 export const deleteFish = async(req:Request, res:Response) =>{
+    try {
+    const { id } = req.params;
 
+    const fish = await Fish.findById(id);
+    if (!fish) {
+      return res.status(404).json({ message: "Fish not found" });
+    }
+
+    await Fish.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: "Fish deleted successfully",
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Delete failed",
+      error: error.message,
+    });
+  }
 }
 

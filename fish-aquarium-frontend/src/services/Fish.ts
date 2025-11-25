@@ -22,3 +22,9 @@ export const updateFish = async (id: string, data: any) => {
   });
   return res.data;
 };
+
+
+export const deleteFish = async (id: string) => {
+  const res = await api.delete(`/fish/deleteFish/${id}`);
+  return res.data;
+};
