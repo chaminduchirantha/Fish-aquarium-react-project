@@ -191,7 +191,7 @@ export default function CustomTankForm() {
 
               {/* Width */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-sky-700 mb-1">Width (cm)</label>
+                <label className="text-sm font-medium text-sky-700 mb-1">Width (feet)</label>
                 <input
                   type="number"
                   className="border p-3 rounded-lg focus:ring-2 focus:ring-sky-400 transition"
@@ -204,7 +204,7 @@ export default function CustomTankForm() {
 
               {/* Height */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-sky-700 mb-1">Height (cm)</label>
+                <label className="text-sm font-medium text-sky-700 mb-1">Height (feet)</label>
                 <input
                   type="number"
                   className="border p-3 rounded-lg focus:ring-2 focus:ring-sky-400 transition"
@@ -217,7 +217,7 @@ export default function CustomTankForm() {
 
               {/* Length */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-sky-700 mb-1">Length (cm)</label>
+                <label className="text-sm font-medium text-sky-700 mb-1">Length (feet)</label>
                 <input
                   type="number"
                   className="border p-3 rounded-lg focus:ring-2 focus:ring-sky-400 transition"
