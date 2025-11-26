@@ -16,7 +16,7 @@ export default function FeedbackList() {
    const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const limit = 6; // Cards per page
+  const limit = 3; // Cards per page
 
   useEffect(() => {
     loadFeedback();
@@ -35,12 +35,13 @@ export default function FeedbackList() {
 
 
   return (
+    <section className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-5">
         {/* Section Header */}
-        <h2 className="text-4xl font-bold text-black mb-3">
-          Manage Feedaback
+        <h2 className="text-5xl font-bold text-sky-800 text-center mb-6">
+          What Our Visitors Say
         </h2>
-        <p className=" text-gray-600  mx-auto mb-12">
+        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
           Hear from customers who enjoyed our smart aquarium experience.
         </p>
 
@@ -93,7 +94,7 @@ export default function FeedbackList() {
         </div>
 
         {/* Pagination */}
-          <div className="flex justify-center gap-4 mt-8">
+        <div className="flex justify-center gap-4 mt-8">
             <button
                 disabled={page === 1}
                 className="px-4 py-2 bg-sky-200 text-black rounded"
@@ -114,5 +115,6 @@ export default function FeedbackList() {
         </div>
         
       </div>
+    </section>
   );
 }

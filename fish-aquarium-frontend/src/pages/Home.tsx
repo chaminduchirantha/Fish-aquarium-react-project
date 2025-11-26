@@ -1,6 +1,7 @@
 'use client'
 
 import sectionImage from '../assets/beautiful-group-fish-underwater.jpg'
+import FeedbackList from '../components/FeedbackList'
 
 export default function AnjalFarmHero() {
 
@@ -74,6 +75,16 @@ export default function AnjalFarmHero() {
           animation: fadeIn 1.2s ease-out;
         }
       `}</style>
+
+        <section className='py-16 bg-gray-50'>
+            <FeedbackList />
+        </section>
+
+      
+
     </div>
+
+      
+      
   )
 }

@@ -48,7 +48,7 @@ const FeedbackForm: React.FC = () => {
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="max-w-3xl mx-auto bg-white  p-10 rounded-2xl ">
+      <div className="max-w-3xl mx-auto bg-white  p-10 rounded-2xl shadow-md">
         {/* Title Section */}
         <h1 className="text-5xl font-bold text-sky-800 text-center">Share Your Experience</h1>
         <p className="text-gray-600 text-center mt-5">

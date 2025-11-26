@@ -101,13 +101,7 @@ export default function AnjalFarmHero() {
             to="/login"
             className="text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-blue-600 hover:to-sky-500 px-5 py-2 rounded-lg shadow-lg transition-all"
           >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="text-sm font-semibold text-white bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-600 hover:to-orange-400 px-5 py-2 rounded-lg shadow-lg transition-all"
-          >
-            Sign Up
+            Get Started 
           </Link>
         </div>
 

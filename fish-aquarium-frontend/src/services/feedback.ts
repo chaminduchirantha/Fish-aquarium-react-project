@@ -11,3 +11,8 @@ export const feedabckSave = async (data: FeedbakData) => {
   const res = await api.post("/feedback/create", data)
   return res.data
 }
+
+export const getAllFeedback = async (page: number, limit: number) => {
+  const res = await api.get(`/feedback/allFeedback?page=${page}&limit=${limit}`);
+  return res.data;
+};

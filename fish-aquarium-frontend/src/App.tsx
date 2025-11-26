@@ -93,9 +93,10 @@ function AppContent() {
           <Route
             path="/feedbacak"
             element={
-              <RequireAuth roles={["USER"]}>
-                <Feedback />
-              </RequireAuth>
+              // <RequireAuth roles={["USER"]}>
+              //   <Feedback />
+              // </RequireAuth>
+              <Feedback />
             } 
           />
           
