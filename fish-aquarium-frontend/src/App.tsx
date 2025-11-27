@@ -108,7 +108,14 @@ function AppContent() {
                 </RequireAuth>
               } 
           />
-          <Route path="/access" element={<Access />} />
+          <Route
+              path="/access"
+              element={
+                <RequireAuth roles={["USER"]}>
+                  <Access />
+                </RequireAuth>
+              } 
+          />          
           <Route path="/collection" element={<Collection />} />
            <Route
               path="/customized"

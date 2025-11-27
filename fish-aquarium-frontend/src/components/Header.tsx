@@ -72,12 +72,12 @@ export default function AnjalFarmHero() {
 
               <MenuItem>
                
-                  <Link
-                    to="/access"
+                  <a
+                    href="/access"
                     className= "block px-4 py-2 rounded-md"
                   >
                     Accessories
-                  </Link>
+                  </a>
               </MenuItem>
 
               <MenuItem>
