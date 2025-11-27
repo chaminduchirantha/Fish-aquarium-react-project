@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import video1 from "../assets/stock-footage-colorful-fancy-carps-or-koi-fishes-swimming-in-a-pond-beautiful-color-japanese-koi-fish-koi-carp.webm";
 import image1 from '../assets/21434.jpg'
-import image2 from '../assets/close-up-algae-nature.jpg'
 import image3 from '../assets/image.png'
 import image4 from '../assets/closeup-shot-yellow-cichlidae-cichlid-home-aquarium.jpg'
 
@@ -47,9 +46,13 @@ const CardSection: React.FC = () => {
               alt="Smart Monitoring"
             />
             <div className="p-4">
-              <h2 className="font-bold text-lg mb-4 text-black">
+              <h2 className="font-bold text-lg mb-2  text-black">
                 Explore Our Fishes
               </h2>
+              <p className="text-gray-600 text-sm mb-6">
+                Browse our beautiful collection of healthy, vibrant aquarium fish,
+                carefully selected to suit tanks of all sizes.
+              </p>
               <Link
                 to="fishes"
                 className="text-white px-4 py-2 bg-sky-600  rounded-md hover:bg-sky-700 transition"
@@ -67,9 +70,13 @@ const CardSection: React.FC = () => {
               alt="Automated Feeding"
             />
             <div className="p-4">
-              <h2 className="font-bold text-lg mb-4 text-black">
+              <h2 className="font-bold text-lg mb-2 text-black">
                 Explore The Accssouries
               </h2>
+              <p className="text-gray-600 text-sm mb-6">
+                Find high-quality aquarium accessories including filters, lights,
+                decorations, and tools for perfect tank maintenance.
+              </p>
               <Link
                 to="accessories"
                 className="text-white px-4 py-2 bg-sky-600  rounded-md hover:bg-sky-700  transition"
@@ -89,9 +96,14 @@ const CardSection: React.FC = () => {
               alt="Smart Water Circulation"
             />
             <div className="p-4">
-              <h2 className="font-bold text-lg mb-4 text-black">
+              <h2 className="font-bold text-lg mb-2 text-black">
                 Smart Auarium Maintenance
               </h2>
+
+              <p className="text-gray-600 text-sm mb-6">
+                Customize your aquarium with smart maintenance features designed to
+                keep your tank clean, healthy, and hassle-free.
+              </p>
               <a
                 href="/customized"
                 className="px-4 py-2 bg-sky-600  rounded-md hover:bg-sky-700 transition text-white"
