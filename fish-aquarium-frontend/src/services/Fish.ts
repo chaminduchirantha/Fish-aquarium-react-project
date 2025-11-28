@@ -9,10 +9,19 @@ export const createFish = async(data: any)=>{
   return res.data
 }
 
-export const getAllFish = async (page: number, limit: number) => {
-  const res = await api.get(`/fish/all?page=${page}&limit=${limit}`);
+export const getAllFish = async (
+  page: number,
+  limit: number,
+  category?: string
+) => {
+  let url = `/fish/all?page=${page}&limit=${limit}`;
+  if (category && category !== "all") {
+    url += `&category=${category}`;
+  }
+  const res = await api.get(url);
   return res.data;
 };
+
 
 export const updateFish = async (id: string, data: any) => {
   const res = await api.put(`/fish/updateFish/${id}`, data, {

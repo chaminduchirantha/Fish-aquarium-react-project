@@ -24,7 +24,7 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
   const [fishList, setFishList] = useState<Fish[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 6;
+  const limit = 8;
 
   const loadData = async () => {
     const res = await getAllFish(page, limit);
