@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllFish } from "../services/Fish";
-import { ShoppingCart } from "lucide-react";
+import { CreditCard, ShoppingCart } from "lucide-react";
 import { useCart } from "../context/cartContext";
 import CartDrawer from "../components/CartViewer";
 
@@ -131,7 +131,7 @@ export default function FishCategorySection() {
               <div className="text-lg text-gray-600">No fish found in this category</div>
             </div>
           ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {fishList.map((fish) => (
                 <div
                   key={fish._id}
@@ -147,7 +147,7 @@ export default function FishCategorySection() {
 
                   <div className="p-5 space-y-3">
                     <div className="flex items-center justify-between w-full">
-                      <h3 className="text-xl font-semibold text-sky-800">
+                      <h3 className="text-md font-semibold text-sky-800">
                         {fish.fishName}
                       </h3>
                       <span className="bg-blue-100 text-blue-700 px-3 font-bold py-2 rounded-2xl text-sm whitespace-nowrap">
@@ -174,6 +174,11 @@ export default function FishCategorySection() {
                       } className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
                       <ShoppingCart size={18} />
                       Add to Cart
+                    </button>
+                    <button  
+                      className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
+                      <CreditCard size={18} />
+                      By Now Fish
                     </button>
                   </div>
                 </div>

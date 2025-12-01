@@ -250,7 +250,7 @@ function FishesAdmin() {
                     <option value="Barbs">Barbs</option>
                     <option value="Gouramies">Gouramies</option>
                     <option value="Tetras">Tetras</option>
-                    <option value="Predatory Fish">Predatory Fish</option>
+                    <option value="Predatory">Predatory</option>
                     <option value="Others">Others</option>
                 </select>
             </div>

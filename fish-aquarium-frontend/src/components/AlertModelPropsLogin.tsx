@@ -6,7 +6,7 @@ interface AlertModalProps {
   onClose: () => void;
 }
 
-export default function AlertModal({ title, message, show, onClose }: AlertModalProps) {
+export default function AlertModal({ title, message, show}: AlertModalProps) {
   if (!show) return null;
 
   return (
@@ -35,13 +35,13 @@ export default function AlertModal({ title, message, show, onClose }: AlertModal
           </a>
         </div>
 
-        {/* Close Button */}
+        {/* Close Button
         <button
           onClick={onClose}
           className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
         >
           Close
-        </button>
+        </button> */}
       </div>
        <style>{`
         @keyframes pop {
@@ -50,7 +50,7 @@ export default function AlertModal({ title, message, show, onClose }: AlertModal
         }
 
         .animate-pop {
-        animation: pop 0.25s ease-out forwards;
+        animation: pop 0.15s ease-out forwards;
         }
 
       `}</style>

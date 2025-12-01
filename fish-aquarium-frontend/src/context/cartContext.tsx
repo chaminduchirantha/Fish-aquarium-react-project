@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import type { ReactNode } from "react";
+import { useAuth } from "./authContext";
 
 interface CartItem {
   _id: string;
@@ -23,6 +24,8 @@ const CART_STORAGE_KEY = "fish_aquarium_cart";
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { user } = useAuth();
+  const [previousUser, setPreviousUser] = useState<any>(null);
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -36,6 +39,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
     setIsLoaded(true);
   }, []);
+
+  // Clear cart when user changes (login/logout)
+  useEffect(() => {
+    if (isLoaded) {
+      // Check if user has actually changed
+      const currentUserId = user?._id;
+      const previousUserId = previousUser?._id;
+
+      if (currentUserId !== previousUserId) {
+        // User changed - clear the cart
+        setCart([]);
+        localStorage.removeItem(CART_STORAGE_KEY);
+        setPreviousUser(user);
+      }
+    }
+  }, [user, isLoaded, previousUser]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
