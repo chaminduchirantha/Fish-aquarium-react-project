@@ -9,16 +9,8 @@ export const createFish = async(data: any)=>{
   return res.data
 }
 
-export const getAllFish = async (
-  page: number,
-  limit: number,
-  category?: string
-) => {
-  let url = `/fish/all?page=${page}&limit=${limit}`;
-  if (category && category !== "all") {
-    url += `&category=${category}`;
-  }
-  const res = await api.get(url);
+export const getAllFish = async (page: number, limit: number, category: string, search: string) => {
+  const res = await api.get(`/fish/all?page=${page}&limit=${limit}&category=${category}&search=${search}`);
   return res.data;
 };
 

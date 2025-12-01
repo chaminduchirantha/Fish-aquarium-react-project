@@ -25,13 +25,14 @@ export default function FishCategorySection() {
   const [fishList, setFishList] = useState<Fish[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const limit = 8;
 
   const loadData = async () => {
     try {
       setLoading(true);
-      const res = await getAllFish(page, limit, selected);
+      const res = await getAllFish(page, limit, selected, search);
       setFishList(res.data || []);
       setTotalPages(res.totalPages || 1);
     } catch (error) {
@@ -48,20 +49,40 @@ export default function FishCategorySection() {
 
  
   return (
-    <section className="py-12 px-6 bg-gray-50 mt-8">
+    <section className="py-12 lg:px-20 px-6 bg-gray-50 mt-8">
       <div className="max-w-6xl mx-auto">
 
         {/* Title */}
         <h2 className="text-5xl font-bold text-sky-800 text-center mb-3">
           Fish Categories
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+        <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-center">
           Discover our smart aquarium solutions from intelligent fish care
           systems to automated tank management tools that make your aquarium
           experience easier and more enjoyable.
         </p>
 
-        {/* Category Buttons */}
+
+          <div className="flex justify-center mb-10">
+            <input
+              type="text"
+              placeholder="Search fish..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1);
+              }}
+              className="w-full md:w-1/2 px-4 py-2 rounded-full border border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+          </div>
+
+          {/* Add to Cart Icon */}
+          <button className="absolute top-20 right-6 text-black p-3  shadow-md transition-all">
+            <ShoppingCart size={22} />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+              0
+            </span>
+          </button>
         <div className="flex flex-wrap justify-center gap-3 mb-20">
           {categories.map((cat) => (
             <button
@@ -99,7 +120,7 @@ export default function FishCategorySection() {
               <div className="text-lg text-gray-600">No fish found in this category</div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {fishList.map((fish) => (
                 <div
                   key={fish._id}
