@@ -1,6 +1,7 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { getAllFish , deleteFish } from "../services/Fish";
 import { Edit2, Trash2 } from "lucide-react";
+import { showErrorAlert, showSuccessAlert } from "../util/alerts";
 
 interface Fish {
   _id: string;
@@ -33,18 +34,18 @@ const FishCardGrid = forwardRef<FishCardGridHandle, FishCardGridProps>(({ onEdit
   };
 
    const handleDelete = async (id: string) => {
-      const confirmDelete = window.confirm(
+      const confirmDelete = confirm(
         "Are you sure you want to delete this fish?"
       );
       if (!confirmDelete) return;
 
       try {
         await deleteFish(id);
-        alert("Fish deleted successfully!");
+        showSuccessAlert("Fish deleted successfully!");
         loadData();
         onDeleteSuccess?.();
       } catch (err) {
-        alert("Failed to delete fish.");
+        showErrorAlert("Failed to delete fish.");
       }
     };
 

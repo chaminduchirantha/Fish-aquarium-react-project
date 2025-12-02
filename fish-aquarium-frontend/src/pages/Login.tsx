@@ -5,7 +5,7 @@ import loginImage from "../assets/freepik__a-vibrant-osca-fish-swims-in-a-clear-
 import bgImage from "../assets/top-view-colorful-koi-fishes.jpg";
 import { getMyDetails, login } from "../services/auth";
 import { useAuth } from "../context/authContext";
-import AlertModal from "../components/AlertModelPropsLogin";
+import { showErrorAlert, showSuccessAlert } from "../util/alerts";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Login() {
     e.preventDefault()
 
     if (!email || !password) {
-      alert("Missing Fields, Please fill all required fields.");
+      showErrorAlert("Missing Fields, Please fill all required fields.");
       return
     }
 
@@ -29,7 +29,7 @@ export default function Login() {
       console.log(res.data.accessToken)
 
       if (!res.data.accessToken) {
-        alert("Login Failed , Invalid email or password.");
+        showErrorAlert("Invalid email or password.");
         return
       }
 
@@ -45,7 +45,7 @@ export default function Login() {
 
       localStorage.setItem("user", JSON.stringify(detail.data))
 
-    alert(`Login Successful , Welcome back, ${email}!`);
+    showSuccessAlert(`Welcome Back Login Successful`);
 
     setTimeout(() => {
       if (userData.roles?.includes("ADMIN")) {
@@ -60,9 +60,9 @@ export default function Login() {
       console.error(err)
 
       if (err.response?.status === 401 || err.response?.status === 400) {
-       alert("Login Failed,Invalid email or password.");
+       showErrorAlert("Invalid email or password.");
       } else {
-       alert("Error,Something went wrong. Try again.");
+       showErrorAlert("Error,Something went wrong. Try again.");
       }
     }
   }
