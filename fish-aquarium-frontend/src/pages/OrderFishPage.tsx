@@ -51,11 +51,9 @@ const CheckoutPage: React.FC = () => {
     amount: 0
   });
 
-  // Calculate current qty and subtotal based on form data
   const currentQty = formData.qty ? parseInt(formData.qty) : validQty;
   const subtotal = validPrice > 0 ? validPrice * currentQty : 0;
 
-  // Update amount in formData when subtotal changes
   React.useEffect(() => {
     setFormData(prev => ({ ...prev, amount: subtotal }));
   }, [subtotal]);
@@ -92,6 +90,12 @@ const CheckoutPage: React.FC = () => {
 
       await fishOrderSave(orderData);
       setAlert({ type: 'success', message: 'Order placed successfully!' });
+
+        if (formData.paymentMethod === 'card') {
+            navigate('/payment'); 
+        } else if (formData.paymentMethod === 'cod') {
+            navigate('/dilivery'); 
+        }
     
     } catch (error: any) {
       setAlert({ type: 'error', message: error.response?.data?.message || 'Failed to place order' });
@@ -196,7 +200,7 @@ const CheckoutPage: React.FC = () => {
                         onChange={handleInputChange}
                         className="mr-3 h-4 w-4 text-blue-600"
                     />
-                    <label htmlFor="card" className="font-medium flex-1 cursor-pointer">Credit / Debit Card</label>
+                    <label htmlFor="card Payment" className="font-medium flex-1 cursor-pointer">Credit / Debit Card</label>
                 </div>
                 <div className="flex items-center p-4">
                     <input 
@@ -208,7 +212,7 @@ const CheckoutPage: React.FC = () => {
                         onChange={handleInputChange}
                         className="mr-3 h-4 w-4 text-blue-600"
                     />
-                    <label htmlFor="cod" className="font-medium flex-1 cursor-pointer">Cash on Delivery</label>
+                    <label htmlFor="Cash On Delivery" className="font-medium flex-1 cursor-pointer">Cash on Delivery</label>
                 </div>
             </div>
            </div>
@@ -254,10 +258,10 @@ const CheckoutPage: React.FC = () => {
                     </span>
                 </div>
                 <div className="flex-1">
-                    <h3 className="text-xl font-medium text-gray-800">{product.fishName}</h3>
-                    <p className="text-xs text-gray-500">{currentQty} Fish</p>
+                    <h3 className="text-xl font-medium text-gray-800 mb-3">{product.fishName}</h3>
+                    <p className="text-mb text-gray-500">{currentQty} Qty</p>
                 </div>
-                <p className="text-sm font-medium text-gray-800">Rs {isNaN(validPrice) ? '0' : validPrice}</p>
+                <p className="text-xl mb-9 font-medium text-gray-800">Rs {isNaN(validPrice) ? '0' : validPrice}/=</p>
             </div>
 
             <hr className="border-gray-200 my-6" />

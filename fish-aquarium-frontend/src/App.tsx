@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/authContext'
 import Footer from './components/Footer'
 import AlertPopups from './components/AlertsPopups'
-import DiliveryAdmin from './adminPages/DiliveryAdmin'
 import { CartProvider } from './context/cartContext'
 
 
@@ -17,6 +16,7 @@ const Collection = lazy(() => import('./pages/Collection'))
 const Feedback = lazy(() => import('./pages/FeedbackPage'))
 const CustomizedAqua = lazy(() => import('./pages/CustomizeAquarium'))
 const Fishes = lazy(() => import('./pages/Fishes'))
+const Dilivery = lazy(() => import('./pages/DiliveryPage'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const CheckoutPage = lazy(() => import('./pages/OrderFishPage'))
@@ -91,25 +91,9 @@ function AppContent() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
-
-          <Route
-            path="/feedbacak"
-            element={
-              // <RequireAuth roles={["USER"]}>
-              //   <Feedback />
-              // </RequireAuth>
-              <Feedback />
-            } 
-          />
+          <Route path="/feedbacak"element={<Feedback />} />
           
-          <Route
-              path="/fish"
-              element={
-                // <RequireAuth roles={["USER"]}>
-                  <Fishes />
-                // </RequireAuth>
-              } 
-          />
+          <Route path="/fish"element={<Fishes />}/>
           <Route
               path="/access"
               element={
@@ -129,14 +113,24 @@ function AppContent() {
           /> 
 
           <Route path="/collection" element={<Collection />} />
-           <Route
-              path="/customized"
-              element={
-                <RequireAuth roles={["USER"]}>
-                  <CustomizedAqua />
-                </RequireAuth>
-              }
-            />
+          <Route
+            path="/customized"
+            element={
+              <RequireAuth roles={["USER"]}>
+                <CustomizedAqua />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/dilivery"
+            element={
+              <RequireAuth roles={["USER"]}>
+                <Dilivery />
+              </RequireAuth>
+            }
+          />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
