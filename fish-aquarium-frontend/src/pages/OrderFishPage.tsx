@@ -111,7 +111,7 @@ const CheckoutPage: React.FC = () => {
       <div className="w-full lg:w-[58%] px-4 py-8 lg:px-16 lg:py-12 order-2 lg:order-1 border-r border-gray-200">
         <div className="max-w-xl mx-auto">
           {/* Header / Logo Area */}
-          <h1 className="text-2xl font-bold mb-6 text-black">Your Fish Shop</h1>
+          <h1 className="text-4xl font-bold mb-16  text-sky-800">Aqua World</h1>
           
           {/* Contact Section */}
           <div className="mb-8">
@@ -167,11 +167,11 @@ const CheckoutPage: React.FC = () => {
                 type="number"
                 name="qty"
                 placeholder="Qty"
-                className="w-full md:w-1/3 border border-gray-300 rounded p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full md:w-1/2 border border-gray-300 rounded p-3 focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.qty}
                 onChange={handleInputChange}
               />
-              <div className="w-full md:w-1/3 relative">
+              <div className="w-full md:w-1/2 relative">
                  <select 
                     name="orderType"
                     className="w-full border border-gray-300 rounded p-3 appearance-none bg-white text-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -202,7 +202,7 @@ const CheckoutPage: React.FC = () => {
                     />
                     <label htmlFor="card Payment" className="font-medium flex-1 cursor-pointer">Credit / Debit Card</label>
                 </div>
-                <div className="flex items-center p-4">
+                <div className="flex items-center p-4 cursor-pointer">
                     <input 
                         type="radio" 
                         id="cod" 
@@ -223,12 +223,12 @@ const CheckoutPage: React.FC = () => {
                  className="text-blue-600 hover:text-blue-800 flex items-center text-sm"
                  onClick={() => navigate(-1)}
                >
-                   <ChevronLeft className="h-4 w-4 mr-1" /> Back
+                   <ChevronLeft className="h-4 w-4 mr-1 cursor-pointer" /> Back
                </button>
                <button 
                  onClick={handleOrderSubmit}
                  disabled={loading}
-                 className="w-full md:w-auto bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-medium transition disabled:opacity-50"
+                 className="w-full md:w-auto cursor-pointer bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-medium transition disabled:opacity-50"
                >
                  {loading ? 'Processing...' : 'Order Now'}
                </button>
@@ -277,7 +277,7 @@ const CheckoutPage: React.FC = () => {
                 <span className="text-xl font-semibold">Rs. {isNaN(subtotal) ? '0.00' : subtotal.toFixed(2)}</span>
             </div>
 
-            <div className="mt-6 text-sm text-gray-600 p-4 bg-gray-100 rounded">
+            <div className="mt-15 text-md text-black p-4 bg-gray-100 rounded">
                 <p>Order Date: {formData.orderDate}</p>
                 <p>Order Type: {formData.orderType}</p>
             </div>

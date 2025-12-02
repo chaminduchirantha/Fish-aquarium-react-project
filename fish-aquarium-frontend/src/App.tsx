@@ -28,7 +28,7 @@ const AccessoriesAdmin = lazy(() => import('./adminPages/AccessoriesAdmin'))
 const FeedbackAdmin = lazy(() => import('./adminPages/FeedbackAdmin'))
 const PaymentAdmin = lazy(() => import('./adminPages/PaymentAdmin'))
 const DeliveryAdmin = lazy(() => import('./adminPages/DiliveryAdmin'))
-const CustomizedAquariumAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
+const CustomizedAquariumAdmin = lazy(() => import('./adminPages/CustomizedAquariumAdmin'))
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] };
 

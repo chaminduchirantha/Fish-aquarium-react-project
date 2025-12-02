@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { ShoppingCart } from "lucide-react";
+import { List, ListOrdered, ShoppingCart } from "lucide-react";
 import { getAllAccessories } from "../services/accessories";
+import { GrOrderedList } from "react-icons/gr";
 
 interface Fish {
   _id: string;
@@ -30,7 +31,7 @@ export default function FishCategorySection() {
   
 
   return (
-    <section className="py-12 px-8 bg-gray-50 mt-8">
+    <section className="py-12 lg:px-20 px-6 bg-gray-50 mt-8">
       <div className="max-w-6xl mx-auto">
 
         {/* Title */}
@@ -71,12 +72,16 @@ export default function FishCategorySection() {
               <h4 className="text-md text- font-semibold mb-3 text-sky-800">
                   {item.price}
               </h4>
-              <p className="text-gray-600 font-semibold text-sm leading-relaxed">
+              <p className="text-gray-600 font-semibold text-sm leading-relaxed mb-6">
                 {item.description}
               </p>
               <button className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
                 <ShoppingCart size={18} />
                 Add to Cart
+              </button>
+               <button className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
+                <List size={18} />
+                Order Now 
               </button>
             </div>
           </div>

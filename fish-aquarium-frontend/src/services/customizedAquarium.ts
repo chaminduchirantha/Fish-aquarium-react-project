@@ -8,3 +8,9 @@ export const createCustomizedAquarium = async(data: any)=>{
   })
   return res.data
 }
+
+
+export const getAllSamartAquariumDetails = async (page: number, limit: number) => {
+  const res = await api.get(`/aquarium/get?page=${page}&limit=${limit}`);
+  return res.data;
+};
