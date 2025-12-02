@@ -97,23 +97,23 @@ export default function FeedbackList() {
 
         {/* Pagination */}
         <div className="flex justify-center gap-4 mt-8">
-            <button
-                disabled={page === 1}
-                className="px-4 py-2 bg-sky-200 cursor-pointer text-black rounded"
-                onClick={() => setPage((p) => p - 1)}
-                >
-                Previous
-            </button>
+          <button
+              disabled={page === 1}
+              className="px-4 py-2 bg-sky-200 cursor-pointer text-black rounded"
+              onClick={() => setPage((p) => p - 1)}
+              >
+              Previous
+          </button>
 
             <span className="font-medium text-black text-lg">{page} / {totalPages}</span>
 
-            <button
-                disabled={page === totalPages}
-                className="px-4 py-2 bg-sky-200 cursor-pointer text-black rounded disabled:opacity-50"
-                onClick={() => setPage((p) => p + 1)}
-                >
-                Next
-            </button>
+          <button
+              disabled={page === totalPages}
+              className="px-4 py-2 bg-sky-200 cursor-pointer text-black rounded disabled:opacity-50"
+              onClick={() => setPage((p) => p + 1)}
+              >
+              Next
+          </button>
         </div>
         
       </div>

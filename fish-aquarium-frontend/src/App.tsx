@@ -19,6 +19,7 @@ const CustomizedAqua = lazy(() => import('./pages/CustomizeAquarium'))
 const Fishes = lazy(() => import('./pages/Fishes'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
+const CheckoutPage = lazy(() => import('./pages/OrderFishPage'))
 const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
 const CustomerAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
 const FishesAdmin = lazy(() => import('./adminPages/FishesAdmin'))
@@ -104,9 +105,9 @@ function AppContent() {
           <Route
               path="/fish"
               element={
-                <RequireAuth roles={["USER"]}>
+                // <RequireAuth roles={["USER"]}>
                   <Fishes />
-                </RequireAuth>
+                // </RequireAuth>
               } 
           />
           <Route
@@ -116,7 +117,17 @@ function AppContent() {
                   <Access />
                 </RequireAuth>
               } 
-          />          
+          /> 
+
+          <Route
+              path="/ordersFish"
+              element={
+                <RequireAuth roles={["USER"]}>
+                  <CheckoutPage />
+                </RequireAuth>
+              } 
+          /> 
+
           <Route path="/collection" element={<Collection />} />
            <Route
               path="/customized"

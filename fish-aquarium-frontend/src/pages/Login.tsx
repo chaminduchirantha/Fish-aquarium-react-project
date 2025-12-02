@@ -16,22 +16,11 @@ export default function Login() {
   const [loading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertTitle, setAlertTitle] = useState("");
-  const [alertMsg, setAlertMsg] = useState("");
-
-  const openAlert = (title: string, msg: string) => {
-    setAlertTitle(title);
-    setAlertMsg(msg);
-    setShowAlert(true);
-  };
-
-
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     if (!email || !password) {
-      openAlert("Missing Fields", "Please fill all required fields.");
+      alert("Missing Fields, Please fill all required fields.");
       return
     }
 
@@ -40,7 +29,7 @@ export default function Login() {
       console.log(res.data.accessToken)
 
       if (!res.data.accessToken) {
-        openAlert("Login Failed", "Invalid email or password.");
+        alert("Login Failed , Invalid email or password.");
         return
       }
 
@@ -56,7 +45,7 @@ export default function Login() {
 
       localStorage.setItem("user", JSON.stringify(detail.data))
 
-    openAlert("Login Successful", `Welcome back, ${email}!`);
+    alert(`Login Successful , Welcome back, ${email}!`);
 
     setTimeout(() => {
       if (userData.roles?.includes("ADMIN")) {
@@ -71,9 +60,9 @@ export default function Login() {
       console.error(err)
 
       if (err.response?.status === 401 || err.response?.status === 400) {
-       openAlert("Login Failed", "Invalid email or password.");
+       alert("Login Failed,Invalid email or password.");
       } else {
-       openAlert("Error", "Something went wrong. Try again.");
+       alert("Error,Something went wrong. Try again.");
       }
     }
   }
@@ -175,12 +164,6 @@ export default function Login() {
           </a>
         </p>
       </div>
-       <AlertModal
-        title={alertTitle}
-        message={alertMsg}
-        show={showAlert}
-        onClose={() => setShowAlert(false)}
-      />
     </div>
   );
 }

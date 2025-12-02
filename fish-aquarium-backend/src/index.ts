@@ -4,6 +4,7 @@ import customAquariumRouter from "./routes/customizedAquariumRoutes"
 import fishRouter from "./routes/fishRoutes"
 import userRouter from "./routes/userRoutes"
 import accessRouter from "./routes/accessoriesRoutes"
+import ordersFishRouter from "./routes/orderFishRoutes"
 import feedbackRouter from "./routes/feedbackRoutes"
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"
@@ -32,6 +33,7 @@ app.use("/api/v1/fish" , fishRouter)
 app.use("/api/v1/user" , userRouter)
 app.use("/api/v1/feedback", feedbackRouter)
 app.use("/api/v1/accessories",accessRouter)
+app.use("/api/v1/orders" , ordersFishRouter)
 
 
 mongoose
