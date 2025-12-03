@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllFish } from "../services/Fish";
+import { getAllFish, searchFish } from "../services/Fish";
 import { CreditCard, List, ShoppingCart } from "lucide-react";
 import { useCart } from "../context/cartContext";
 import CartDrawer from "../components/CartViewer";
@@ -47,16 +47,25 @@ export default function FishCategorySection() {
   const [cartOpen, setCartOpen] = useState(false);
   const { cart, addToCart } = useCart();
 
-
-
   const limit = 12;
 
   const loadData = async () => {
     try {
       setLoading(true);
-      const res = await getAllFish(page, limit, selected, search);
-      setFishList(res.data || []);
-      setTotalPages(res.totalPages || 1);
+
+      if (search) {
+        const res = await searchFish(page, limit, "", search); 
+        setFishList(res.data || []);
+        setTotalPages(res.totalPages || 1);
+      } else if (selected !== "all") {
+        const res = await searchFish(page, limit, selected, "");
+        setFishList(res.data || []);
+        setTotalPages(res.totalPages || 1);
+      } else {
+        const res = await getAllFish(page, limit);
+        setFishList(res.data || []);
+        setTotalPages(res.totalPages || 1);
+      }
     } catch (error) {
       console.error("Failed to load fish:", error);
       setFishList([]);
@@ -66,9 +75,13 @@ export default function FishCategorySection() {
   };
 
   useEffect(() => {
+    setPage(1);
     loadData();
-  }, [page, selected, search]);
+  }, [selected, search]);
 
+  useEffect(() => {
+    loadData();
+  }, [page]);
  
   return (
     <section className="py-12 lg:px-20 px-6 bg-gray-50 mt-8">

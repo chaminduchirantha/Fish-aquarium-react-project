@@ -9,8 +9,8 @@ export const createFish = async(data: any)=>{
   return res.data
 }
 
-export const getAllFish = async (page: number, limit: number, category: string, search: string) => {
-  const res = await api.get(`/fish/all?page=${page}&limit=${limit}&category=${category}&search=${search}`);
+export const getAllFish = async (page: number, limit: number) => {
+  const res = await api.get(`/fish/all?page=${page}&limit=${limit}`);
   return res.data;
 };
 
@@ -21,6 +21,11 @@ export const updateFish = async (id: string, data: any) => {
       "Content-Type": "multipart/form-data"
     }
   });
+  return res.data;
+};
+
+export const searchFish = async (page: number, limit: number, category: string, search: string) => {
+  const res = await api.get(`/fish/search?page=${page}&limit=${limit}&category=${category}&query=${search}`);
   return res.data;
 };
 

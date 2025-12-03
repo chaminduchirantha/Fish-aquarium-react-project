@@ -136,3 +136,43 @@ export const deleteFish = async(req:Request, res:Response) =>{
   }
 }
 
+export const searchFish = async (req: Request, res: Response) => {
+  try {
+    const { query, category, page = "1", limit = "10" } = req.query;
+
+    const pageNumber = parseInt(page as string);
+    const limitNumber = parseInt(limit as string);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    // Build filter
+    const filter: any = {};
+
+    if (query) {
+      filter.fishName = { $regex: query, $options: "i" }; // case-insensitive search
+    }
+
+    if (category) {
+      filter.fishCategory = category;
+    }
+
+    const fish = await Fish.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limitNumber);
+
+    const total = await Fish.countDocuments(filter);
+
+    return res.status(200).json({
+      message: "Search results",
+      data: fish,
+      totalPages: Math.ceil(total / limitNumber),
+      totalCount: total,
+      page: pageNumber,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Search failed",
+      error: error.message,
+    });
+  }
+};
