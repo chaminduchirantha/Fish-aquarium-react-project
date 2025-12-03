@@ -140,12 +140,17 @@ const DashboardLayout: React.FC = () => {
 
             <Link to="/admin/orders" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-package text-2xl"></i></span>
-              <span className="ml-3">Orders</span>
+              <span className="ml-3">Fish Orders</span>
             </Link>
 
             <Link to="/admin/delivery" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><img className="w-7.5" src={delivery} alt="" /></span>              
               <span className="ml-3">Delivery</span>
+            </Link>
+
+            <Link to="/admin/ordersAccess" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
+              <span className="text-2xl"><i className="bx bx-package text-2xl"></i></span>
+              <span className="ml-3">Accessories Orders</span>
             </Link>
 
             <Link to="/admin/payments" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">

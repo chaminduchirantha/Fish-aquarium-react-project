@@ -24,6 +24,7 @@ const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
 const CustomerAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
 const FishesAdmin = lazy(() => import('./adminPages/FishesAdmin'))
 const OrdersAdmin = lazy(() => import('./adminPages/OrdersAdmin'))
+const OrdersAccessAdmin = lazy(() => import('./adminPages/AccessoriesOrdersAdmin'))
 const AccessoriesAdmin = lazy(() => import('./adminPages/AccessoriesAdmin'))
 const FeedbackAdmin = lazy(() => import('./adminPages/FeedbackAdmin'))
 const PaymentAdmin = lazy(() => import('./adminPages/PaymentAdmin'))
@@ -144,6 +145,7 @@ function AppContent() {
               <Route path="customers" element={<CustomerAdmin />} />
               <Route path="fishes" element={<FishesAdmin />} />
               <Route path="orders" element={<OrdersAdmin />} />
+              <Route path="ordersAccess" element={<OrdersAccessAdmin />} />
               <Route path="accessories" element={<AccessoriesAdmin />} />
               <Route path="feedback" element={<FeedbackAdmin/>} />
               <Route path="delivery" element={<DeliveryAdmin/>} />

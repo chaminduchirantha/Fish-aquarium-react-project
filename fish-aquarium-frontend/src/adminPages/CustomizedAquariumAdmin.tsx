@@ -24,7 +24,7 @@ const UserCardGrid = forwardRef<AquariumCardGridHandle>((_, ref) => {
   const [aquariumList, setAquariumList] = useState<Aquarium[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 9;
+  const limit = 3;
 
   const loadData = async () => {
     try {
@@ -45,7 +45,7 @@ const UserCardGrid = forwardRef<AquariumCardGridHandle>((_, ref) => {
   }, [page]);
 
   return (
-  <div className="mt-10">
+  <div className="mt-1">
     <div>
       <div className="mb-6">
         <h2 className="text-3xl font-bold text-gray-800">Customized Aquarium Management</h2>
@@ -61,21 +61,21 @@ const UserCardGrid = forwardRef<AquariumCardGridHandle>((_, ref) => {
           >
             <h3 className="text-lg font-semibold">{aquarium.customername} {aquarium.phonenumber}</h3>
             <p className="text-gray-600">{aquarium.email}</p>
-            <p className="mt-2 inline-block  text-gray-700 ">
-              {aquarium.address}
+            <p className="inline-block  text-gray-700 mt-2 ">
+              Address : {aquarium.address}
             </p>
-            <p className="text-gray-600">{aquarium.width}</p>
-            <p className="text-gray-600">{aquarium.height}</p>
-            <p className="text-gray-600">{aquarium.length}</p>
-            <p className="text-gray-600">{aquarium.material}</p>
-            <p className="text-gray-600">{aquarium.extrafeatures}</p>
+            <p className="text-gray-600 mt-2">Width  : {aquarium.width} ft</p>
+            <p className="text-gray-600 mt-2">Hight  : {aquarium.height} ft </p>
+            <p className="text-gray-600 mt-2">Length : {aquarium.length} ft </p>
+            <p className="text-gray-600 mt-2">{aquarium.material}</p>
+            <p className="text-gray-600 mt-2">Extra Features = {aquarium.extrafeatures}</p>
               <img
               src={aquarium.imageUrl}
-              className="w-full h-48 object-cover rounded-md"
+              className="w-full h-48 object-cover rounded-md mt-4"
               
             />
 
-            <p className="text-gray-600">{aquarium.notes}</p>
+            <p className="text-gray-600 mt-7">{aquarium.notes}</p>
 
           </div>
         ))}
@@ -85,15 +85,15 @@ const UserCardGrid = forwardRef<AquariumCardGridHandle>((_, ref) => {
       <div className="flex justify-center gap-4 mt-8">
         <button
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 cursor-pointer"
           onClick={() => setPage((p) => p - 1)}
         >
           Previous
         </button>
-        <span className="font-medium text-lg">{page} / {totalPages}</span>
+        <span className="font-medium text-lg cursor-pointer">{page} / {totalPages}</span>
         <button
           disabled={page === totalPages}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 cursor-pointer"
           onClick={() => setPage((p) => p + 1)}
         >
           Next
