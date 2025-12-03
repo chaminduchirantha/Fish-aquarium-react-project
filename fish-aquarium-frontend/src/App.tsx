@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './context/authContext'
 import Footer from './components/Footer'
 import AlertPopups from './components/AlertsPopups'
 import { CartProvider } from './context/cartContext'
+import { CartProvider as CartProviderAccessories } from './context/cartContextAccessories'
 
 
 const Welcome =  lazy(() => import('./pages/WelcomPage'))
@@ -166,9 +167,11 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <CartProviderAccessories>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </CartProviderAccessories>
       </CartProvider>
     </AuthProvider>
   )

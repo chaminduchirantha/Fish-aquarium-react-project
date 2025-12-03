@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { List, ListOrdered, ShoppingCart } from "lucide-react";
+import { List, ShoppingCart } from "lucide-react";
 import { getAllAccessories } from "../services/accessories";
-import { GrOrderedList } from "react-icons/gr";
+import { useCartAccessories } from "../context/cartContextAccessories";
+import CartDrawerAccessories from "../components/CartViewerAccessories";
 
-interface Fish {
+interface Accessories {
   _id: string;
   itemname: string;
   price: string;
@@ -14,9 +15,13 @@ interface Fish {
 export default function FishCategorySection() {
 
 
-  const [fishList, setFishList] = useState<Fish[]>([]);
+  const [fishList, setFishList] = useState<Accessories[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const { cart, addToCart } = useCartAccessories();
+  const [search, setSearch] = useState("");
+  const [cartOpen, setCartOpen] = useState(false);
+  
   const limit = 6;
 
   const loadData = async () => {
@@ -27,7 +32,7 @@ export default function FishCategorySection() {
 
   useEffect(() => {
      loadData();
-  }, [page]);
+  }, [page , search]);
   
 
   return (
@@ -44,6 +49,31 @@ export default function FishCategorySection() {
           experience easier and more enjoyable.
         </p>
       </div>
+
+       <div className="flex justify-center mb-10">
+            <input
+              type="text"
+              placeholder="Search Item..."
+              value={search}
+               onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1); // reset to first page when searching
+              }}
+              className="w-full md:w-1/2 px-4 py-2 rounded-full border border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+          </div>
+
+          {/* Add to Cart Icon */}
+          <button
+            onClick={() => setCartOpen(true)}
+            className="absolute top-20 right-6 text-black p-3 shadow-md"
+          >
+            <ShoppingCart size={22} />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+              {cart.length}
+            </span>
+        </button>
+
 
 
       <div className="mt-10">
@@ -75,7 +105,15 @@ export default function FishCategorySection() {
               <p className="text-gray-600 font-semibold text-sm leading-relaxed mb-6">
                 {item.description}
               </p>
-              <button className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
+              <button  onClick={() =>
+                addToCart({
+                    _id: item._id,
+                    itemname: item.itemname,
+                    price: item.price,
+                    imageUrl: item.imageUrl,
+                    qty: 1,
+                  })
+                } className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
                 <ShoppingCart size={18} />
                 Add to Cart
               </button>
@@ -109,6 +147,7 @@ export default function FishCategorySection() {
         </button>
       </div>
     </div>
+    <CartDrawerAccessories open={cartOpen} onClose={() => setCartOpen(false)} />
   </section>
   );
 }
