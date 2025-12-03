@@ -8,7 +8,7 @@ import { createAccessories, deleteAccessories, getAccessories, updateAccessories
 const router = Router()
 
 router.post("/createAccess",  authenticate , requireRole([Role.ADMIN]) , upload.single("image"),createAccessories)
-router.get("/allAccess" , authenticate ,requireRole([Role.ADMIN , Role.USER]) , upload.single("image") , getAccessories)
+router.get("/allAccess", upload.single("image") , getAccessories)
 router.put("/updateAccess/:id", authenticate , requireRole([Role.ADMIN]) , upload.single("image"), updateAccessories)
 router.delete("/deleteAccess/:id", authenticate , requireRole([Role.ADMIN]),deleteAccessories)
 

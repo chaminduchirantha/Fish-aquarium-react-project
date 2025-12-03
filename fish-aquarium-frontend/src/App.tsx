@@ -97,15 +97,7 @@ function AppContent() {
           <Route path="/feedbacak"element={<Feedback />} />
           
           <Route path="/fish"element={<Fishes />}/>
-          <Route
-              path="/access"
-              element={
-                <RequireAuth roles={["USER"]}>
-                  <Access />
-                </RequireAuth>
-              } 
-          /> 
-
+          <Route path="/access"element={<Access />} /> 
           <Route
               path="/ordersFish"
               element={

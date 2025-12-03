@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronLeft } from 'lucide-react';
+import { Calendar, ChevronDown, ChevronLeft, MapIcon, MapPin, ShoppingBag, Truck } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fishOrderSave } from '../services/fishOrder';
 import { useAuth } from '../context/authContext';
@@ -111,12 +111,12 @@ const CheckoutPage: React.FC = () => {
       <div className="w-full lg:w-[58%] px-4 py-8 lg:px-16 lg:py-12 order-2 lg:order-1 border-r border-gray-200">
         <div className="max-w-xl mx-auto">
           {/* Header / Logo Area */}
-          <h1 className="text-4xl font-bold mb-16  text-sky-800">Aqua World</h1>
+          <h1 className="text-3xl font-bold mb-10 text-sky-900 tracking-tight">Aqua World</h1>
           
           {/* Contact Section */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">
-              <h2 className="text-lg font-semibold">Contact</h2>
+              <h2 className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-700">Contact</h2>
             </div>
             <input
               type="email"
@@ -228,9 +228,9 @@ const CheckoutPage: React.FC = () => {
                <button 
                  onClick={handleOrderSubmit}
                  disabled={loading}
-                 className="w-full md:w-auto cursor-pointer bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-medium transition disabled:opacity-50"
+                 className="w-full md:w-auto cursor-pointer bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 font-semibold shadow-lg shadow-sky-200 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                >
-                 {loading ? 'Processing...' : 'Order Now'}
+                 {loading ? 'Processing...' : `Order Rs. ${subtotal.toFixed(2)}`}
                </button>
            </div>
 
@@ -244,42 +244,74 @@ const CheckoutPage: React.FC = () => {
       </div>
 
       {/* RIGHT SIDE - Order Summary */}
-      <div className="w-full lg:w-[42%] bg-white border-l border-gray-200 px-4 py-8 lg:px-12 lg:py-12 order-1 mt-15 lg:order-2">
-        <div className="max-w-md mx-auto lg:mx-0  lg:top-12">
+      <div className="w-full lg:w-[42%] bg-gray-50 border-l border-gray-200 px-4 py-8 lg:px-12 lg:py-12 order-1 lg:order-2">
+        <div className="lg:top-8 max-w-md mx-auto lg:mx-0">
+             <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <ShoppingBag className="text-sky-600" /> Order Summary
+            </h2>
             
             {/* Product Item */}
-            <div className="flex items-center gap-4 mb-6">
-                <div className="relative">
-                    <div className="w-36 h-36 border border-gray-200 rounded-lg overflow-hidden bg-white">
-                        <img src={product.image} alt={product.fishName} className="w-full h-full object-cover" />
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6 transition hover:shadow-md">
+                <div className="flex gap-4">
+                    <div className="relative shrink-0">
+                        <div className="w-50 h-40 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+                            <img 
+                                src={product.image} 
+                                alt={product.fishname} 
+                                className="w-full h-full object-cover" 
+                            />
+                        </div>
+                        <span className="absolute -top-2 -right-2 bg-gray-800 text-white text-xs font-bold h-6 w-6 flex items-center justify-center rounded-full shadow border-2 border-white">
+                            {currentQty}
+                        </span>
                     </div>
-                    <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs font-medium h-5 w-5 flex items-center justify-center rounded-full">
-                        {currentQty}
-                    </span>
+                    <div className="flex flex-col justify-between flex-1 py-1">
+                        <div>
+                            <h3 className="text-lg font-bold text-gray-800 leading-tight mb-1">{product.fishName}</h3>
+                        </div>
+                        <div className="flex justify-between items-end">
+                            <p className="text-sm text-gray-400">Qty: {currentQty}</p>
+                            <p className="font-bold text-lg text-gray-900">Rs. {isNaN(validPrice) ? '0' : validPrice.toLocaleString()}</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex-1">
-                    <h3 className="text-xl font-medium text-gray-800 mb-3">{product.fishName}</h3>
-                    <p className="text-mb text-gray-500">{currentQty} Qty</p>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+                <div className="flex justify-between items-center mb-3 text-gray-600">
+                    <span>Subtotal</span>
+                    <span className="font-medium">Rs. {isNaN(subtotal) ? '0.00' : subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                 </div>
-                <p className="text-xl mb-9 font-medium text-gray-800">Rs {isNaN(validPrice) ? '0' : validPrice}/=</p>
+                
+                <div className="h-px bg-gray-100 my-4 w-full"></div>
+
+                <div className="flex justify-between items-center">
+                    <span className="text-lg font-bold text-gray-800">Total</span>
+                    <div className="text-right">
+                        <span className="text-sm text-gray-400 font-normal mr-2">LKR</span>
+                        <span className="text-2xl font-extrabold text-sky-700">
+                            {isNaN(subtotal) ? '0.00' : subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                        </span>
+                    </div>
+                </div>
             </div>
 
-            <hr className="border-gray-200 my-6" />
-
-            {/* Total */}
-            <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span className="font-medium">Rs {isNaN(subtotal) ? '0.00' : subtotal.toFixed(2)}</span>
-            </div>
-
-            <div className="flex justify-between mt-4">
-                <span>Total</span>
-                <span className="text-xl font-semibold">Rs. {isNaN(subtotal) ? '0.00' : subtotal.toFixed(2)}</span>
-            </div>
-
-            <div className="mt-15 text-md text-black p-4 bg-gray-100 rounded">
-                <p>Order Date: {formData.orderDate}</p>
-                <p>Order Type: {formData.orderType}</p>
+            <div className="bg-sky-50 rounded-xl p-5 border border-sky-100">
+                <h4 className="text-sm font-semibold text-sky-800 mb-3 uppercase tracking-wider">Order Details</h4>
+                <div className="space-y-3">
+                    <div className="flex items-center text-sm text-gray-700">
+                        <Calendar className="h-4 w-4 mr-3 text-sky-500" />
+                        <span>Date: <span className="font-medium">{formData.orderDate}</span></span>
+                    </div>
+                    <div className="flex items-center text-sm text-gray-700">
+                        {formData.orderType === 'Dilivery' ? (
+                            <Truck className="h-4 w-4 mr-3 text-sky-500" />
+                        ) : (
+                            <MapPin className="h-4 w-4 mr-3 text-sky-500" />
+                        )}
+                        <span>Type: <span className="font-medium">{formData.orderType === 'Dilivery' ? 'Home Delivery' : 'Store Pickup'}</span></span>
+                    </div>
+                </div>
             </div>
         </div>
       </div>
