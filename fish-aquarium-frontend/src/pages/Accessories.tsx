@@ -3,6 +3,7 @@ import { List, ShoppingCart } from "lucide-react";
 import { getAllAccessories } from "../services/accessories";
 import { useCartAccessories } from "../context/cartContextAccessories";
 import CartDrawerAccessories from "../components/CartViewerAccessories";
+import { Link } from "react-router-dom";
 
 interface Accessories {
   _id: string;
@@ -11,6 +12,19 @@ interface Accessories {
   description: string;
   imageUrl: string;
 }
+
+const parsePrice = (price: any): number => {
+  try {
+    if (typeof price === 'number') return price;
+    if (typeof price === 'string') {
+      const cleanPrice = parseFloat(price.replace(/[^0-9.]/g, ''));
+      return isNaN(cleanPrice) ? 0 : cleanPrice;
+    }
+    return 0;
+  } catch {
+    return 0;
+  }
+};
 
 export default function FishCategorySection() {
 
@@ -117,10 +131,20 @@ export default function FishCategorySection() {
                 <ShoppingCart size={18} />
                 Add to Cart
               </button>
-               <button className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300">
+              <Link
+                to="/ordersAcceessories"
+                state={{
+                  itemname: item.itemname,
+                  description : item.description,
+                  price: parsePrice(item.price),
+                  qty: 1,
+                  image: item.imageUrl
+                }}
+                className="flex items-center justify-center gap-2 mt-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-full w-full transition-all duration-300"
+              >
                 <List size={18} />
-                Order Now 
-              </button>
+                Order Now Fish
+              </Link>
             </div>
           </div>
         ))}

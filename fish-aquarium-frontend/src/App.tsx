@@ -21,6 +21,7 @@ const Dilivery = lazy(() => import('./pages/DiliveryPage'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const CheckoutPage = lazy(() => import('./pages/OrderFishPage'))
+const AccessoriesCheckoutPage = lazy(() => import('./pages/ordersAcceessories'))
 const AdminDashBoard = lazy(()=>import('./pages/AdminDashBoard'))
 const CustomerAdmin = lazy(() => import('./adminPages/CustomerAdmin'))
 const FishesAdmin = lazy(() => import('./adminPages/FishesAdmin'))
@@ -110,6 +111,15 @@ function AppContent() {
               element={
                 <RequireAuth roles={["USER"]}>
                   <CheckoutPage />
+                </RequireAuth>
+              } 
+          /> 
+
+          <Route
+              path="/ordersAcceessories"
+              element={
+                <RequireAuth roles={["USER"]}>
+                  <AccessoriesCheckoutPage />
                 </RequireAuth>
               } 
           /> 
