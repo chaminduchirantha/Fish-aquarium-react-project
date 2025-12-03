@@ -133,6 +133,11 @@ const DashboardLayout: React.FC = () => {
               <span className="ml-3">FeedBack</span>
             </Link>
 
+            <Link to="/admin/customized" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
+              <i className="bx bx-cog text-2xl"></i>              
+              <span className="ml-3">Customized Aquarium</span>
+            </Link>
+
             <Link to="/admin/accessories" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-heart text-2xl"></i></span>
               <span className="ml-3">Accessories</span>
@@ -158,10 +163,7 @@ const DashboardLayout: React.FC = () => {
               <span className="ml-3">Payments</span>
             </Link>
 
-            <Link to="/admin/customized" className="flex items-center space-x-1  text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-              <i className="bx bx-cog text-2xl"></i>              
-              <span className="ml-3">Customized Aquarium</span>
-            </Link>
+            
           </aside>
         )}    
 
