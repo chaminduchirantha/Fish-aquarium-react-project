@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllFish, searchFish } from "../services/Fish";
-import { CreditCard, List, ShoppingCart } from "lucide-react";
+import {List, ShoppingCart } from "lucide-react";
 import { useCart } from "../context/cartContext";
 import CartDrawer from "../components/CartViewer";
 import { Link } from "react-router-dom";

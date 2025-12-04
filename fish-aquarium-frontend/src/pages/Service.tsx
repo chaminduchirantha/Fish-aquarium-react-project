@@ -1,4 +1,3 @@
-import React from 'react'
 import carfd2 from '../assets/create an image with.png'
 import card3 from '../assets/Delivery & Relocatio.png'
 import card4 from '../assets/fish Aquarium Design.png'

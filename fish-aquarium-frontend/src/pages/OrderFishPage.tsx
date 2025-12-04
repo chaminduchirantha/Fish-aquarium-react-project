@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, ChevronDown, ChevronLeft, MapIcon, MapPin, ShoppingBag, Truck } from 'lucide-react';
+import { Calendar, ChevronDown, ChevronLeft,MapPin, ShoppingBag, Truck } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fishOrderSave } from '../services/fishOrder';
 import { useAuth } from '../context/authContext';
