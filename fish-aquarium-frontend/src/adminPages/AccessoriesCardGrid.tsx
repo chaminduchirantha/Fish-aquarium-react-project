@@ -23,7 +23,7 @@ const AcccessoriesCardGrid = forwardRef<AcccessoriesCardGridHandle, AccessoriesC
   const [accessoriesList, setAcceesoriesList] = useState<Accessories[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 6;
+  const limit = 4;
 
   const loadData = async () => {
     const res = await getAllAccessories(page, limit);

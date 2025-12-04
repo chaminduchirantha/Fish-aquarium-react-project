@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { List, ShoppingCart } from "lucide-react";
-import { getAllAccessories } from "../services/accessories";
+import { getAllAccessories, searchAccessories } from "../services/accessories";
 import { useCartAccessories } from "../context/cartContextAccessories";
 import CartDrawerAccessories from "../components/CartViewerAccessories";
 import { Link } from "react-router-dom";
@@ -29,19 +29,26 @@ const parsePrice = (price: any): number => {
 export default function FishCategorySection() {
 
 
-  const [fishList, setFishList] = useState<Accessories[]>([]);
+  const [accessoriesList, setAccessoriesList] = useState<Accessories[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const { cart, addToCart } = useCartAccessories();
+  const {cart, addToCart } = useCartAccessories();
   const [search, setSearch] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
   
   const limit = 6;
 
   const loadData = async () => {
+
+    if (search) {
+      const res = await searchAccessories(page, limit, "", search); 
+      setAccessoriesList(res.data || []);
+      setTotalPages(res.totalPages || 1);
+    }else{
       const res = await getAllAccessories(page, limit);
-      setFishList(res.data);
+      setAccessoriesList(res.data);
       setTotalPages(res.totalPages);
+    }
   };
 
   useEffect(() => {
@@ -93,7 +100,7 @@ export default function FishCategorySection() {
       <div className="mt-10">
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {fishList.map((item) => (
+        {accessoriesList.map((item) => (
           <div
             key={item._id}
             className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative"

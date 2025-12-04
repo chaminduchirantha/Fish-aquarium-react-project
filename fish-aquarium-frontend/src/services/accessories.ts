@@ -29,3 +29,8 @@ export const deleteAccessories = async (id: string) => {
   const res = await api.delete(`/accessories/deleteAccess/${id}`);
   return res.data;
 };
+
+export const searchAccessories = async (page: number, limit: number, category: string, search: string) => {
+  const res = await api.get(`/accessories/search?page=${page}&limit=${limit}&category=${category}&query=${search}`);
+  return res.data;
+};
