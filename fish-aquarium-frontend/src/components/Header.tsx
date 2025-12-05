@@ -79,17 +79,6 @@ export default function AnjalFarmHero() {
                     Accessories
                   </a>
               </MenuItem>
-
-              <MenuItem>
-                {({ active }) => (
-                  <Link
-                    to="/plants"
-                    className={`${active ? 'bg-sky-200' : ''} block px-4 py-2 rounded-md`}
-                  >
-                    Plants
-                  </Link>
-                )}
-              </MenuItem>
             </MenuItems>
           </Menu>
 

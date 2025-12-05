@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoutes"
 import accessRouter from "./routes/accessoriesRoutes"
 import ordersFishRouter from "./routes/orderFishRoutes"
 import ordersAccessoriesRouter from "./routes/ordersAccessoriesRoutes"
+import delivery from "./routes/deliveryRoutes"
 import feedbackRouter from "./routes/feedbackRoutes"
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"
@@ -36,6 +37,8 @@ app.use("/api/v1/feedback", feedbackRouter)
 app.use("/api/v1/accessories",accessRouter)
 app.use("/api/v1/orders" , ordersFishRouter)
 app.use("/api/v1/ordersAccess" , ordersAccessoriesRouter)
+app.use("/api/v1/delivery" , delivery)
+
 
 
 

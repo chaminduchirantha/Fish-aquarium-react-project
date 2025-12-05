@@ -60,11 +60,10 @@ export default function FishCategorySection() {
     <section className="py-12 lg:px-20 px-6 bg-gray-50 mt-8">
       <div className="max-w-6xl mx-auto">
 
-        {/* Title */}
         <h2 className="text-5xl font-bold text-sky-800 text-center mb-3">
-          Accessories in Aquarium
+          Fish Categories
         </h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+        <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-center">
           Discover our smart aquarium solutions from intelligent fish care
           systems to automated tank management tools that make your aquarium
           experience easier and more enjoyable.

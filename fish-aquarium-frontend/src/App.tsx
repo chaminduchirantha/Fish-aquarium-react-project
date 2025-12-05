@@ -129,9 +129,9 @@ function AppContent() {
           <Route
             path="/dilivery"
             element={
-              <RequireAuth roles={["USER"]}>
+              // <RequireAuth roles={["USER"]}>
                 <Dilivery />
-              </RequireAuth>
+              // </RequireAuth>
             }
           />
 
