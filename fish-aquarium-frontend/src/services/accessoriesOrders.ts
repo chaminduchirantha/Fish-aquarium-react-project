@@ -19,3 +19,8 @@ export const accessoriesOrderSave = async (data: OrderAccessoriesList) => {
   const res = await api.post("/ordersAccess/createOrders", data)
   return res.data
 }
+
+export const getAllAccessoriesOrder = async (page: number, limit: number) => {
+  const res = await api.get(`/ordersAccess/allOrders?page=${page}&limit=${limit}`);
+  return res.data;
+};

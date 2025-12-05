@@ -1,4 +1,4 @@
-import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
+import { useEffect, useState} from "react";
 import { getAllFishOrder } from "../services/fishOrder";
 
 interface User {
@@ -16,11 +16,7 @@ interface User {
   qty : number
 }
 
-interface UserCardGridHandle {
-  refreshData: () => void;
-}
-
-const UserCardGrid = forwardRef<UserCardGridHandle>((_, ref) => {
+export default function FishOrders(){
   const [orderFishList, setOrderFishList] = useState<User[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -36,9 +32,6 @@ const UserCardGrid = forwardRef<UserCardGridHandle>((_, ref) => {
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    refreshData: () => loadData(),
-  }));
 
   useEffect(() => {
     loadData();
@@ -49,7 +42,7 @@ const UserCardGrid = forwardRef<UserCardGridHandle>((_, ref) => {
 
       <div>
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Order Management</h2>
+          <h2 className="text-3xl font-bold text-gray-800">Fish Orders Management</h2>
           <p className="text-gray-600 mt-2">Track and manage all customer orders</p>
         </div>
       </div>
@@ -62,15 +55,18 @@ const UserCardGrid = forwardRef<UserCardGridHandle>((_, ref) => {
             className="bg-white rounded-xl shadow-md p-4 border hover:shadow-lg transition"
           >
             <h3 className="text-lg font-semibold">{ordersFish.firstname} {ordersFish.lastname}</h3>
-            <p className="text-gray-600">Customer Email : {ordersFish.email}</p>
-            <p className="text-gray-600 font-bold">Address : {ordersFish.address}</p>
-            <p className="text-gray-600">Payment Method : {ordersFish.paymentmethod}</p>
-            <p className="text-gray-600">Order Date : {ordersFish.orderDate}</p>
-            <p className="text-gray-600">Order Type : {ordersFish.orderType}</p>
-            <p className="text-gray-600 font-bold">Fish Name : {ordersFish.fishname}</p>
-            <p className="text-gray-600">Price Rs : {ordersFish.price}.00/=</p>
-            <p className="text-gray-600">Qty of fish : {ordersFish.qty}</p>
-            <p className="text-gray-600 font-bold">Amount Rs : {ordersFish.amount}.00/=</p>
+            <p className="text-gray-600 mt-1"><strong>Customer Email</strong> : {ordersFish.email}</p>
+            <p className="text-gray-600 mt-1"><strong>Address</strong> : {ordersFish.address}</p>
+            <p className="text-gray-600 mt-1"><strong>Payment Method</strong> : {ordersFish.paymentmethod}</p>
+            <p className="text-gray-600 mt-1"><strong>Order Date</strong> : {ordersFish.orderDate}</p>
+            <p className="text-gray-600 mt-1"><strong>Order Date</strong> : {ordersFish.orderType}</p>
+            <div className="mt-3 pt-3 border-t">
+              <p className="text-gray-600 mt-1 font-bold">Fish Name : {ordersFish.fishname}</p>
+              <p className="text-gray-600 mt-1"><strong>Price Rs</strong> : {ordersFish.price}.00/=</p>
+              <p className="text-gray-600 mt-1"><strong>Qty of fish</strong> : {ordersFish.qty}</p>
+              <p className="text-xl font-bold text-green-700 mt-2">Amount Rs : {ordersFish.amount}.00/=</p>
+            </div>
+            
           </div>
         ))}
       </div>
@@ -95,8 +91,4 @@ const UserCardGrid = forwardRef<UserCardGridHandle>((_, ref) => {
       </div>
     </div>
   );
-});
-
-UserCardGrid.displayName = "UserCardGrid";
-
-export default UserCardGrid;
+}
