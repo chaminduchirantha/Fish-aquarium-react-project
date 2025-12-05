@@ -16,7 +16,7 @@ export interface IDelivery extends Document{
 const deliverySchema  = new Schema<IDelivery>({
     customername :{type:String , required:true},
     phonenumber : {type:String , required:true},
-    email : {type:String , required:true , unique:true},
+    email : {type:String , required:true},
     address : {type:String , required:true},
     city : {type:String , required:true},
     deliveryDate : {type:String , required:true},

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Truck, CheckCircle } from 'lucide-react';
+import { Truck } from 'lucide-react';
 import image from '../assets/18156825.jpg';
 import { deliverySave } from '../services/delivery';
 
@@ -83,7 +83,7 @@ const DeliveryPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-slate-800">Delivery Information</h2>
             </div>
 
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2 flex-1">
+            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
               
               <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-slate-700">Customer Name</label>
@@ -91,7 +91,7 @@ const DeliveryPage: React.FC = () => {
                 type="text"
                 value={customername} 
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="Saman Perera" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Enter You are Name" />
               </div>
 
               <div>
@@ -100,7 +100,7 @@ const DeliveryPage: React.FC = () => {
                 type="tel"
                 value={phonenumber} 
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="077 123 4567" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Enter You are Phone number" />
               </div>
 
               <div>
@@ -109,7 +109,7 @@ const DeliveryPage: React.FC = () => {
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="saman@email.com" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Enter your email" />
               </div>
 
               <div className="sm:col-span-2">
@@ -118,7 +118,7 @@ const DeliveryPage: React.FC = () => {
                 type="text" 
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="No. 123, Galle Road" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Enter your Address" />
               </div>
 
               <div>
@@ -127,7 +127,7 @@ const DeliveryPage: React.FC = () => {
                 type="text" 
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="Colombo" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="city" />
               </div>
 
               <div>
@@ -136,7 +136,7 @@ const DeliveryPage: React.FC = () => {
                 type="text"
                 value={postelCode}
                 onChange={(e) => setPostelCode(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" placeholder="10100" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="postal code" />
               </div>
 
               <div>
@@ -145,7 +145,7 @@ const DeliveryPage: React.FC = () => {
                 type="date" 
                 value={deliveryDate}
                 onChange={(e) => setDeliveryDate(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
               </div>
 
               <div>
@@ -154,7 +154,7 @@ const DeliveryPage: React.FC = () => {
                 type="time" 
                 value={deliveryTime}
                 onChange={(e) => setDeliveryTime(e.target.value)}
-                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border" />
+                className="w-full border mt-3 border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
               </div>
             </div>
 
