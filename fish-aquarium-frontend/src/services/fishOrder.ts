@@ -18,3 +18,8 @@ export const fishOrderSave = async (data: OrderFishList) => {
   const res = await api.post("/orders/createOrders", data)
   return res.data
 }
+
+export const getAllFishOrder = async (page: number, limit: number) => {
+  const res = await api.get(`/orders/allOrders?page=${page}&limit=${limit}`);
+  return res.data;
+};
