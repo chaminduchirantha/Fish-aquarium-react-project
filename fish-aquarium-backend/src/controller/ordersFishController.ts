@@ -1,5 +1,6 @@
 import { Request , Response } from "express"
 import { OrdersFish } from "../model/ordersFishModel"
+import { sendOrderConfirmationMail } from "../util/sendMail"
 
 export const createOrders = async(req:Request , res:Response)=>{
     const {email ,firstname,lastname,address,paymentmethod,amount,orderDate,orderType,fishname,price,qty} = req.body
@@ -22,8 +23,21 @@ export const createOrders = async(req:Request , res:Response)=>{
         qty,
     })
 
+    await sendOrderConfirmationMail(
+      email,
+      firstname,
+      address,
+      orderDate,
+      orderType,
+      fishname,
+      price,
+      qty,
+
+      newOrderFishDetail._id.toString()
+    );
+
     await newOrderFishDetail.save()
-    res.status(201).json({message: "Order created successfully",
+    res.status(201).json({message: "Order created successfully and Email sent ",
         data: newOrderFishDetail
     })
 
