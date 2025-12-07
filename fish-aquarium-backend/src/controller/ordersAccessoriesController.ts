@@ -1,5 +1,6 @@
 import { Request , Response } from "express"
 import { OrdersAccessories } from "../model/ordersAccessriesModel"
+import { sendOrderConfirmationMailAccessories } from "../util/sendMail"
 
 export const createOrdersAccessories = async(req:Request , res:Response)=>{
     const {email ,firstname,lastname,address,paymentmethod,amount,orderDate,orderType,itemname,description,price,qty} = req.body
@@ -22,6 +23,18 @@ export const createOrdersAccessories = async(req:Request , res:Response)=>{
         price,
         qty,
     })
+
+    await sendOrderConfirmationMailAccessories(
+        email,
+        firstname,
+        address,
+        orderDate,
+        orderType,
+        itemname,
+        price,
+        qty,
+        newOrdeAccessoriesDetail._id.toString()
+    );
 
     await newOrdeAccessoriesDetail.save()
     res.status(201).json({message: "Order created successfully",
