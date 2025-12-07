@@ -18,6 +18,7 @@ const Feedback = lazy(() => import('./pages/FeedbackPage'))
 const CustomizedAqua = lazy(() => import('./pages/CustomizeAquarium'))
 const Fishes = lazy(() => import('./pages/Fishes'))
 const Dilivery = lazy(() => import('./pages/DeliveryPage'))
+const Payment = lazy(() => import('./pages/PaymentPage'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const CheckoutPage = lazy(() => import('./pages/OrderFishPage'))
@@ -134,6 +135,8 @@ function AppContent() {
               </RequireAuth>
             }
           />
+
+          <Route path="/payment"element={<Payment />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
