@@ -88,7 +88,7 @@ const CheckoutPage: React.FC = () => {
       setAlert({ type: 'success', message: 'Order placed successfully!' });
 
         if (formData.paymentMethod === 'card') {
-            navigate('/payment'); 
+            navigate('/payment', { state: { amount: subtotal } }); 
         } else if (formData.paymentMethod === 'cod') {
             navigate('/dilivery'); 
         }

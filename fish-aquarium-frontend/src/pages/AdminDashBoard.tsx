@@ -113,21 +113,18 @@ const DashboardLayout: React.FC = () => {
             className="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2"
             style={{ height: "90.5vh" }}
           >
-            <Link to="/admin" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-              <span className="text-2xl"><i className="bx bx-home"></i></span>
-              <span className="ml-3">Dashboard</span>
+            <Link to="/admin/fishes" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
+              <span className="text-2xl"><img className="w-7.5" src={fish} alt="" /></span>
+              <span className="ml-3">Fishes</span>
             </Link>
+
 
             <Link to="/admin/customers" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"><i className="bx bx-user"></i></span>
               <span className="ml-3">Customers</span>
             </Link>
 
-            <Link to="/admin/fishes" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-              <span className="text-2xl"><img className="w-7.5" src={fish} alt="" /></span>
-              <span className="ml-3">Fishes</span>
-            </Link>
-
+            
             <Link to="/admin/feedback" className="flex items-center space-x-1 text-xl rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
               <span className="text-2xl"> <i className="bx bx-message-dots text-2xl"></i> </span>
               <span className="ml-3">FeedBack</span>

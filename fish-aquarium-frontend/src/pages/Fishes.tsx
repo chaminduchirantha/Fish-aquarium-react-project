@@ -36,6 +36,8 @@ export default function FishCategorySection() {
     { label: "Gouramies", value: "Gouramies" },
     { label: "Tetras", value: "Tetras" },
     { label: "Predatory Fish", value: "Predatory" },
+    { label: "Others", value: "Others" },
+
   ];
 
   const [selected, setSelected] = useState("all");

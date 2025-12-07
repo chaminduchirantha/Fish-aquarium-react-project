@@ -1,8 +1,166 @@
-import React from "react";
-import { CreditCard, Calendar, User, Lock, Phone, Mail } from "lucide-react";
+import React, { useState } from "react";
+import { CreditCard, Calendar, User, Lock, Phone, Mail, AlertCircle, CheckCircle } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/pexels-shvetsa-4482900.jpg";
+import { paymentSave } from "../services/payment";
 
 export default function PaymentPage() {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  // Get amount from navigation state or use default
+  const orderAmount = state?.amount || 0;
+  const formattedAmount = typeof orderAmount === 'string' ? parseFloat(orderAmount.replace(/[^0-9.]/g, '')) : orderAmount;
+
+  // Individual state for each field
+  const [email, setEmail] = useState("");
+  const [phonenumber, setPhonNumber] = useState("");
+  const [cardHolderName, setCardHolderName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expireDate, setExpireDate] = useState("");
+  const [cvv, setCvv] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    
+    // Format card number with spaces
+    if (name === "cardNumber") {
+      const formatted = value.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim();
+      setCardNumber(formatted);
+      return;
+    }
+
+    // Format expiry date MM/YY
+    if (name === "expireDate") {
+      const formatted = value.replace(/\D/g, "").replace(/(\d{2})(\d{0,2})/, "$1/$2").slice(0, 5);
+      setExpireDate(formatted);
+      return;
+    }
+
+    // Limit CVV to 4 digits
+    if (name === "cvv") {
+      if (value.length <= 4) {
+        setCvv(value);
+      }
+      return;
+    }
+
+    if (name === "email") setEmail(value);
+    if (name === "phonenumber") setPhonNumber(value);
+    if (name === "cardHolderName") setCardHolderName(value);
+  };
+
+  const validateForm = (): boolean => {
+    if (!email || !phonenumber || !cardHolderName || !cardNumber || !expireDate || !cvv) {
+      setAlert({ type: "error", message: "Please fill all fields" });
+      return false;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setAlert({ type: "error", message: "Invalid email address" });
+      return false;
+    }
+
+    // Validate card number (basic check)
+    const cardNum = cardNumber.replace(/\s/g, "");
+    if (cardNum.length < 13) {
+      setAlert({ type: "error", message: "Invalid card number" });
+      return false;
+    }
+
+    // Validate CVV
+    if (cvv.length < 3) {
+      setAlert({ type: "error", message: "Invalid CVV" });
+      return false;
+    }
+
+    // Validate phone number (basic check)
+    if (phonenumber.length < 10) {
+      setAlert({ type: "error", message: "Invalid phone number" });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handlePaymentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setAlert(null);
+
+      const paymentData = {
+        email,
+        phonenumber,
+        cardHolderName,
+        cardNumber,
+        expireDate,
+        cvv,
+        paymentDate: new Date().toISOString(),
+        amount: formattedAmount,
+      };
+
+      await paymentSave(paymentData);
+      
+      setAlert({ type: "success", message: "Payment processed successfully!" });
+      setPaymentSuccess(true);
+
+      // Reset form and redirect after 2 seconds
+      setTimeout(() => {
+        setEmail("");
+        setPhonNumber("");
+        setCardHolderName("");
+        setCardNumber("");
+        setExpireDate("");
+        setCvv("");
+        navigate('/fish');
+      }, 5000);
+
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Payment failed. Please try again.";
+      setAlert({ type: "error", message: errorMessage });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (paymentSuccess) {
+    return (
+      <div className="min-h-screen from-green-50 to-blue-50 flex items-center justify-center p-4 mt-12">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="text-green-500" size={64} />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Payment Successful!</h1>
+          <p className="text-gray-600 mb-4">Your payment has been processed successfully</p>
+          
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-600">Transaction Date</p>
+            <p className="text-lg font-bold text-sky-600">{new Date().toLocaleDateString()}</p>
+          </div>
+
+          <div className="bg-blue-50 rounded-lg p-4 mb-6 border border-blue-200">
+            <p className="text-sm text-gray-600">Amount Paid</p>
+            <p className="text-2xl font-bold text-sky-700">Rs. {formattedAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+          </div>
+
+          <p className="text-gray-600 text-sm">Redirecting to home...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center p-4 mt-12">
 
@@ -17,8 +175,20 @@ export default function PaymentPage() {
         easier and more enjoyable.
       </p>
 
+      {/* Alert Message */}
+      {alert && (
+        <div className={`max-w-5xl w-full mt-6 p-4 rounded-lg flex items-center gap-3 ${
+          alert.type === "success" 
+            ? "bg-green-100 text-green-800 border border-green-300" 
+            : "bg-red-100 text-red-800 border border-red-300"
+        }`}>
+          {alert.type === "error" ? <AlertCircle size={20} /> : <CheckCircle size={20} />}
+          <span>{alert.message}</span>
+        </div>
+      )}
+
       {/* PAYMENT CARD */}
-      <div className="bg-white shadow-2xl rounded-2xl max-w-5xl w-full mt-10 grid grid-cols-1 md:grid-cols-2">
+      <div className="bg-white shadow-2xl rounded-2xl max-w-6xl w-full mt-10 grid grid-cols-1 md:grid-cols-2">
 
         {/* LEFT SIDE IMAGE */}
         <div className="hidden md:block">
@@ -47,17 +217,21 @@ export default function PaymentPage() {
           </div>
 
           {/* FORM */}
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handlePaymentSubmit}>
 
             {/* Email */}
             <div>
               <label className="block font-medium mb-1">Email Address</label>
-              <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+              <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                 <Mail className="w-5 h-5 text-gray-500 mr-2" />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={handleChange}
                   className="w-full bg-transparent outline-none"
+                  required
                 />
               </div>
             </div>
@@ -65,12 +239,16 @@ export default function PaymentPage() {
             {/* Phone */}
             <div>
               <label className="block font-medium mb-1">Phone Number</label>
-              <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+              <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                 <Phone className="w-5 h-5 text-gray-500 mr-2" />
                 <input
-                  type="text"
+                  type="tel"
+                  name="phonenumber"
                   placeholder="Enter your phone number"
+                  value={phonenumber}
+                  onChange={handleChange}
                   className="w-full bg-transparent outline-none"
+                  required
                 />
               </div>
             </div>
@@ -78,12 +256,16 @@ export default function PaymentPage() {
             {/* Cardholder Name */}
             <div>
               <label className="block font-medium mb-1">Cardholder Name</label>
-              <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+              <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                 <User className="w-5 h-5 text-gray-500 mr-2" />
                 <input
                   type="text"
-                  placeholder="Enter Cardholder Name "
+                  name="cardHolderName"
+                  placeholder="Enter Cardholder Name"
+                  value={cardHolderName}
+                  onChange={handleChange}
                   className="w-full bg-transparent outline-none"
+                  required
                 />
               </div>
             </div>
@@ -91,12 +273,17 @@ export default function PaymentPage() {
             {/* Card Number */}
             <div>
               <label className="block font-medium mb-1">Card Number</label>
-              <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+              <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                 <CreditCard className="w-5 h-5 text-gray-500 mr-2" />
                 <input
                   type="text"
+                  name="cardNumber"
                   placeholder="1234 5678 9012 3456"
-                  className="w-full bg-transparent outline-none"
+                  value={cardNumber}
+                  onChange={handleChange}
+                  maxLength={19}
+                  className="w-full bg-transparent outline-none font-mono"
+                  required
                 />
               </div>
             </div>
@@ -105,24 +292,34 @@ export default function PaymentPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block font-medium mb-1">Expiry Date</label>
-                <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+                <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                   <Calendar className="w-5 h-5 text-gray-500 mr-2" />
                   <input
                     type="text"
+                    name="expireDate"
                     placeholder="MM/YY"
+                    value={expireDate}
+                    onChange={handleChange}
+                    maxLength={5}
                     className="w-full bg-transparent outline-none"
+                    required
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block font-medium mb-1">CVV</label>
-                <div className="flex items-center border rounded-xl p-3 bg-gray-50">
+                <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
                   <Lock className="w-5 h-5 text-gray-500 mr-2" />
                   <input
                     type="password"
+                    name="cvv"
                     placeholder="123"
+                    value={cvv}
+                    onChange={handleChange}
+                    maxLength={4}
                     className="w-full bg-transparent outline-none"
+                    required
                   />
                 </div>
               </div>
@@ -130,12 +327,37 @@ export default function PaymentPage() {
 
             {/* Pay Button */}
             <button
-              type="button"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl mt-3 transition"
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl mt-3 transition flex items-center justify-center gap-2"
             >
-              Pay Now
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <Lock size={18} />
+                  Pay Now Rs. {formattedAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                </>
+              )}
             </button>
           </form>
+
+          {/* Amount Display */}
+          {formattedAmount > 0 && (
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm text-gray-600 mb-2">Payment Amount</p>
+              <p className="text-2xl font-bold text-sky-700">Rs. {formattedAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+            </div>
+          )}
+
+          {/* Security Info */}
+          <div className="mt-6 text-center text-sm text-gray-600 flex items-center justify-center gap-1">
+            <Lock size={16} className="text-green-600" />
+            <span>Your payment is 100% secure and encrypted</span>
+          </div>
         </div>
       </div>
     </div>
