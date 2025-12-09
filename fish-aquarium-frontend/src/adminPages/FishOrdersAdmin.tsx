@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { getAllFishOrder } from "../services/fishOrder";
 
-interface User {
+interface OrderFishList {
   _id: string;
   email :string
   firstname : string 
@@ -17,7 +17,7 @@ interface User {
 }
 
 export default function FishOrders(){
-  const [orderFishList, setOrderFishList] = useState<User[]>([]);
+  const [orderFishList, setOrderFishList] = useState<OrderFishList[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const limit = 3;
@@ -59,7 +59,7 @@ export default function FishOrders(){
             <p className="text-gray-600 mt-1"><strong>Address</strong> : {ordersFish.address}</p>
             <p className="text-gray-600 mt-1"><strong>Payment Method</strong> : {ordersFish.paymentmethod}</p>
             <p className="text-gray-600 mt-1"><strong>Order Date</strong> : {ordersFish.orderDate}</p>
-            <p className="text-gray-600 mt-1"><strong>Order Date</strong> : {ordersFish.orderType}</p>
+            <p className="text-gray-600 mt-1"><strong>Order Type</strong> : {ordersFish.orderType}</p>
             <div className="mt-3 pt-3 border-t">
               <p className="text-gray-600 mt-1 font-bold">Fish Name : {ordersFish.fishname}</p>
               <p className="text-gray-600 mt-1"><strong>Price Rs</strong> : {ordersFish.price}.00/=</p>
@@ -75,7 +75,7 @@ export default function FishOrders(){
       <div className="flex justify-center gap-4 mt-8">
         <button
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 rounded cursor-pointer disabled:opacity-50"
           onClick={() => setPage((p) => p - 1)}
         >
           Previous
@@ -83,7 +83,7 @@ export default function FishOrders(){
         <span className="font-medium text-lg">{page} / {totalPages}</span>
         <button
           disabled={page === totalPages}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 rounded cursor-pointer disabled:opacity-50"
           onClick={() => setPage((p) => p + 1)}
         >
           Next

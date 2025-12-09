@@ -62,4 +62,31 @@ export const sendOrderConfirmationMailAccessories = async (to: string, name: str
   await transporter.sendMail(mailOptions);
 };
 
+export const sendDeliveryEmail = async (delivery: any) => {
+
+  const mapLink = `https://www.google.com/maps?q=${delivery.location.lat},${delivery.location.lng}`;
+
+
+  await transporter.sendMail({
+    from: "chaminduchirantha10@gmail.com",
+    to: "chaminduchirantha10@gmail.com", // Change admin email
+    subject: "New Delivery Request Received",
+    html: `
+      <h2>New Delivery Request</h2>
+
+      <p><b>Name:</b> ${delivery.customername}</p>
+      <p><b>Phone:</b> ${delivery.phonenumber}</p>
+      <p><b>Email:</b> ${delivery.email}</p>
+      <p><b>Address:</b> ${delivery.address}</p>
+      <p><b>City:</b> ${delivery.city}</p>
+      <p><b>Postal Code:</b> ${delivery.postelCode}</p>
+      <p><b>Delivery Date:</b> ${delivery.deliveryDate}</p>
+      <p><b>Delivery Time:</b> ${delivery.deliveryTime}</p>
+
+      <h3>Google Location Link:</h3>
+      <a href="${mapLink}" target="_blank">${mapLink}</a>
+    `
+  });
+};
+
 

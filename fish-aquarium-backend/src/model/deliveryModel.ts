@@ -11,6 +11,10 @@ export interface IDelivery extends Document{
     deliveryDate : string
     deliveryTime : string
     postelCode : string
+    location: {
+        lat: number | null;
+        lng: number | null;
+  };
 }
 
 const deliverySchema  = new Schema<IDelivery>({
@@ -21,7 +25,11 @@ const deliverySchema  = new Schema<IDelivery>({
     city : {type:String , required:true},
     deliveryDate : {type:String , required:true},
     deliveryTime : {type:String , required:true},
-    postelCode : {type:String , required:true}
+    postelCode : {type:String , required:true},
+    location: {
+      lat: { type: Number, default: null },
+      lng: { type: Number, default: null },
+    }
 },{
     timestamps:true
 }
