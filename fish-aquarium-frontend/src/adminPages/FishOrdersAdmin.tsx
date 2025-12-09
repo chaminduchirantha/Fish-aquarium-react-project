@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import { getAllFishOrder } from "../services/fishOrder";
+import { getAllFishOrder, updateFishOrderStatus } from "../services/fishOrder";
 
 interface OrderFishList {
   _id: string;
@@ -14,6 +14,8 @@ interface OrderFishList {
   fishname : string
   price : string
   qty : number
+  status: string;
+
 }
 
 export default function FishOrders(){
@@ -36,6 +38,17 @@ export default function FishOrders(){
   useEffect(() => {
     loadData();
   }, [page]);
+
+   const handleStatusUpdate = async (id: string, newStatus: string) => {
+    try {
+      await updateFishOrderStatus(id, newStatus);
+      alert("Order status updated successfully!");
+      loadData(); // refresh list
+    } catch (err) {
+      console.error("Failed to update status:", err);
+      alert("Failed to update status");
+    }
+  };
 
   return (
     <div className="mt-5">
@@ -66,7 +79,33 @@ export default function FishOrders(){
               <p className="text-gray-600 mt-1"><strong>Qty of fish</strong> : {ordersFish.qty}</p>
               <p className="text-xl font-bold text-green-700 mt-2">Amount Rs : {ordersFish.amount}.00/=</p>
             </div>
-            
+            <p className="mt-3">
+              <span
+                className={`px-3 py-1 text-white rounded-full text-sm ${
+                  ordersFish.status === "pending"
+                    ? "bg-yellow-500"
+                    : ordersFish.status === "success"
+                    ? "bg-green-600"
+                    : "bg-red-600"
+                }`}
+              >
+                {ordersFish.status.toUpperCase()}
+              </span>
+            </p>
+
+            {/* STATUS UPDATE */}
+            <div className="mt-4">
+              <select
+                defaultValue={ordersFish.status}
+                onChange={(e) => handleStatusUpdate(ordersFish._id, e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="pending">Pending</option>
+                <option value="success">Success</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          
           </div>
         ))}
       </div>

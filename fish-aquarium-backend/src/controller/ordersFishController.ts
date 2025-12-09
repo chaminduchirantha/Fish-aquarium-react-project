@@ -67,3 +67,38 @@ export const getAllFishOrders = async (req:Request, res:Response) => {
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 }
+
+
+export const updateOrderStatus = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!status) {
+            return res.status(400).json({ message: "Status is required" });
+        }
+
+        const allowedStatus = ["pending", "success", "cancelled"];
+        if (!allowedStatus.includes(status)) {
+            return res.status(400).json({ message: "Invalid status value" });
+        }
+
+        const updatedOrder = await OrdersFish.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        return res.status(200).json({
+            message: "Order status updated successfully",
+            data: updatedOrder
+        });
+
+    } catch (error: any) {
+        res.status(500).json({ message: "Server Error", error: error.message });
+    }
+};

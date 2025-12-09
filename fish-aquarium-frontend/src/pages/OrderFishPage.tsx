@@ -85,7 +85,9 @@ const CheckoutPage: React.FC = () => {
         orderDate: formData.orderDate,
         fishname: product.fishName,
         price: validPrice.toString(),
-        qty: currentQty
+        qty: currentQty,
+        status: "pending",
+
       };
 
       await fishOrderSave(orderData);

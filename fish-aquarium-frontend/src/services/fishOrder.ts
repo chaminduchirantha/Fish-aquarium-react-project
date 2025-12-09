@@ -12,6 +12,7 @@ type OrderFishList = {
     fishname : string
     price : string
     qty : number
+    status: string;
 }
 
 export const fishOrderSave = async (data: OrderFishList) => {
@@ -21,5 +22,10 @@ export const fishOrderSave = async (data: OrderFishList) => {
 
 export const getAllFishOrder = async (page: number, limit: number) => {
   const res = await api.get(`/orders/allOrders?page=${page}&limit=${limit}`);
+  return res.data;
+};
+
+export const updateFishOrderStatus = async (id: string, status: string) => {
+  const res = await api.put(`/orders/updateStatus/${id}`, { status });
   return res.data;
 };
