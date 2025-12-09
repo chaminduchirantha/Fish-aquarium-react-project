@@ -10,6 +10,7 @@ export interface IPayment extends Document{
     expireDate : string
     cvv : string
     paymentDate : string
+    amount : string
 }
 
 const paymentSchema  = new Schema<IPayment>({
@@ -20,6 +21,7 @@ const paymentSchema  = new Schema<IPayment>({
     expireDate : {type:String , required:true},
     cvv : {type:String , required:true},
     paymentDate : {type:String , required:true},
+    amount : {type:String , required:true},
 },{
     timestamps:true
 }

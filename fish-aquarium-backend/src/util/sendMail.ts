@@ -61,3 +61,5 @@ export const sendOrderConfirmationMailAccessories = async (to: string, name: str
 
   await transporter.sendMail(mailOptions);
 };
+
+

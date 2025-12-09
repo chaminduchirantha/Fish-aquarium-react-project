@@ -108,7 +108,7 @@ export default function PaymentPage() {
         expireDate,
         cvv,
         paymentDate: new Date().toISOString(),
-        amount: formattedAmount,
+        amount: formattedAmount.toString(),
       };
 
       await paymentSave(paymentData);
@@ -213,7 +213,7 @@ export default function PaymentPage() {
               src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
               className="h-8"
               alt="Mastercard"
-            />
+            /> 
           </div>
 
           {/* FORM */}

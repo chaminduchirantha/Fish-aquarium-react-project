@@ -135,7 +135,7 @@ export default function FishCategorySection() {
               className={`px-5 py-2 rounded-full font-semibold shadow-sm transition-all ${
                 selected === cat.value
                   ? "bg-sky-600 text-white shadow-lg scale-105"
-                  : "bg-white text-sky-800 border border-sky-400 hover:bg-sky-100"
+                  : "bg-white text-sky-800 border border-sky-400 cursor-pointer hover:bg-sky-100"
               }`}
             >
               {cat.label}

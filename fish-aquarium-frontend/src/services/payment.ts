@@ -8,6 +8,7 @@ type paymentData = {
     expireDate : string
     cvv : string
     paymentDate : string
+    amount : string
 }
 
 export const paymentSave = async (data: paymentData) => {

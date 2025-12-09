@@ -3,9 +3,9 @@ import { Payemnt } from "../model/paymentModel"
 import bcrypt from "bcryptjs"
 
 export const savePayment = async(req:Request , res:Response)=>{
-    const {email , phonenumber , cardHolderName , cardNumber , expireDate , cvv, paymentDate} = req.body
+    const {email , phonenumber , cardHolderName , cardNumber , expireDate , cvv, paymentDate , amount} = req.body
     
-    if(!email || !phonenumber || !cardHolderName || !cardNumber || !expireDate || !cvv || !paymentDate){
+    if(!email || !phonenumber || !cardHolderName || !cardNumber || !expireDate || !cvv || !paymentDate || !amount){
         return res.status(400).json({ message: "All fields are required" })
     }
 
@@ -20,7 +20,8 @@ export const savePayment = async(req:Request , res:Response)=>{
         cardNumber:hasheCardNumber,
         expireDate:hasheExpireDate,
         cvv:hasheCvv,
-        paymentDate
+        paymentDate,
+        amount
     })
 
     await newPayement.save()
