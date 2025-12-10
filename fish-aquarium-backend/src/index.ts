@@ -9,6 +9,7 @@ import ordersAccessoriesRouter from "./routes/ordersAccessoriesRoutes"
 import delivery from "./routes/deliveryRoutes"
 import feedbackRouter from "./routes/feedbackRoutes"
 import paymentRouter from "./routes/payementRouter"
+import report from "./routes/genarateReportRoutes"
 import ai from "./routes/aiRouter"
 
 import dotenv from "dotenv"
@@ -42,7 +43,8 @@ app.use("/api/v1/orders" , ordersFishRouter)
 app.use("/api/v1/ordersAccess" , ordersAccessoriesRouter)
 app.use("/api/v1/delivery" , delivery)
 app.use("/api/v1/payment" , paymentRouter)
-app.use("/api/v1/aicontent" , ai)
+app.use("/api/v1/report" , report)
+
 
 
 

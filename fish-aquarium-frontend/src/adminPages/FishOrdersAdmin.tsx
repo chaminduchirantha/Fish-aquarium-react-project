@@ -105,10 +105,22 @@ export default function FishOrders(){
                 <option value="cancelled">Cancelled</option>
               </select>
             </div>
-          
+
           </div>
         ))}
       </div>
+
+          
+      <div className="mt-6">
+        <button
+            onClick={() => window.open("http://localhost:5000/api/v1/report/pdf", "_blank")}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow cursor-pointer hover:bg-blue-700"
+          >
+          Download Orders Report
+        </button>
+      </div>
+      
+
 
       {/* Pagination */}
       <div className="flex justify-center gap-4 mt-8">

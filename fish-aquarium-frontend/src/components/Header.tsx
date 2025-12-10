@@ -92,6 +92,7 @@ export default function AnjalFarmHero() {
           >
             Get Started 
           </Link>
+
         </div>
 
       </nav>
