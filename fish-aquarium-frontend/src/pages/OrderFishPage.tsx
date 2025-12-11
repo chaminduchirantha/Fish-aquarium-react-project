@@ -234,13 +234,6 @@ const CheckoutPage: React.FC = () => {
                >
                  {loading ? 'Processing...' : `Order Rs. ${subtotal.toFixed(2)}`}
               </button>
-              <button 
-                onClick={() => navigate("/my-orders")}
-                disabled={loading}
-                className="w-full md:w-auto cursor-pointer bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 font-semibold shadow-lg shadow-sky-200 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                View Your Order
-              </button>
            </div>
 
            {/* Alert */}

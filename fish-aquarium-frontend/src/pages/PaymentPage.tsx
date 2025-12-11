@@ -3,6 +3,7 @@ import { CreditCard, Calendar, User, Lock, Phone, Mail, AlertCircle, CheckCircle
 import { useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/pexels-shvetsa-4482900.jpg";
 import { paymentSave } from "../services/payment";
+import { useAuth } from "../context/authContext";
 
 export default function PaymentPage() {
   const { state } = useLocation();
@@ -23,6 +24,9 @@ export default function PaymentPage() {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  const { user } = useAuth();
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -117,15 +121,15 @@ export default function PaymentPage() {
       setPaymentSuccess(true);
 
       // Reset form and redirect after 2 seconds
-      setTimeout(() => {
+      
         setEmail("");
         setPhonNumber("");
         setCardHolderName("");
         setCardNumber("");
         setExpireDate("");
         setCvv("");
-        navigate('/fish');
-      }, 5000);
+        // navigate('/fish');
+      
 
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Payment failed. Please try again.";
@@ -155,7 +159,12 @@ export default function PaymentPage() {
             <p className="text-2xl font-bold text-sky-700">Rs. {formattedAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
           </div>
 
-          <p className="text-gray-600 text-sm">Redirecting to home...</p>
+          <button 
+              onClick={() => window.open(`http://localhost:5000/api/v1/payment/payment-slip/${user.email}`, "_blank")}
+              className="bg-sky-600 text-white px-6 py-3 rounded-lg shadow hover:bg-sky-700"
+            >
+              Download Payment Slip
+          </button>
         </div>
       </div>
     );
@@ -343,6 +352,7 @@ export default function PaymentPage() {
                 </>
               )}
             </button>
+
           </form>
 
           {/* Amount Display */}

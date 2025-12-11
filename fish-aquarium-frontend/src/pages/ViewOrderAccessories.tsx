@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getUserOrders } from "../services/fishOrder";
 import { useAuth } from "../context/authContext";
 import { getUserOrdersAccessories } from "../services/accessoriesOrders";
 
@@ -38,9 +37,9 @@ export default function UserOrdersPage() {
 
   return (
     <div className="p-6 mt-12 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-extrabold mb-8 text-sky-800 text-center">My Orders</h1>
+      <h1 className="text-4xl font-extrabold mb-8 text-sky-800 text-center">My Accessories Orders</h1>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
         {orders.map((order) => (
           <div 
             key={order._id} 
