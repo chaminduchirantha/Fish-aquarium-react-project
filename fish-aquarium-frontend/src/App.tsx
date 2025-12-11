@@ -33,6 +33,7 @@ const FeedbackAdmin = lazy(() => import('./adminPages/FeedbackAdmin'))
 const PaymentAdmin = lazy(() => import('./adminPages/PaymentAdmin'))
 const DeliveryAdmin = lazy(() => import('./adminPages/DiliveryAdmin'))
 const CustomizedAquariumAdmin = lazy(() => import('./adminPages/CustomizedAquariumAdmin'))
+const UserOrderPage = lazy(()=>import('./pages/ViewFishOrders'))
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] };
@@ -79,10 +80,14 @@ function AppContent() {
   const hideHeaderRoutes = ['/login', '/register', '/admin']
   const shouldHideHeader = hideHeaderRoutes.some(route => location.pathname.startsWith(route))
 
+  const hideFooterRoutes = ['/my-orders', '/admin']
+  const shouldHideFooter = hideFooterRoutes.some(route => location.pathname.startsWith(route))
+
   return (
     <>
     
       {!shouldHideHeader && <Header />}
+      
     
       <Suspense
         fallback={
@@ -137,6 +142,8 @@ function AppContent() {
             }
           />
 
+          <Route path="/my-orders" element={<UserOrderPage />} />
+
           <Route path="/payment"element={<Payment />} />
 
           <Route path="/login" element={<Login />} />
@@ -162,7 +169,7 @@ function AppContent() {
         </Routes>
       </Suspense>
 
-      <Footer/>
+      {!shouldHideFooter && <Footer />}
 
     </>
     

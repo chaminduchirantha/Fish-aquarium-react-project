@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Truck } from 'lucide-react';
 import image from '../assets/18156825.jpg';
 import { deliverySave } from '../services/delivery';
+import { useNavigate } from 'react-router-dom';
 
 const DeliveryPage: React.FC = () => {
     const [customername, setCustomerName] = useState("")
@@ -13,6 +14,8 @@ const DeliveryPage: React.FC = () => {
     const [deliveryTime, setDeliveryTime] =useState("")
     const [postelCode, setPostelCode] = useState("")
     const [loading, setLoading] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async()=>{
       if(!customername || !phonenumber || !email || !address || !city || !postelCode || !deliveryDate || !deliveryTime) {
@@ -162,6 +165,12 @@ const DeliveryPage: React.FC = () => {
             <div className="mt-8">
               <button onClick={handleSubmit} disabled={loading} className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
                 {loading ? "Submitting..." : "Submit Delivery"}
+              </button>
+            </div>
+
+             <div>
+              <button onClick={() => navigate("/my-orders")}disabled={loading} className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
+                View My orders
               </button>
             </div>
           </form>

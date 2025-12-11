@@ -221,19 +221,26 @@ const CheckoutPage: React.FC = () => {
 
            {/* Pay Button & Footer */}
            <div className="flex flex-col-reverse md:flex-row justify-between items-center mt-8 gap-4">
-               <button 
+              <button 
                  className="text-blue-600 hover:text-blue-800 flex items-center text-sm"
                  onClick={() => navigate(-1)}
                >
                    <ChevronLeft className="h-4 w-4 mr-1 cursor-pointer" /> Back
-               </button>
-               <button 
+              </button>
+              <button 
                  onClick={handleOrderSubmit}
                  disabled={loading}
                  className="w-full md:w-auto cursor-pointer bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 font-semibold shadow-lg shadow-sky-200 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                >
                  {loading ? 'Processing...' : `Order Rs. ${subtotal.toFixed(2)}`}
-               </button>
+              </button>
+              <button 
+                onClick={() => navigate("/my-orders")}
+                disabled={loading}
+                className="w-full md:w-auto cursor-pointer bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 font-semibold shadow-lg shadow-sky-200 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                View Your Order
+              </button>
            </div>
 
            {/* Alert */}

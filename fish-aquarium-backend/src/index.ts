@@ -10,7 +10,6 @@ import delivery from "./routes/deliveryRoutes"
 import feedbackRouter from "./routes/feedbackRoutes"
 import paymentRouter from "./routes/payementRouter"
 import report from "./routes/genarateReportRoutes"
-import ai from "./routes/aiRouter"
 
 import dotenv from "dotenv"
 import mongoose, { mongo } from "mongoose"

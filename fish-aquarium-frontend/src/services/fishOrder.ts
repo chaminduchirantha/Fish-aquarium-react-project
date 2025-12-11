@@ -29,3 +29,9 @@ export const updateFishOrderStatus = async (id: string, status: string) => {
   const res = await api.put(`/orders/updateStatus/${id}`, { status });
   return res.data;
 };
+
+
+export const getUserOrders = async (email: string) => {
+  const res = await api.get(`/orders/viewOrder/${email}`);
+  return res.data;
+};

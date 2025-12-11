@@ -90,10 +90,10 @@ export default function FishCategorySection() {
       <div className="max-w-6xl mx-auto">
 
         {/* Title */}
-        <h2 className="text-5xl font-bold text-sky-800 text-center mb-3">
+        <h2 className=" font-bold text-sky-800 text-3xl lg:text-5xl text-center mb-3">
           Fish Categories
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-center">
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm lg:text-md mb-8 text-center">
           Discover our smart aquarium solutions from intelligent fish care
           systems to automated tank management tools that make your aquarium
           experience easier and more enjoyable.
@@ -112,6 +112,14 @@ export default function FishCategorySection() {
               className="w-full md:w-1/2 px-4 py-2 rounded-full border border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
           </div>
+
+          <Link
+            to="/my-orders" 
+            className="absolute top-36 right-6 text-black p-3 shadow-md"
+          >
+            <List size={22} />
+            <span className="sr-only">View Orders</span>
+          </Link>
 
           {/* Add to Cart Icon */}
           <button
