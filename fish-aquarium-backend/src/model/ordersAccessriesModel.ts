@@ -14,6 +14,7 @@ export interface IOrderAccessories extends Document{
     description :string
     price : string
     qty : number
+    status?: string;
     creatAt? : Date
     updatedAt? : Date
 }
@@ -31,6 +32,11 @@ const OrdersAccessriesSchema = new Schema<IOrderAccessories>({
     description : {type:String , required:true},
     price : {type:String , required:true},
     qty : {type:Number , required:true},
+    status: {
+        type: String,
+        enum: ["pending", "success", "cancelled"],
+        default: "pending",
+    },
 },{
     timestamps:true
 })

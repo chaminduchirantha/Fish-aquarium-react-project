@@ -34,6 +34,8 @@ const PaymentAdmin = lazy(() => import('./adminPages/PaymentAdmin'))
 const DeliveryAdmin = lazy(() => import('./adminPages/DiliveryAdmin'))
 const CustomizedAquariumAdmin = lazy(() => import('./adminPages/CustomizedAquariumAdmin'))
 const UserOrderPage = lazy(()=>import('./pages/ViewFishOrders'))
+const UserOrderPageAccess = lazy(()=>import('./pages/ViewOrderAccessories'))
+
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] };
@@ -143,6 +145,7 @@ function AppContent() {
           />
 
           <Route path="/my-orders" element={<UserOrderPage />} />
+          <Route path="/my-orders-access" element={<UserOrderPageAccess />} />
 
           <Route path="/payment"element={<Payment />} />
 

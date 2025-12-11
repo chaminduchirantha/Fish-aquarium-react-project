@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllAccessoriesOrder } from "../services/accessoriesOrders";
+import { getAllAccessoriesOrder, updateAccessoriesOrderStatus } from "../services/accessoriesOrders";
 
 interface OrdersAccessories {
   _id: string;
@@ -15,6 +15,7 @@ interface OrdersAccessories {
   description: string;
   price: string;
   qty: number;
+  status: string;
 }
 
 export default function AccessoriesOrders() {
@@ -36,6 +37,17 @@ export default function AccessoriesOrders() {
   useEffect(() => {
     loadData();
   }, [page]);
+
+  const handleStatusUpdate = async (id: string, newStatus: string) => {
+    try {
+      await updateAccessoriesOrderStatus(id, newStatus);
+      alert("Order status updated successfully!");
+      loadData(); // refresh list
+    } catch (err) {
+      console.error("Failed to update status:", err);
+      alert("Failed to update status");
+    }
+  };
 
   return (
     <div className="mt-5">
@@ -70,9 +82,42 @@ export default function AccessoriesOrders() {
               <p className="text-xl font-bold text-green-700 mt-2">
                 Total: Rs {order.amount}.00/=
               </p>
+              <p className="mt-3">
+              <span
+                className={`px-5 py-2 text-white rounded-full text-sm ${
+                  order.status === "pending"
+                    ? "bg-yellow-500"
+                    : order.status === "success"
+                    ? "bg-green-600"
+                    : "bg-red-600"
+                }`}
+              >
+                {order.status.toUpperCase()}
+              </span>
+            </p>
+
+              <div className="mt-4">
+                <select
+                  defaultValue={order.status}
+                  onChange={(e) => handleStatusUpdate(order._id, e.target.value)}
+                  className="w-full border p-2 rounded-xl cursor-pointer"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="success">Success</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-6">
+        <button
+            onClick={() => window.open("http://localhost:5000/api/v1/report/acce/pdf", "_blank")}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow cursor-pointer hover:bg-blue-700"
+          >
+          Download Orders Report
+        </button>
       </div>
 
       {/* Pagination */}

@@ -13,6 +13,7 @@ type OrderAccessoriesList = {
     description : string
     price : string
     qty : number
+    status: string
 }
 
 export const accessoriesOrderSave = async (data: OrderAccessoriesList) => {
@@ -22,5 +23,16 @@ export const accessoriesOrderSave = async (data: OrderAccessoriesList) => {
 
 export const getAllAccessoriesOrder = async (page: number, limit: number) => {
   const res = await api.get(`/ordersAccess/allOrders?page=${page}&limit=${limit}`);
+  return res.data;
+};
+
+export const updateAccessoriesOrderStatus = async (id: string, status: string) => {
+  const res = await api.put(`/ordersAccess/updateStatus/${id}`, { status });
+  return res.data;
+};
+
+
+export const getUserOrdersAccessories = async (email: string) => {
+  const res = await api.get(`/ordersAccess/viewOrder/${email}`);
   return res.data;
 };
