@@ -1,24 +1,29 @@
 'use client'
 
 import sectionImage from '../assets/beautiful-group-fish-underwater.jpg'
+import FeedbackList from '../components/FeedbackList'
 
 export default function AnjalFarmHero() {
 
   return (
-    <div className="relative min-h-screen font-sans text-white">
-    
+    <div className="font-sans text-white">
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen flex items-center">
+
+        {/* Background Image */}
         <div
-          className="absolute inset-0 -z-10 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${sectionImage})` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-sky-900/40 to-sky-800/70 -z-10"></div>
 
-        {/* Floating Bubbles Animation */}
-        <div className="absolute inset-0 overflow-hidden -z-10">
-          {[...Array(10)].map((_, i) => (
+        {/* Dark + Sky Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-sky-900/100 to-transparent"></div>
+
+
+        {/* BUBBLES */}
+       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+          {[...Array(15)].map((_, i) => (
             <span
               key={i}
               className="absolute bottom-0 w-4 h-4 bg-sky-200 rounded-full opacity-40 animate-bubble"
@@ -31,49 +36,70 @@ export default function AnjalFarmHero() {
           ))}
         </div>
 
-        <div className="px-6 lg:px-8 animate-fadeIn">
-          <h1 className="text-3xl lg:text-5xl md:text-3xl font-bold tracking-tight text-sky-100 drop-shadow-lg">
-            Dive Into Your Own Underwater World
+        {/* CONTENT */}
+        <div className="relative z-10 max-w-5xl px-8 lg:px-40">
+
+          <span className="inline-block mb-6 px-4 py-2 text-sm rounded-full bg-sky-400/20 text-sky-200 font-medium">
+            Premium Aquarium Lifestyle
+          </span>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+            Bring the Ocean
+            <span className="block text-sky-300">
+              Into Your Living Space .
+            </span>
           </h1>
-          <h2 className="text-2xl md:text-3xl sm:text-4xl font-medium text-sky-200 mt-3 drop-shadow-md">
-            Aqua World Fish Aquarium Shop
-          </h2>
-          <p className="mt-6 text-xl lg:text-xl text-sky-100/90 max-w-2xl mx-auto">
-            Experience the tranquility of the ocean in your own home. Explore our exotic fish, aquatic plants, and smart aquarium systems.
+
+          <p className="mt-6 text-xl max-w-lg  text-sky-100/90">
+            Discover exotic fishes, designer aquariums, and premium accessories
+            crafted to turn your home into a peaceful underwater world.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+
+          <div className="mt-10 flex gap-6">
             <a
               href="/fish"
-              className="bg-gradient-to-r from-sky-400 to-blue-500 hover:from-blue-500 hover:to-sky-400 px-6 py-3 text-md font-semibold text-white rounded-full shadow-lg transition-all"
+              className="px-4 py-4 rounded-xl bg-sky-500 text-white font-semibold shadow-xl hover:bg-sky-600 transition"
             >
-              Explore Our Fishes
+              Browse Fishes
             </a>
+
             <a
               href="/access"
-              className="bg-gradient-to-r from-orange-400 to-pink-500 hover:from-pink-500 hover:to-orange-400 px-6 py-3 text-md font-semibold text-white rounded-full shadow-lg transition-all"
+              className="px-8 py-4 rounded-xl border border-white/30 bg-white/10 backdrop-blur-md font-semibold hover:bg-white/20 transition"
             >
-              View Accessories
+              Accessories
             </a>
           </div>
+
         </div>
+
+        <style>{`
+          @keyframes bubble {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.3); opacity: 0; }
+          }
+          .animate-bubble {
+            animation: bubble linear infinite;
+          }
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 1.2s ease-out;
+          }
+        `}</style>
+
+       
+
+      </section>
+        <section className='py-16 bg-gray-50'>
+            <FeedbackList />
       </section>
 
-      <style>{`
-        @keyframes bubble {
-          0% { transform: translateY(0) scale(1); opacity: 0.6; }
-          100% { transform: translateY(-100vh) scale(1.3); opacity: 0; }
-        }
-        .animate-bubble {
-          animation: bubble linear infinite;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 1.2s ease-out;
-        }
-      `}</style>
     </div>
+
+      
+      
   )
 }
