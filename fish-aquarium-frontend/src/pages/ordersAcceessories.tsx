@@ -81,7 +81,8 @@ const CheckoutPage: React.FC = () => {
         itemname: product.itemname,
         description : product.description,
         price: validPrice.toString(),
-        qty: currentQty
+        qty: currentQty,
+        status: "pending",
       };
 
       await accessoriesOrderSave(aaccessoriesOrderData);

@@ -107,13 +107,15 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-800 flex flex-col lg:flex-row mt-10">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50 text-gray-800 flex flex-col lg:flex-row mt-10">
       
       {/* LEFT SIDE - Form Section */}
-      <div className="w-full lg:w-[58%] px-4 py-8 lg:px-16 lg:py-12 order-2 lg:order-1 border-r border-gray-200">
-        <div className="max-w-xl mx-auto">
+      <div className="w-full lg:w-[58%] px-6 py-10 lg:px-20 lg:py-14 order-2 lg:order-1">
+        <div className="max-w-xl mx-auto bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-100 p-8">
           {/* Header / Logo Area */}
-          <h1 className="text-3xl font-bold mb-10 text-sky-900 tracking-tight">Aqua World</h1>
+          <h1 className="text-3xl font-extrabold mb-10 text-sky-900 tracking-tight">
+            Aqua <span className="text-sky-500">World</span>
+          </h1>
           
           {/* Contact Section */}
           <div className="mb-8">
@@ -124,7 +126,7 @@ const CheckoutPage: React.FC = () => {
               type="email"
               name="email"
               placeholder="Enter Your Email "
-              className="w-full border border-gray-300 rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="w-full border rounded-xl border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -140,7 +142,7 @@ const CheckoutPage: React.FC = () => {
                 type="text"
                 name="firstname"
                 placeholder="First name"
-                className="w-full md:w-1/2 border border-gray-300 rounded p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full md:w-1/2 border rounded-xl border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.firstname}
                 onChange={handleInputChange}
               />
@@ -148,7 +150,7 @@ const CheckoutPage: React.FC = () => {
                 type="text"
                 name="lastname"
                 placeholder="Last name"
-                className="w-full md:w-1/2 border border-gray-300 rounded p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full md:w-1/2 border rounded-xl border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.lastname}
                 onChange={handleInputChange}
               />
@@ -159,7 +161,7 @@ const CheckoutPage: React.FC = () => {
               type="text"
               name="address"
               placeholder="Address"
-              className="w-full border border-gray-300 rounded p-3 mb-4 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full border border-gray-300 rounded-xl p-3 mb-4 focus:ring-2 focus:ring-blue-500 outline-none"
               value={formData.address}
               onChange={handleInputChange}
             />
@@ -169,14 +171,14 @@ const CheckoutPage: React.FC = () => {
                 type="number"
                 name="qty"
                 placeholder="Qty"
-                className="w-full md:w-1/2 border border-gray-300 rounded p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full md:w-1/2 border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.qty}
                 onChange={handleInputChange}
               />
               <div className="w-full md:w-1/2 relative">
                  <select 
                     name="orderType"
-                    className="w-full border border-gray-300 rounded p-3 appearance-none bg-white text-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full border border-gray-300 rounded-xl p-3 appearance-none bg-white text-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={formData.orderType}
                     onChange={handleInputChange}
                  >
@@ -191,7 +193,7 @@ const CheckoutPage: React.FC = () => {
            {/* Payment Method Section (Added based on request) */}
            <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
-            <div className="border border-gray-300 rounded overflow-hidden">
+            <div className="border border-gray-300 rounded-xl overflow-hidden">
                 <div className="flex items-center p-4 border-b border-gray-200 bg-gray-50">
                     <input 
                         type="radio" 
