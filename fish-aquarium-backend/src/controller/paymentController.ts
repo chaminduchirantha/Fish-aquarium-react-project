@@ -2,6 +2,7 @@ import { Request,Response } from "express"
 import { Payemnt } from "../model/paymentModel"
 import bcrypt from "bcryptjs"
 import { AuthRequest } from "../middleware/auth"
+import { sendOrderConfirmationMailPayment } from "../util/sendMail"
 
 export const savePayment = async(req:Request , res:Response)=>{
     const {email , phonenumber , cardHolderName , cardNumber , expireDate , cvv, paymentDate , amount} = req.body
@@ -24,6 +25,13 @@ export const savePayment = async(req:Request , res:Response)=>{
         paymentDate,
         amount
     })
+
+    await sendOrderConfirmationMailPayment(
+            email,
+            cardHolderName,
+            phonenumber,
+           newPayement._id.toString()
+    );
 
     await newPayement.save()
 

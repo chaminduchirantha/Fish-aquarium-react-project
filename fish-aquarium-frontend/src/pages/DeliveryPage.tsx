@@ -167,12 +167,6 @@ const DeliveryPage: React.FC = () => {
                 {loading ? "Submitting..." : "Submit Delivery"}
               </button>
             </div>
-
-             <div>
-              <button onClick={() => navigate("/my-orders")}disabled={loading} className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
-                View My orders
-              </button>
-            </div>
           </form>
 
           {/* Right Side: Image */}

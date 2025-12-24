@@ -90,3 +90,24 @@ export const sendDeliveryEmail = async (delivery: any) => {
 };
 
 
+
+
+export const sendOrderConfirmationMailPayment = async (to: string, name: string, phonenumber:string , paymentId: string) => {
+  const mailOptions = {
+    from: "chaminduchirantha10@gmail.com",
+    to,
+    subject: "Payment Successfuly - Fish Aquarium Store",
+    html: `
+      <p>name : ${name}<p>
+      <p>phone number:  ${phonenumber}<p>
+      <p><strong>Payment ID:</strong> ${paymentId}</p>
+
+      <hr />
+      <p>Fish Aquarium Store</p>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
+

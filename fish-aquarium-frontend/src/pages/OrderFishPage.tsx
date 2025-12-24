@@ -61,10 +61,25 @@ const CheckoutPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    setFormData(prev => {
+      // If Take Away selected → force card payment
+      if (name === 'orderType' && value === 'Take Away') {
+        return {
+          ...prev,
+          orderType: value,
+          paymentMethod: 'card'
+        };
+      }
+
+      return { ...prev, [name]: value };
+    });
   };
+
 
   const handleOrderSubmit = async () => {
     if (!formData.email || !formData.firstname || !formData.lastname || !formData.address) {
@@ -107,7 +122,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50 text-gray-800 flex flex-col lg:flex-row mt-10">
+    <div className="min-h-screen  text-gray-800 flex flex-col lg:flex-row mt-10">
       
       {/* LEFT SIDE - Form Section */}
       <div className="w-full lg:w-[58%] px-6 py-10 lg:px-20 lg:py-14 order-2 lg:order-1">
@@ -214,7 +229,8 @@ const CheckoutPage: React.FC = () => {
                         value="cod"
                         checked={formData.paymentMethod === 'cod'}
                         onChange={handleInputChange}
-                        className="mr-3 h-4 w-4 text-blue-600"
+                        className="mr-3 h-4 w-4 text-blue-600  disabled:opacity-50"
+                        disabled={formData.orderType === 'Take Away'}
                     />
                     <label htmlFor="Cash On Delivery" className="font-medium flex-1 cursor-pointer">Cash on Delivery</label>
                 </div>
