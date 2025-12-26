@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/authContext'
 import Footer from './components/Footer'
 import AlertPopups from './components/AlertsPopups'
-import { CartProvider } from './context/cartContext'
+import { CartProvider } from './context/cartContextFish'
 import { CartProvider as CartProviderAccessories } from './context/cartContextAccessories'
 
 
@@ -58,7 +58,7 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
   if (!showPopup) setShowPopup(true);
     return (
       <>
-        {showPopup && <AlertPopups onClose={() => setShowPopup(false)} />}
+        {showPopup && <AlertPopups/>}
       </>
     );
   }

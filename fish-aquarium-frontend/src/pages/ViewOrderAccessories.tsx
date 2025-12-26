@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { getUserOrdersAccessories } from "../services/accessoriesOrders";
+import AlertPopups from "../components/AlertsPopups";
 
 interface OrderSAccessories {
   _id: string;
@@ -16,6 +17,7 @@ export default function UserOrdersPage() {
   const { user } = useAuth();
   const [orders, setOrders] = useState<OrderSAccessories[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -32,7 +34,20 @@ export default function UserOrdersPage() {
     fetchOrders();
   }, [user]);
 
-  if (loading) return <p className="text-center mt-20 text-gray-500">Loading...</p>;
+  if (loading) {
+      
+  }
+ 
+  if (!user) {
+  
+    if (!showPopup) setShowPopup(true);
+      return (
+        <>
+          {showPopup && <AlertPopups />}
+        </>
+    );
+  }
+
   if (orders.length === 0) return <p className="text-center mt-20 text-gray-500">No orders found.</p>;
 
   return (

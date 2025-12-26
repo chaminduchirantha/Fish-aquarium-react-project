@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 
-interface AuthPopupProps {
-  onClose: () => void;
-}
 
-export default function AlertPopups({ onClose }: AuthPopupProps) {
+export default function AlertPopups() {
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999]">
+    <div className="fixed inset-0 bg-white  flex items-center justify-center">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-[90%] max-w-md animate-fadeIn scale-95 animate-pop">
         <h2 className="text-2xl font-bold text-center text-sky-700 mb-4">
           You are not logged in!
@@ -31,13 +28,6 @@ export default function AlertPopups({ onClose }: AuthPopupProps) {
             Register
           </Link>
         </div>
-
-        <button
-          onClick={onClose}
-          className="mt-5 w-full text-gray-400 hover:text-gray-600 text-sm"
-        >
-          Cancel
-        </button>
       </div>
       <style>{`
         @keyframes pop {
