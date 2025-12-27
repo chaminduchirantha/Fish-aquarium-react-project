@@ -39,7 +39,7 @@ export default function AnjalFarmHero() {
         {/* CONTENT */}
         <div className="relative z-10 max-w-5xl px-8 lg:px-40">
 
-          <span className="inline-block mb-6 px-4 py-2 text-sm rounded-full bg-sky-400/20 text-sky-200 font-medium">
+          <span className="inline-block mb-6 px-4 py-2 text-sm  rounded-full bg-sky-400/20 text-sky-200 font-medium">
             Premium Aquarium Lifestyle
           </span>
 
@@ -50,7 +50,7 @@ export default function AnjalFarmHero() {
             </span>
           </h1>
 
-          <p className="mt-6 text-xl max-w-lg  text-sky-100/90">
+          <p className="mt-6 text-xl max-w-lg sm:text-sm md:text-xl lg:text-xl  text-sky-100/90">
             Discover exotic fishes, designer aquariums, and premium accessories
             crafted to turn your home into a peaceful underwater world.
           </p>

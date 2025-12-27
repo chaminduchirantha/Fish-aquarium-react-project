@@ -35,7 +35,7 @@ export default function AnjalFarmHero() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="rounded-md p-2.5 text-sky-900 hover:text-sky-700"
+            className="rounded-md p-2.5 text-white hover:text-white cursor-pointer"
           >
             <Bars3Icon className="w-7 h-7" />
           </button>
@@ -108,7 +108,7 @@ export default function AnjalFarmHero() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sky-300 hover:text-white"
+              className="text-white hover:text-white cursor-pointer"
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
@@ -130,16 +130,13 @@ export default function AnjalFarmHero() {
 
             {/* Mobile Dropdown (Simple Version) */}
             <div className="mt-3">
-              <p className="text-sm font-bold text-sky-300">Menu</p>
-              <div className="pl-4 space-y-2 mt-2">
-                <Link to="/fishes" onClick={() => setMobileMenuOpen(false)} className="block ">
+              <p className="text-sm font-bold text-sky-300">Items</p>
+              <div className="pl-4 space-y-2 mt-2 mb-10">
+                <Link to="/fish" onClick={() => setMobileMenuOpen(false)} className="block ">
                   Fishes
                 </Link>
-                <Link to="/accessories" onClick={() => setMobileMenuOpen(false)} className="block ">
+                <Link to="/access" onClick={() => setMobileMenuOpen(false)} className="block ">
                   Accessories
-                </Link>
-                <Link to="/plants" onClick={() => setMobileMenuOpen(false)} className="block">
-                  Plants
                 </Link>
               </div>
             </div>
