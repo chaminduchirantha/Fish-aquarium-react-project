@@ -69,11 +69,18 @@ const UserCardGrid = forwardRef<AquariumCardGridHandle>((_, ref) => {
             <p className="text-gray-600 mt-2">Length : {aquarium.length} ft </p>
             <p className="text-gray-600 mt-2">{aquarium.material}</p>
             <p className="text-gray-600 mt-2">Extra Features = {aquarium.extrafeatures}</p>
+
+            {aquarium.imageUrl && aquarium.imageUrl.trim() !== "" ? (
               <img
-              src={aquarium.imageUrl}
-              className="w-full h-48 object-cover rounded-md mt-4"
-              
-            />
+                src={aquarium.imageUrl}
+                className="w-full h-48 object-cover rounded-md mt-4"
+                alt="Aquarium"
+              />
+            ) : (
+              <div className="w-full h-48 mt-4 rounded-md bg-gray-100 flex items-center justify-center text-gray-500">
+                Image not sent
+              </div>
+            )}
 
             <p className="text-gray-600 mt-7">{aquarium.notes}</p>
 

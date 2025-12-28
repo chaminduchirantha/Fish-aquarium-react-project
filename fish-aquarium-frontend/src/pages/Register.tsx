@@ -16,10 +16,9 @@ function Register() {
   const [role] = useState("USER")
 
   const handleRgister = async (e: FormEvent) => {
-    e.preventDefault() // ignore page refresh
+    e.preventDefault()
 
     if (!firstname || !lastname || !email || !password || !conPassword) {
-      // find alert libraries
       alert("All fields are required.")
       return
     }
@@ -42,25 +41,9 @@ function Register() {
       console.log(res.message)
 
       alert(`Reginstration successful! Email: ${res?.data?.email}`)
-      //  const navigate = useNavigate()
+      
       navigate("/login")
 
-      // const response = await axios.post(
-      //   "http://localhost:5000/api/v1/auth/register",
-      //   {
-      //     firstname, //firstname: firstname
-      //     lastname,
-      //     email,
-      //     password,
-      //     role
-      //   },
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json"
-      //     }
-      //   }
-      // )
-      // console.log(response)
     } catch (err: any) {
       console.error(err?.response?.data)
     }

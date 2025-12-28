@@ -45,16 +45,15 @@ export default function Login() {
 
       localStorage.setItem("user", JSON.stringify(detail.data))
 
-    showSuccessAlert(`Welcome Back Login Successful`);
+      showSuccessAlert(`Welcome Back Login Successful`);
 
-    setTimeout(() => {
-      if (userData.roles?.includes("ADMIN")) {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
-    }, 2000);
-
+      setTimeout(() => {
+        if (userData.roles?.includes("ADMIN")) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }, 1000);
 
     } catch (err :any) {
       console.error(err)

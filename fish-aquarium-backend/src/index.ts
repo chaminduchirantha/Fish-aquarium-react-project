@@ -45,11 +45,6 @@ app.use("/api/v1/payment" , paymentRouter)
 app.use("/api/v1/report" , report)
 
 
-
-
-
-
-
 mongoose
   .connect(MONGO_URI)
   .then(() => {

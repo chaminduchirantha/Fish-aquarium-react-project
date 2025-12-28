@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CreditCard, Calendar, User, Lock, Phone, Mail, AlertCircle, CheckCircle } from "lucide-react";
+import { CreditCard, Calendar, User, Lock, Phone, Mail, AlertCircle, CheckCircle, Shield } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/pexels-shvetsa-4482900.jpg";
 import { paymentSave } from "../services/payment";
@@ -161,7 +161,7 @@ export default function PaymentPage() {
 
           <button 
               onClick={() => window.open(`http://localhost:5000/api/v1/payment/payment-slip/${user.email}`, "_blank")}
-              className="bg-sky-600 text-white px-6 py-3 rounded-lg shadow hover:bg-sky-700"
+              className="bg-sky-600 cursor-pointer text-white px-6 py-3 rounded-lg shadow hover:bg-sky-700"
             >
               Download Payment Slip
           </button>
@@ -281,9 +281,13 @@ export default function PaymentPage() {
 
             {/* Card Number */}
             <div>
-              <label className="block font-medium mb-1">Card Number</label>
-              <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
-                <CreditCard className="w-5 h-5 text-gray-500 mr-2" />
+              <label className="block text-sm font-bold text-gray-700 mb-3">
+                Card Number
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <CreditCard className="w-5 h-4 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
+                </div>
                 <input
                   type="text"
                   name="cardNumber"
@@ -291,9 +295,21 @@ export default function PaymentPage() {
                   value={cardNumber}
                   onChange={handleChange}
                   maxLength={19}
-                  className="w-full bg-transparent outline-none font-mono"
+                  className="w-full pl-12 pr-20 py-4 border border-black rounded-xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all duration-200 bg-white/50 hover:bg-white font-mono text-lg tracking-wider font-semibold"
                   required
                 />
+                <div className="absolute inset-y-0 right-0 pr-4 flex items-center gap-1.5">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
+                    className="h-4 opacity-50 hover:opacity-100 transition-opacity"
+                    alt="Visa"
+                  />
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
+                    className="h-5 opacity-50 hover:opacity-100 transition-opacity"
+                    alt="Mastercard"
+                  />
+                </div>
               </div>
             </div>
 
@@ -364,10 +380,30 @@ export default function PaymentPage() {
           )}
 
           {/* Security Info */}
-          <div className="mt-6 text-center text-sm text-gray-600 flex items-center justify-center gap-1">
-            <Lock size={16} className="text-green-600" />
-            <span>Your payment is 100% secure and encrypted</span>
+           {/* Premium Trust Badges */}
+        <div className="mt-12 text-center">
+          <p className="text-sm font-semibold text-gray-600 mb-6">Trusted by thousands of customers worldwide</p>
+          <div className="flex items-center justify-center gap-10">
+            <div className="flex flex-col items-center gap-2 group cursor-pointer">
+              <div className="w-14 h-14 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                <Shield className="w-7 h-7 text-green-600" strokeWidth={2.5} />
+              </div>
+              <span className="text-xs font-bold text-gray-600">Secure</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 group cursor-pointer">
+              <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                <CheckCircle className="w-7 h-7 text-blue-600" strokeWidth={2.5} />
+              </div>
+              <span className="text-xs font-bold text-gray-600">Verified</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 group cursor-pointer">
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                <Lock className="w-7 h-7 text-purple-600" strokeWidth={2.5} />
+              </div>
+              <span className="text-xs font-bold text-gray-600">Encrypted</span>
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
