@@ -59,6 +59,18 @@ const CheckoutPage: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => {
+      // If Take Away selected → force card payment
+      if (name === 'orderType' && value === 'Take Away') {
+        return {
+          ...prev,
+          orderType: value,
+          paymentMethod: 'card'
+        };
+      }
+
+      return { ...prev, [name]: value };
+    });
   };
 
   const handleOrderSubmit = async () => {
@@ -173,7 +185,7 @@ const CheckoutPage: React.FC = () => {
                    value={formData.orderType}
                    onChange={handleInputChange}
                  >
-                    <option value="Dilivery">Delivery</option>
+                    <option value="Dilivery">Cash on Delivery</option>
                     <option value="Take Away">Take Away</option>
                  </select>
                  <ChevronDown className="absolute right-3 top-3.5 h-5 w-5 text-gray-400 pointer-events-none" />
@@ -194,7 +206,7 @@ const CheckoutPage: React.FC = () => {
                         onChange={handleInputChange}
                         className="mr-3 h-5 w-5 text-sky-600 focus:ring-sky-500"
                     />
-                    <div className="flex-1 font-medium">Credit / Debit Card</div>
+                    <label htmlFor="card Payment" className="font-medium flex-1 cursor-pointer">Credit / Debit Card</label>
                     <CreditCard className="text-gray-400 h-5 w-5" />
                 </label>
                 <label className={`flex items-center p-4 cursor-pointer transition ${formData.paymentMethod === 'cod' ? 'bg-sky-50' : 'bg-white hover:bg-gray-50'}`}>
@@ -204,9 +216,10 @@ const CheckoutPage: React.FC = () => {
                         value="cod"
                         checked={formData.paymentMethod === 'cod'}
                         onChange={handleInputChange}
-                        className="mr-3 h-5 w-5 text-sky-600 focus:ring-sky-500"
+                        className="mr-3 h-5 w-5 text-sky-600 focus:ring-sky-500 disabled:opacity-50"
+                        disabled={formData.orderType === 'Take Away'}
                     />
-                    <div className="flex-1 font-medium">Cash on Delivery</div>
+                     <label htmlFor="Cash On Delivery" className="font-medium flex-1 cursor-pointer">Cash on Delivery</label>
                     <Truck className="text-gray-400 h-5 w-5" />
                 </label>
             </div>

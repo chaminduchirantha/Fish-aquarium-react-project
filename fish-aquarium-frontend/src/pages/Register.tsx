@@ -15,6 +15,32 @@ function Register() {
   const [conPassword, setConPassword] = useState("")
   const [role] = useState("USER")
 
+  const [errors, setErrors] = useState<any>({})
+
+  const validateForm = () => {
+    const newErrors: any = {}
+
+    if (!firstname.trim()) newErrors.firstname = "First name is required"
+    if (!lastname.trim()) newErrors.lastname = "Last name is required"
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email) newErrors.email = "Email is required"
+    else if (!emailRegex.test(email)) newErrors.email = "Enter a valid email"
+
+    if (!password) newErrors.password = "Password is required"
+    else if (password.length < 6)
+      newErrors.password = "Password must be at least 6 characters"
+
+    if (!conPassword) newErrors.conPassword = "Confirm your password"
+    else if (password !== conPassword)
+      newErrors.conPassword = "Passwords do not match"
+
+    setErrors(newErrors)
+
+    return Object.keys(newErrors).length === 0
+  }
+
+
   const handleRgister = async (e: FormEvent) => {
     e.preventDefault()
 
@@ -27,6 +53,8 @@ function Register() {
       alert("Password do not match.")
       return
     }
+
+    if (!validateForm()) return
 
     try {
       const obj = {
@@ -48,6 +76,13 @@ function Register() {
       console.error(err?.response?.data)
     }
   }
+
+  const inputClass = (field: string) =>
+    `w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 
+     ${errors[field]
+       ? "border-red-400 focus:ring-red-400"
+       : "border-sky-300 focus:ring-sky-400"
+  }`
   
 
   return (
@@ -79,9 +114,12 @@ function Register() {
                 placeholder="Enter First Name"
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
-                className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className={inputClass("firstname")}
                 required
               />
+               {errors.firstname && (
+                <p className="text-red-300 text-xs mt-1">{errors.firstname}</p>
+              )}
             </div>
 
             <div>
@@ -91,9 +129,14 @@ function Register() {
                 placeholder="Enter Last Name"
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
-                className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className={inputClass("lastname")}                  
                 required
               />
+
+              {errors.lastname && (
+                <p className="text-red-300 text-xs mt-1">{errors.lastname}</p>
+              )}
+
             </div>
           </div>
 
@@ -104,9 +147,13 @@ function Register() {
               placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className={inputClass("email")}
               required
             />
+
+            {errors.email && (
+              <p className="text-red-300 text-xs mt-1">{errors.email}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -117,9 +164,12 @@ function Register() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className={inputClass("password")}
                 required
               />
+               {errors.password && (
+                <p className="text-red-300 text-xs mt-1">{errors.password}</p>
+              )}
           </div>
 
           <div className="mb-4">
@@ -129,9 +179,12 @@ function Register() {
               placeholder="••••••••"
               value={conPassword}
               onChange={(e) => setConPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className={inputClass("conPassword")}
               required
             />
+              {errors.conPassword && (
+                <p className="text-red-300 text-xs mt-1">{errors.conPassword}</p>
+              )}
           </div>
           </div>
           
