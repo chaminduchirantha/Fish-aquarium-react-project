@@ -1,9 +1,12 @@
 import { Request, Response } from "express"
 import bcrypt from "bcryptjs"
 import {IUser, User } from "../model/user"
-import { signAccessToken } from "../util/token"
+import { signAccessToken, signRefreshToken } from "../util/token"
 import { AuthRequest } from "../middleware/auth"
+import jwt from "jsonwebtoken"
 
+
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET as string
 
 export const register = async (req:Request , res:Response)=>{
     const {firstname , lastname , email , password , role} = req.body
@@ -54,13 +57,15 @@ export const login = async(req:Request , res:Response)=>{
     }
 
     const accessToken = signAccessToken(existingUser)
+    const refreshToken = signRefreshToken(existingUser) 
 
     res.status(200).json({
         message : "success",
         data:{
             email : existingUser.email,
             role : existingUser.role,
-            accessToken
+            accessToken,
+            refreshToken
         }
     })
 }
@@ -85,4 +90,25 @@ if (!req.user) {
     message: "Ok",
     data: { firstname, lastname, email, role }
   })
+}
+
+
+export const handleRefreshToken = async (req: Request, res: Response) => {
+  try {
+    const { token } = req.body
+    if (!token) {
+      return res.status(400).json({ message: "Token required" })
+    }
+    // import jwt from "jsonwebtoken"
+    const payload = jwt.verify(token, JWT_REFRESH_SECRET)
+    // payload.sub - userID
+    const user = await User.findById(payload.sub)
+    if (!user) {
+      return res.status(403).json({ message: "Invalid refresh token" })
+    }
+    const accessToken = signAccessToken(user)
+    res.status(200).json({ accessToken })
+  } catch (err) {
+    res.status(403).json({ message: "Invalid or expire token" })
+  }
 }

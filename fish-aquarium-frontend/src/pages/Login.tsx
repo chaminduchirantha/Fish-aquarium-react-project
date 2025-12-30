@@ -34,6 +34,8 @@ export default function Login() {
       }
 
       await localStorage.setItem("accessToken", res.data.accessToken)
+      await localStorage.setItem("refreshToken", res.data.refreshToken)
+
       const detail = await getMyDetails()
 
       const userData = ({
