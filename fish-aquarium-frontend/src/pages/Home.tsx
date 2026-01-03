@@ -3,7 +3,7 @@
 import sectionImage from '../assets/beautiful-group-fish-underwater.jpg'
 import FeedbackList from '../components/FeedbackList'
 
-export default function AnjalFarmHero() {
+export default function Hero() {
 
   return (
     <div className="font-sans text-white">
@@ -43,14 +43,14 @@ export default function AnjalFarmHero() {
             Premium Aquarium Lifestyle
           </span>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             Bring the Ocean
             <span className="block text-sky-300">
               Into Your Living Space .
             </span>
           </h1>
 
-          <p className="mt-6 text-xl max-w-lg sm:text-sm md:text-xl lg:text-xl  text-sky-100/90">
+          <p className="mt-6 text-sm max-w-lg md:text-xl lg:text-xl  text-sky-100/90">
             Discover exotic fishes, designer aquariums, and premium accessories
             crafted to turn your home into a peaceful underwater world.
           </p>
@@ -58,7 +58,7 @@ export default function AnjalFarmHero() {
           <div className="mt-10 flex gap-6">
             <a
               href="/fish"
-              className="px-4 py-4 rounded-xl bg-sky-500 text-white font-semibold shadow-xl hover:bg-sky-600 transition"
+              className="px-8 py-4 rounded-xl text-sm md:text-md lg:text-md bg-sky-500 text-white font-semibold shadow-xl hover:bg-sky-600 transition"
             >
               Browse Fishes
             </a>

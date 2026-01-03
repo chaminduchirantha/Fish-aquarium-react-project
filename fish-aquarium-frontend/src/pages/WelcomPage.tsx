@@ -1,9 +1,8 @@
 'use client'
 
 import sectionImage from '../assets/beautiful-group-fish-underwater.jpg'
-import FeedbackList from '../components/FeedbackList'
 
-export default function AnjalFarmHero() {
+export default function Hero() {
 
   return (
     <div className="font-sans text-white">
@@ -43,31 +42,44 @@ export default function AnjalFarmHero() {
             Premium Aquarium Lifestyle
           </span>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             Bring the Ocean
             <span className="block text-sky-300">
               Into Your Living Space .
             </span>
           </h1>
 
-          <p className="mt-6 text-xl max-w-lg  text-sky-100/90">
+          <p className="mt-6 text-md md:text-xl lg:text-xl max-w-lg  text-sky-100/90">
             Discover exotic fishes, designer aquariums, and premium accessories
             crafted to turn your home into a peaceful underwater world.
           </p>
 
-          <div className="mt-10 flex gap-6">
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <a
               href="/fish"
-              className="px-4 py-4 rounded-xl bg-sky-500 text-white font-semibold shadow-xl hover:bg-sky-600 transition"
+              className="lg:px-4 lg:py-4 md:px-20 md:py-4 text-center px-18 py-2 rounded-xl bg-sky-500 text-white font-semibold shadow-xl hover:bg-sky-600 transition"
             >
               Browse Fishes
             </a>
 
             <a
               href="/access"
-              className="px-8 py-4 rounded-xl border border-white/30 bg-white/10 backdrop-blur-md font-semibold hover:bg-white/20 transition"
+              className="lg:px-8 lg:py-4 md:px-20 md:py-4  px-14 py-4 rounded-xl border border-white/30 bg-sky-500 backdrop-blur-md font-semibold hover:bg-sky-600 transition"
             >
               Accessories
+            </a>
+            <a
+              href="/customized"
+              className="lg:px-10 lg:py-4 md:px-20 md:py-4 px-14 py-4 rounded-xl border border-white/30  bg-sky-500  backdrop-blur-md font-semibold hover:bg-sky-600 transition"
+            >
+              Aquarium
+            </a>
+
+            <a
+              href="/feedbacak"
+              className="lg:px-10 lg:py-4 md:px-20 md:py-4 px-14 py-4 rounded-xl border border-white/30  bg-sky-500 backdrop-blur-md font-semibold  hover:bg-sky-600 transition"
+            >
+              Feedback
             </a>
           </div>
 
@@ -92,9 +104,6 @@ export default function AnjalFarmHero() {
 
        
 
-      </section>
-        <section className='py-16 bg-gray-50'>
-            <FeedbackList />
       </section>
 
     </div>
