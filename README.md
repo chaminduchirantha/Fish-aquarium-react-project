@@ -48,7 +48,7 @@ This project is built using the **MERN Stack** with **Tailwind CSS** for modern 
 - JWT Authentication
 
 ### Other Tools
-- PDF Generator (pdf-lib / jsPDF / pdfkit)
+- PDF Generator (pdfkit)
 - REST APIs
 - Cloud / Local Storage Support
 - send the emails
