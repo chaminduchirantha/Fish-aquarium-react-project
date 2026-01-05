@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Truck } from 'lucide-react';
 import image from '../assets/18156825.jpg';
 import { deliverySave } from '../services/delivery';
-import { useNavigate } from 'react-router-dom';
 
 const DeliveryPage: React.FC = () => {
     const [customername, setCustomerName] = useState("")
@@ -15,7 +14,6 @@ const DeliveryPage: React.FC = () => {
     const [postelCode, setPostelCode] = useState("")
     const [loading, setLoading] = useState<boolean>(false);
 
-    const navigate = useNavigate();
 
     const handleSubmit = async()=>{
       if(!customername || !phonenumber || !email || !address || !city || !postelCode || !deliveryDate || !deliveryTime) {
