@@ -55,5 +55,5 @@ This project is built using the **MERN Stack** with **Tailwind CSS** for modern 
 
 ---
 
-## 📂 host link in Vercel - https://fish-aquarium-blue.vercel.app/
+## 📂 host link in Vercel - https://fish-aquarium-iota.vercel.app/
 
