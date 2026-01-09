@@ -9,11 +9,9 @@ export default function PaymentPage() {
   const { state } = useLocation();
   useNavigate();
 
-  // Get amount from navigation state or use default
   const orderAmount = state?.amount || 0;
   const formattedAmount = typeof orderAmount === 'string' ? parseFloat(orderAmount.replace(/[^0-9.]/g, '')) : orderAmount;
 
-  // Individual state for each field
   const [email, setEmail] = useState("");
   const [phonenumber, setPhonNumber] = useState("");
   const [cardHolderName, setCardHolderName] = useState("");
@@ -31,21 +29,18 @@ export default function PaymentPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
-    // Format card number with spaces
     if (name === "cardNumber") {
       const formatted = value.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim();
       setCardNumber(formatted);
       return;
     }
 
-    // Format expiry date MM/YY
     if (name === "expireDate") {
       const formatted = value.replace(/\D/g, "").replace(/(\d{2})(\d{0,2})/, "$1/$2").slice(0, 5);
       setExpireDate(formatted);
       return;
     }
 
-    // Limit CVV to 4 digits
     if (name === "cvv") {
       if (value.length <= 4) {
         setCvv(value);
@@ -64,27 +59,23 @@ export default function PaymentPage() {
       return false;
     }
 
-    // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setAlert({ type: "error", message: "Invalid email address" });
       return false;
     }
 
-    // Validate card number (basic check)
     const cardNum = cardNumber.replace(/\s/g, "");
     if (cardNum.length < 13) {
       setAlert({ type: "error", message: "Invalid card number" });
       return false;
     }
 
-    // Validate CVV
     if (cvv.length < 3) {
       setAlert({ type: "error", message: "Invalid CVV" });
       return false;
     }
 
-    // Validate phone number (basic check)
     if (phonenumber.length < 10) {
       setAlert({ type: "error", message: "Invalid phone number" });
       return false;
@@ -120,7 +111,6 @@ export default function PaymentPage() {
       setAlert({ type: "success", message: "Payment processed successfully!" });
       setPaymentSuccess(true);
 
-      // Reset form and redirect after 2 seconds
       
         setEmail("");
         setPhonNumber("");
@@ -128,7 +118,6 @@ export default function PaymentPage() {
         setCardNumber("");
         setExpireDate("");
         setCvv("");
-        // navigate('/fish');
       
 
     } catch (error: any) {
@@ -173,7 +162,6 @@ export default function PaymentPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center p-4 mt-12">
 
-      {/* TOP TITLE + DESCRIPTION */}
       <h1 className="text-5xl font-bold text-sky-800 text-center mt-4">
         Process your Payment
       </h1>
@@ -184,7 +172,6 @@ export default function PaymentPage() {
         easier and more enjoyable.
       </p>
 
-      {/* Alert Message */}
       {alert && (
         <div className={`max-w-5xl w-full mt-6 p-4 rounded-lg flex items-center gap-3 ${
           alert.type === "success" 
@@ -196,10 +183,8 @@ export default function PaymentPage() {
         </div>
       )}
 
-      {/* PAYMENT CARD */}
       <div className="bg-white shadow-2xl rounded-2xl max-w-6xl w-full mt-10 grid grid-cols-1 md:grid-cols-2">
 
-        {/* LEFT SIDE IMAGE */}
         <div className="hidden md:block">
           <img
             src={image}
@@ -208,10 +193,8 @@ export default function PaymentPage() {
           />
         </div>
 
-        {/* RIGHT SIDE FORM */}
         <div className="p-6 md:p-10">
 
-          {/* Card Logos */}
           <div className="flex items-center gap-4 mb-6">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
@@ -225,10 +208,8 @@ export default function PaymentPage() {
             /> 
           </div>
 
-          {/* FORM */}
           <form className="space-y-6" onSubmit={handlePaymentSubmit}>
 
-            {/* Email */}
             <div>
               <label className="block font-medium mb-1">Email Address</label>
               <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
@@ -245,7 +226,6 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* Phone */}
             <div>
               <label className="block font-medium mb-1">Phone Number</label>
               <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
@@ -262,7 +242,6 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* Cardholder Name */}
             <div>
               <label className="block font-medium mb-1">Cardholder Name</label>
               <div className="flex items-center border rounded-xl p-3 bg-gray-50 focus-within:border-blue-500">
@@ -279,7 +258,6 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* Card Number */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-3">
                 Card Number
@@ -313,7 +291,6 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* Expiry & CVV */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block font-medium mb-1">Expiry Date</label>
@@ -371,7 +348,6 @@ export default function PaymentPage() {
 
           </form>
 
-          {/* Amount Display */}
           {formattedAmount > 0 && (
             <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
               <p className="text-sm text-gray-600 mb-2">Payment Amount</p>
@@ -379,8 +355,6 @@ export default function PaymentPage() {
             </div>
           )}
 
-          {/* Security Info */}
-           {/* Premium Trust Badges */}
         <div className="mt-12 text-center">
           <p className="text-sm font-semibold text-gray-600 mb-6">Trusted by thousands of customers worldwide</p>
           <div className="flex items-center justify-center gap-10">

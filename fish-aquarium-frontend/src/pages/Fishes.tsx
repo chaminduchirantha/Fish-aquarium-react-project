@@ -89,7 +89,6 @@ export default function FishCategorySection() {
     <section className="py-12 lg:px-20 px-6 bg-gray-50 mt-8">
       <div className="max-w-6xl mx-auto">
 
-        {/* Title */}
         <h2 className=" font-bold text-sky-800 text-3xl lg:text-5xl text-center mb-3">
           Fish Categories
         </h2>
@@ -121,7 +120,6 @@ export default function FishCategorySection() {
             <span className="sr-only">View Orders</span>
           </Link>
 
-          {/* Add to Cart Icon */}
           <button
             onClick={() => setCartOpen(true)}
             className="absolute top-20 right-6 text-black p-3 shadow-md"
@@ -138,7 +136,7 @@ export default function FishCategorySection() {
               key={cat.value}
               onClick={() => {
                 setSelected(cat.value);
-                setPage(1); // reset page on category change
+                setPage(1); 
               }}
               className={`px-5 py-2 rounded-full font-semibold shadow-sm transition-all ${
                 selected === cat.value
@@ -154,7 +152,6 @@ export default function FishCategorySection() {
 
 
       <div className="mt-10">
-      {/* Loading State */}
       {loading && (
         <div className="flex justify-center items-center h-64">
           <div className="text-lg text-gray-600">Loading fish...</div>
@@ -164,11 +161,6 @@ export default function FishCategorySection() {
       {/* Cards */}
       {!loading && (
         <>
-          {/* {fishList.length === 0 ? (
-            <div className="flex justify-center items-center h-64">
-              <div className="text-lg text-gray-600">No fish found in this category</div>
-            </div>
-          ) : ( */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {fishList.map((fish) => (
                 <div
@@ -230,7 +222,6 @@ export default function FishCategorySection() {
                 </div>
               ))}
             </div>
-          {/* )} */}
         </>
       )}
 

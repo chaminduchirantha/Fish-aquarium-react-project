@@ -8,7 +8,6 @@ import image4 from '../assets/closeup-shot-yellow-cichlidae-cichlid-home-aquariu
 const CardSection: React.FC = () => {
   return (
     <section className="bg-gray-100 w-full min-h-screen flex flex-col items-center py-10 px-6 " id="collections">
-      {/* Header Section */}
       <header className="text-center ">
         <h1 className="text-5xl font-bold  text-sky-800  mt-9">
           Explore Our Collections
@@ -20,9 +19,7 @@ const CardSection: React.FC = () => {
         </p>
       </header>
 
-      {/* Main Content */}
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch mt-10">
-        {/* Video Section */}
         <div className="flex justify-center items-center">
           <div className="relative w-full max-w-lg h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl">
             <video
@@ -36,9 +33,7 @@ const CardSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Card 1 */}
           <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-all hover:-translate-y-2 duration-300 flex flex-col items-center text-center">
             <img
               className="h-40 w-full object-cover rounded-t-xl"
@@ -62,7 +57,6 @@ const CardSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2 */}
           <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-all hover:-translate-y-2 duration-300 flex flex-col items-center text-center">
             <img
               className="h-40 w-full object-cover rounded-t-xl"
@@ -88,7 +82,6 @@ const CardSection: React.FC = () => {
 
           
 
-          {/* Card 4 */}
           <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-all hover:-translate-y-2 duration-300 flex flex-col items-center text-center">
             <img
               className="h-40 w-full object-cover rounded-t-xl"

@@ -61,7 +61,6 @@ const DeliveryPage: React.FC = () => {
     <div className="min-h-screen bg-slate-50 mt-9 py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-6xl mx-auto space-y-8">
 
-        {/* Header Section */}
         <div className="text-center">
           <h2 className="text-5xl font-bold text-sky-800 mb-3">
             Delivery Information
@@ -73,10 +72,8 @@ const DeliveryPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Main Content: Form + Image */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-          {/* Left Side: Delivery Form */}
           <form className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 space-y-6 h-full flex flex-col">
             
             <div className="flex items-center gap-2 mb-4 border-b pb-2">
@@ -159,7 +156,6 @@ const DeliveryPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="mt-8">
               <button onClick={handleSubmit} disabled={loading} className="w-full bg-sky-600 text-white py-2 rounded-xl cursor-pointer text-lg font-semibold hover:bg-sky-800 transition">
                 {loading ? "Submitting..." : "Submit Delivery"}
@@ -167,7 +163,6 @@ const DeliveryPage: React.FC = () => {
             </div>
           </form>
 
-          {/* Right Side: Image */}
           <div className="flex items-start justify-center h-full">
             <img
               src={image}

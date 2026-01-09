@@ -75,7 +75,6 @@ export default function Login() {
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="bg-black/50 text-white shadow-lg backdrop-blur-sm rounded-2xl p-8 w-full max-w-md border border-sky-200 opacity-100">
-        {/* Logo / Title */}
         <div className="text-center mb-6">
           <img
             src={loginImage}
@@ -88,7 +87,6 @@ export default function Login() {
           </p>
         </div>
 
-        {/* Login Form */}
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
@@ -149,12 +147,10 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="my-6 border-t border-gray-300 text-center">
           <span className="px-2 text-sm">or</span>
         </div>
 
-        {/* Signup Link */}
         <p className="text-center text-sm">
           Don't have an account?{" "}
           <a

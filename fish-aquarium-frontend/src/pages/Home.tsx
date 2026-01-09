@@ -7,21 +7,14 @@ export default function Hero() {
 
   return (
     <div className="font-sans text-white">
-
-      {/* HERO SECTION */}
       <section className="relative min-h-screen flex items-center">
-
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${sectionImage})` }}
         ></div>
 
-        {/* Dark + Sky Overlay */}
         <div className="absolute inset-0 bg-linear-to-r from-black via-sky-900 to-transparent"></div>
-
-
-        {/* BUBBLES */}
+        
        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           {[...Array(15)].map((_, i) => (
             <span
@@ -36,7 +29,6 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* CONTENT */}
         <div className="relative z-10 max-w-5xl px-8 lg:px-40">
 
           <span className="inline-block mb-6 px-4 py-2 text-sm  rounded-full bg-sky-400/20 text-sky-200 font-medium">

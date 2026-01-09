@@ -20,7 +20,6 @@ function Service() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            {/* Accessory Card 1 */}
             <div className="bg-gray-50 border-b border-blue-600 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition">
               <img src={card7} alt="Fish Tank" className="h-70 w-full object-cover" />
               <div className="p-4 text-center">

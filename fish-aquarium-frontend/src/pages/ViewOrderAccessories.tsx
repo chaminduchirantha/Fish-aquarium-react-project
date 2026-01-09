@@ -73,10 +73,8 @@ export default function UserOrdersPage() {
               {order.status.toUpperCase()}
             </span>
 
-            {/* Fish Name */}
             <h3 className="font-bold text-xl text-sky-800 mb-2">{order.itemname}</h3>
 
-            {/* Order Details */}
             <div className="text-gray-600 space-y-1">
               <p><span className="font-semibold">Qty:</span> {order.qty}</p>
               <p><span className="font-semibold">Price:</span> Rs {order.price}</p>

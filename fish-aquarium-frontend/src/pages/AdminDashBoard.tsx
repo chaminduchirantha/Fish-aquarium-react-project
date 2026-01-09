@@ -68,18 +68,6 @@ const DashboardLayout: React.FC = () => {
                 <div className="font-medium">{username}</div>
               </div>
 
-              <div className="flex flex-col space-y-3 p-2">
-                <a className="transition hover:text-blue-600" href="#">
-                  My Profile
-                </a>
-                <a className="transition hover:text-blue-600" href="#">
-                  Edit Profile
-                </a>
-                <a className="transition hover:text-blue-600" href="#">
-                  Settings
-                </a>
-              </div>
-
               <div className="p-2">
                 <button className="flex items-center space-x-2 transition hover:text-blue-600">
                   <svg

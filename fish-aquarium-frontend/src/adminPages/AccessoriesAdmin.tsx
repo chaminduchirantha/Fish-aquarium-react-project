@@ -125,8 +125,6 @@ function AccessoriesAdmin() {
 
   return (
     <div>
-
-      {/* Header Section */}
       <div className="mb-6 flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold text-gray-800">Accessories Management</h2>
@@ -147,8 +145,6 @@ function AccessoriesAdmin() {
         onDeleteSuccess={() => showAlert("success", "Accessories deleted successfully!")}
       />
       </div>
-
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-white bg-opacity-50 flex justify-center items-center z-50">
             {alert && (
@@ -177,7 +173,6 @@ function AccessoriesAdmin() {
           )}
           <div className="bg-white  border-black w-140 rounded-lg shadow-lg p-6 relative max-h-[90vh] overflow-y-auto">
 
-            {/* Close Button */}
             <button
               onClick={handleCloseModal}
               className="absolute top-2 right-3 cursor-pointer text-gray-600 hover:text-black text-4xl "
@@ -202,7 +197,6 @@ function AccessoriesAdmin() {
                 />
               </div>
 
-              {/* Price */}
               <div>
                 <label className="block text-sm font-medium text-gray-600">Price</label>
                 <input
@@ -228,7 +222,6 @@ function AccessoriesAdmin() {
                 ></textarea>
               </div>
 
-              {/* Image Upload */}
               <div className="flex flex-col items-center mt-6">
               <label className="flex flex-col items-center justify-center w-full border-2 border-dashed border-sky-300 rounded-xl cursor-pointer hover:bg-sky-50 transition p-6">
                 <ImagePlus className="text-sky-500 mb-2" size={30} />
@@ -245,8 +238,7 @@ function AccessoriesAdmin() {
               )}
             </div>
 
-              {/* Submit */}
-              <button
+            <button
               type="submit"
               className="mt-8 bg-sky-600 text-white w-full py-3 rounded-lg font-semibold hover:bg-sky-700 hover:shadow-xl transition shadow-md flex justify-center items-center gap-2"
               disabled={loading}

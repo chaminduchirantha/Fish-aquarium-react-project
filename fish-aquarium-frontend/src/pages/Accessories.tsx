@@ -77,7 +77,7 @@ export default function FishCategorySection() {
             value={search}
               onChange={(e) => {
               setSearch(e.target.value);
-              setPage(1); // reset to first page when searching
+              setPage(1);
             }}
             className="w-full md:w-1/2 px-4 py-2 rounded-full border border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
@@ -92,7 +92,6 @@ export default function FishCategorySection() {
             <span className="sr-only">View Orders</span>
           </Link>
 
-          {/* Add to Cart Icon */}
         <button
           onClick={() => setCartOpen(true)}
           className="absolute top-20 right-6 text-black p-3 shadow-md"
@@ -106,7 +105,6 @@ export default function FishCategorySection() {
 
 
       <div className="mt-10">
-      {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {accessoriesList.map((item) => (
           <div
@@ -165,7 +163,6 @@ export default function FishCategorySection() {
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-center gap-4 mt-12">
         <button
           disabled={page === 1}

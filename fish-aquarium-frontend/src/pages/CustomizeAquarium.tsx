@@ -65,7 +65,6 @@ export default function CustomTankForm() {
 
       await createCustomizedAquarium(formData);
 
-      // Reset all fields
       setCustomerName("");
       setPhoneNumber("");
       setEmail("");
@@ -96,9 +95,7 @@ export default function CustomTankForm() {
     <div className="min-h-screen p-6 flex justify-center items-center">
     <div className="w-full max-w-7xlbackdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-white/40">
 
-      {/* LEFT SIDE IMAGES + PARAGRAPH */}
       <div className="p-16 flex flex-col mt-20" >
-        {/* IMAGE GRID */}
         <div className="grid grid-cols-2 gap-4">
           <img
             src={image1}
@@ -118,7 +115,6 @@ export default function CustomTankForm() {
           />
         </div>
 
-        {/* PARAGRAPH */}
         <p className="mt-5 text-sky-800 text-lgleading-relaxed lg:text-left md:text-center sm:text-center">
             Choose your ideal custom fish tank design from our stunning collection of colorful and vibrant aquatic themes, each crafted to 
             inspire creativity, relaxation, and a deeper connection with aquatic life. Whether you prefer a natural, planted environment, a sleek modern aesthetic, or a fully personalized concept based on your own imagination, our system allows you to upload your design and customize every detail. You can adjust the shape, size, and materials to suit your available space or visual preferences, ensuring your tank blends perfectly with your home or office environment. Additionally, you can select lighting styles, filtration systems, decorative elements, and advanced smart features such as automatic feeders, temperature monitoring, and water-quality sensors. 
@@ -126,18 +122,14 @@ export default function CustomTankForm() {
             efficient, and comfortable for your fish. Create a tank that truly reflects your personality and aquatic passion.        
         </p>
       </div>
-
-    {/* RIGHT SIDE FORM */}
       <div className="p-8">
         <h1 className="text-3xl font-bold text-sky-700 mb-12 text-center drop-shadow-sm">
           Custom Tank Request
         </h1>
 
          
-          {/* Form Start */}
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {/* Customer Name */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Customer Name</label>
                 <input
@@ -150,7 +142,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Phone Number */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Phone Number</label>
                 <input
@@ -163,7 +154,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Email */}
               <div className="flex flex-col md:col-span-2">
                 <label className="text-sm font-medium text-sky-700 mb-1">Email</label>
                 <input
@@ -176,7 +166,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Address */}
               <div className="flex flex-col md:col-span-2">
                 <label className="text-sm font-medium text-sky-700 mb-1">Address</label>
                 <input
@@ -189,7 +178,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Width */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Width (feet)</label>
                 <input
@@ -202,7 +190,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Height */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Height (feet)</label>
                 <input
@@ -215,7 +202,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Length */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Length (feet)</label>
                 <input
@@ -228,7 +214,6 @@ export default function CustomTankForm() {
                 />
               </div>
 
-              {/* Material */}
               <div className="flex flex-col">
                 <label className="text-sm font-medium text-sky-700 mb-1">Material</label>
                 <select
@@ -245,7 +230,6 @@ export default function CustomTankForm() {
               </div>
             </div>
 
-            {/* Extra Features */}
             <label className="block text-sm font-medium text-sky-700 mt-5 mb-1">Extra Features</label>
             <textarea
               className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-sky-400 transition"
@@ -255,7 +239,6 @@ export default function CustomTankForm() {
               rows={3}
             />
 
-            {/* Notes */}
             <label className="block text-sm font-medium text-sky-700 mt-5 mb-1">Notes</label>
             <textarea
               className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-sky-400 transition"
@@ -265,7 +248,6 @@ export default function CustomTankForm() {
               rows={3}
             />
 
-            {/* Image Upload */}
             <div className="flex flex-col items-center mt-6">
               <label className="flex flex-col items-center justify-center w-full border-2 border-dashed border-sky-300 rounded-xl cursor-pointer hover:bg-sky-50 transition p-6">
                 <ImagePlus className="text-sky-500 mb-2" size={30} />
@@ -282,7 +264,6 @@ export default function CustomTankForm() {
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="mt-8 bg-sky-600 text-white w-full py-3 rounded-lg font-semibold hover:bg-sky-700 hover:shadow-xl transition shadow-md flex justify-center items-center gap-2"

@@ -17,7 +17,6 @@ const CheckoutPage: React.FC = () => {
     image: ""
   };
 
-  // Parse price helper
   const parsePrice = (price: any): number => {
     try {
       if (typeof price === 'number') return isNaN(price) ? 0 : price;
@@ -32,7 +31,6 @@ const CheckoutPage: React.FC = () => {
   const validPrice = parsePrice(product.price);
   const validQty = parseInt(String(product.qty)) || 1;
 
-  // Form State
   const [formData, setFormData] = useState({
     email: user?.email || '',
     firstname: user?.firstname || '',
@@ -60,7 +58,6 @@ const CheckoutPage: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setFormData(prev => {
-      // If Take Away selected → force card payment
       if (name === 'orderType' && value === 'Take Away') {
         return {
           ...prev,
@@ -116,13 +113,10 @@ const CheckoutPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col lg:flex-row mt-10 font-sans">
       
-      {/* LEFT SIDE - Form Section */}
       <div className="w-full lg:w-[58%] px-4 py-8 lg:px-16 lg:py-12 order-2 lg:order-1">
         <div className="max-w-xl mx-auto">
-          {/* Header */}
           <h1 className="text-3xl font-bold mb-10 text-sky-900 tracking-tight">Aqua World Checkout</h1>
           
-          {/* Contact Section */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-700">
                 Contact Information
@@ -137,7 +131,6 @@ const CheckoutPage: React.FC = () => {
             />
           </div>
 
-          {/* Delivery Section */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4 text-gray-700">Shipping Details</h2>
 
@@ -193,7 +186,6 @@ const CheckoutPage: React.FC = () => {
             </div>
           </div>
 
-           {/* Payment Method */}
            <div className="mb-10">
             <h2 className="text-lg font-semibold mb-4 text-gray-700">Payment Method</h2>
             <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
@@ -225,7 +217,6 @@ const CheckoutPage: React.FC = () => {
             </div>
            </div>
 
-           {/* Actions */}
            <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-100">
                <button 
                  className="text-gray-600 hover:text-sky-700 flex items-center text-sm font-medium transition"
@@ -242,7 +233,6 @@ const CheckoutPage: React.FC = () => {
                </button>
            </div>
 
-           {/* Alert */}
            {alert && (
              <div className={`mt-6 p-4 rounded-lg flex items-center ${alert.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
                {alert.message}
@@ -251,7 +241,6 @@ const CheckoutPage: React.FC = () => {
         </div>
       </div>
 
-      {/* RIGHT SIDE - Order Summary (IMPROVED) */}
       <div className="w-full lg:w-[42%] bg-gray-50 border-l border-gray-200 px-4 py-8 lg:px-12 lg:py-12 order-1 lg:order-2">
         <div className=" lg:top-8 max-w-md mx-auto lg:mx-0">
             
@@ -259,7 +248,6 @@ const CheckoutPage: React.FC = () => {
                 <ShoppingBag className="text-sky-600" /> Order Summary
             </h2>
 
-            {/* Product Card */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6 transition hover:shadow-md">
                 <div className="flex gap-4">
                     <div className="relative shrink-0">
@@ -287,7 +275,6 @@ const CheckoutPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Calculations */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
                 <div className="flex justify-between items-center mb-3 text-gray-600">
                     <span>Subtotal</span>
@@ -307,7 +294,6 @@ const CheckoutPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Order Details Mini-Summary */}
             <div className="bg-sky-50 rounded-xl p-5 border border-sky-100">
                 <h4 className="text-sm font-semibold text-sky-800 mb-3 uppercase tracking-wider">Order Details</h4>
                 <div className="space-y-3">

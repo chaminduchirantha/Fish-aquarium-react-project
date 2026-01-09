@@ -7,7 +7,6 @@ const About = () => {
   return (
     <section className="bg-white py-30 px-6 md:px-20" id="about">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        {/* LEFT SIDE - Image Grid */}
         <div className="md:w-1/2 grid grid-cols-2 gap-4">
           <div className="space-y-4">
             <div className="overflow-hidden rounded-2xl shadow-lg">

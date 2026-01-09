@@ -91,7 +91,6 @@ function Register() {
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="bg-black/50 text-white shadow-lg backdrop-blur-sm rounded-2xl p-8 w-full max-w-md border border-sky-200 opacity-100">
-        {/* Logo / Title */}
         <div className="text-center mb-6">
           <img
             src={loginImage}

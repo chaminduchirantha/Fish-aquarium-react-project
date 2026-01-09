@@ -152,13 +152,13 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-              path="/admin"
-              element={
-                <RequireAuth roles={["ADMIN"]}>
-                  <AdminDashBoard />
-                </RequireAuth>
-              }
-            >
+            path="/admin"
+            element={
+              <RequireAuth roles={["ADMIN"]}>
+                <AdminDashBoard />
+              </RequireAuth>
+            }
+          >
               <Route path="customers" element={<CustomerAdmin />} />
               <Route path="fishes" element={<FishesAdmin />} />
               <Route path="orders" element={<OrdersAdmin />} />
@@ -168,7 +168,7 @@ function AppContent() {
               <Route path="delivery" element={<DeliveryAdmin/>} />
               <Route path="payments" element={<PaymentAdmin/>} />
               <Route path="customized" element={<CustomizedAquariumAdmin/>} />
-            </Route>
+          </Route>
         </Routes>
       </Suspense>
 

@@ -59,7 +59,6 @@ export default function UserOrdersPage() {
             key={order._id} 
             className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300 relative border border-gray-100"
           >
-            {/* Status Badge */}
             <span
               className={ `bottom-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
                 order.status === "pending"
@@ -72,10 +71,8 @@ export default function UserOrdersPage() {
               {order.status.toUpperCase()}
             </span>
 
-            {/* Fish Name */}
             <h3 className="font-bold text-xl text-sky-800 mb-2">{order.fishname}</h3>
 
-            {/* Order Details */}
             <div className="text-gray-600 space-y-1">
               <p><span className="font-semibold">Qty:</span> {order.qty}</p>
               <p><span className="font-semibold">Price:</span> Rs {order.price}</p>

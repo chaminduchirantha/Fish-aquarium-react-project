@@ -18,7 +18,6 @@ const CheckoutPage: React.FC = () => {
     image: ""
   };
 
-  // Parse price to ensure it's a number with fallback
   const parsePrice = (price: any): number => {
     try {
       if (typeof price === 'number') {
@@ -37,7 +36,6 @@ const CheckoutPage: React.FC = () => {
   const validPrice = parsePrice(product.price);
   const validQty = parseInt(String(product.qty)) || 1;
 
-  // Form State
   const [formData, setFormData] = useState({
     email: user?.email || '',
     firstname: user?.firstname || '',
@@ -67,7 +65,6 @@ const CheckoutPage: React.FC = () => {
     const { name, value } = e.target;
 
     setFormData(prev => {
-      // If Take Away selected → force card payment
       if (name === 'orderType' && value === 'Take Away') {
         return {
           ...prev,
@@ -124,15 +121,12 @@ const CheckoutPage: React.FC = () => {
   return (
     <div className="min-h-screen  text-gray-800 flex flex-col lg:flex-row mt-10">
       
-      {/* LEFT SIDE - Form Section */}
       <div className="w-full lg:w-[58%] px-6 py-10 lg:px-20 lg:py-14 order-2 lg:order-1">
         <div className="max-w-xl mx-auto bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-100 p-8">
-          {/* Header / Logo Area */}
           <h1 className="text-3xl font-extrabold mb-10 text-sky-900 tracking-tight">
             Aqua <span className="text-sky-500">World</span>
           </h1>
           
-          {/* Contact Section */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-700">Contact</h2>
@@ -147,11 +141,9 @@ const CheckoutPage: React.FC = () => {
             />
           </div>
 
-          {/* Delivery Section */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4">Fill the Orders</h2>
 
-            {/* Name Fields */}
             <div className="flex flex-col md:flex-row gap-4 mb-4">
               <input
                 type="text"
@@ -171,7 +163,6 @@ const CheckoutPage: React.FC = () => {
               />
             </div>
 
-            {/* Address Fields */}
             <input
               type="text"
               name="address"
@@ -205,7 +196,6 @@ const CheckoutPage: React.FC = () => {
             </div>
           </div>
 
-           {/* Payment Method Section (Added based on request) */}
            <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
             <div className="border border-gray-300 rounded-xl overflow-hidden">
@@ -237,7 +227,6 @@ const CheckoutPage: React.FC = () => {
             </div>
            </div>
 
-           {/* Pay Button & Footer */}
            <div className="flex flex-col-reverse md:flex-row justify-between items-center mt-8 gap-4">
               <button 
                  className="text-blue-600 hover:text-blue-800 flex items-center text-sm"
@@ -263,14 +252,12 @@ const CheckoutPage: React.FC = () => {
         </div>
       </div>
 
-      {/* RIGHT SIDE - Order Summary */}
       <div className="w-full lg:w-[42%] bg-gray-50 border-l border-gray-200 px-4 py-8 lg:px-12 lg:py-12 order-1 lg:order-2">
         <div className="lg:top-8 max-w-md mx-auto lg:mx-0">
              <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                 <ShoppingBag className="text-sky-600" /> Order Summary
             </h2>
             
-            {/* Product Item */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6 transition hover:shadow-md">
                 <div className="flex gap-4">
                     <div className="relative shrink-0">
