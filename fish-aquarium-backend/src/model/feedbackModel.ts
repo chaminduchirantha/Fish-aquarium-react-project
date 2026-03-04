@@ -9,7 +9,7 @@ export interface IFeedback extends Document{
     creatAt? : Date
     updatedAt? : Date
 }
-
+``
 const feedbackSchema = new Schema<IFeedback>({
     customername :{type:String , required:true},
     email : {type:String , required:true},
